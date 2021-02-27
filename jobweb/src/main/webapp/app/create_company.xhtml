@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{createCompany.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg" />
+			<h:form id="frm">
+				<b:row>
+					<b:column style-class="head-line" medium-screen="12">
+						<h:outputText value="Angaben zur Firma:" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Name:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createCompany.model.name}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Empfänger:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createCompany.model.addressee}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Strasse:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createCompany.model.street}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="PLZ:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="10" value="#{createCompany.model.zip}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="4"></b:column>
+						<h:outputLabel value="Ort:" />
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createCompany.model.city}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Webseite:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createCompany.model.web}" />
+					</b:column>
+				</b:row>
+				<b:row style-class="cmds">
+					<b:column offset="4" medium-screen="6">
+						<b:commandButton value="weiter" action="#{createCompany.create}" look="primary" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+</html>

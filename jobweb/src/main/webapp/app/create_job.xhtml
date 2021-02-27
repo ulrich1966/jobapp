@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{createjob.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg" />
+			<h:form id="frm">
+				<b:row>
+					<b:column style-class="head-line" medium-screen="12">
+						<h:outputText value="Angaben zum Job:" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Jobtitel:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createjob.model.title}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Jobfunktion:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createjob.model.jobfunction}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Notitz / Ref:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createjob.model.note}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Link Stellenausschreibung:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createjob.model.webLink}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Jobcenter Liste:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:panelGrid size="xs" columns="6">
+							<b:radiobutton value="#{createjob.model.isListed}" itemLabel="Ja" itemValue="true" />
+							<b:radiobutton value="#{createjob.model.isListed}" itemLabel="Nein" itemValue="false" />
+						</b:panelGrid>
+					</b:column>
+				</b:row>
+				<b:row style-class="cmds">
+					<b:column offset="4" medium-screen="6">
+						<b:commandButton value="weiter" action="#{createjob.create}" look="primary" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+</html>

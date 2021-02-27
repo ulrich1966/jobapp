@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputStylesheet name="common-style.css" library="css" />
+	<h:outputStylesheet name="css/global.css" />
+	<title>Jobsuche</title>
+</h:head>
+<ui:composition template="/templates/layout.xhtml">
+
+	<ui:define name="content">
+		<f:event listener="#{test.test}" type="preRenderView" />
+		<h2>
+			Testseite für Versuche
+		</h2>
+		<b:messages globalOnly="true" id="msg" />
+	</ui:define>
+</ui:composition>
+</html>

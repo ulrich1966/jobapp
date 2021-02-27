@@ -1,0 +1,62 @@
+.footer{
+}
+
+.headline{
+	-fx-font-size: 16;
+	-fx-font-weight: bold;
+}
+.output{
+	-fx-font-size: 14;
+}
+.error{
+	-fx-font-size: 16;
+	-fx-font-cplor: red;
+}
+.info{
+	-fx-font-size: 16;
+	-fx-font-cplor: #ff6600;
+}
+.infopane{
+	-fx-background-color: #333333;
+}
+.tootip{
+	-fx-font-size: 12;
+	-fx-background-color: #333333;
+}
+
+.icons{
+    -fx-font-family: FontAwesome;
+    -fx-font-size: 16px;
+    iconColor: #1188ff;
+  }
+
+.button{
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1em;
+    -fx-border-insets: 1 1 1 1, 0;
+    -fx-border-color: #1188ff;
+}
+.button:focused {
+    -fx-border-width: 1, 0;
+    -fx-border-style: solid, segments(1, 2);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+    -fx-border-color: #1188ff;
+    -fx-border-insets: 1 1 1 1, 0;
+    -fx-border-color: #1188ff;
+}
+
+.button:pressed {
+    -fx-background-color: ligtblue;
+    -fx-border-insets: 1 1 1 1, 0;
+    -fx-border-color: #1188ff;
+}
+
+.icon-txt{
+    -fx-font-size: 1em;
+	-fx-font-color: #1188ff;
+}
+

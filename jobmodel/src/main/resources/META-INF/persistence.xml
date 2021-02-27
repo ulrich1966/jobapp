@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+   http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+	<!-- mysql -->
+	<!-- <persistence-unit name="mysql"> <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> <jta-data-source>jobapplication</jta-data-source> <non-jta-data-source>jobapplication</non-jta-data-source> <properties> <property name="hibernate.archive.autodetection" value="class" /> <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" /> <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/jobapplication" /> <property name="hibernate.connection.username" value="querydsl" /> <property name="hibernate.connection.password" value="querydsl" /> -->
+	<!-- <property name="hibernate.show_sql" value="true"/> -->
+	<!-- <property name="hibernate.flushMode" value="FLUSH_AUTO" /> <property name="hibernate.hbm2ddl.auto" value="update" /> </properties> </persistence-unit> -->
+	<!-- sqlite -->
+	<!-- <persistence-unit name="sqlite"> <provider>org.hibernate.ejb.HibernatePersistence</provider> <class>de.juli.jobmodel.model.Company</class> <class>de.juli.jobmodel.model.Contact</class> <class>de.juli.jobmodel.model.History</class> <class>de.juli.jobmodel.model.JobApplication</class> <class>de.juli.jobmodel.model.Document</class> <properties> <property name="hibernate.hbm2ddl.auto" value="update" /> <property name="hibernate.dialect" value="de.juli.jobmodel.util.SQLiteDialect" /> <property name="hibernate.show_sql" value="true" /> <property name="hibernate.format_sql" value="false" /> <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" /> <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:job.db" /> </properties> </persistence-unit> -->
+
+	<persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>de.juli.jobmodel.model.Account</class>
+		<class>de.juli.jobmodel.model.AppSetting</class>
+		<class>de.juli.jobmodel.model.Company</class>
+		<class>de.juli.jobmodel.model.Contact</class>
+		<class>de.juli.jobmodel.model.Document</class>
+		<class>de.juli.jobmodel.model.Email</class>
+		<class>de.juli.jobmodel.model.History</class>
+		<class>de.juli.jobmodel.model.Job</class>
+		<class>de.juli.jobmodel.model.Letter</class>
+		<class>de.juli.jobmodel.model.Model</class>
+		<class>de.juli.jobmodel.model.Source</class>
+		<class>de.juli.jobmodel.model.State</class>
+		<class>de.juli.jobmodel.model.Vita</class>
+		<properties>
+			<property name="hibernate.archive.autodetection" value="class" />
+			<!-- LOCAL -->
+			<property name="hibernate.connection.driver_class" value="org.mariadb.jdbc.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/job_dev" />
+			<property name="hibernate.connection.user" value="tomcat" />
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.use_sql_comments" value="false" />
+		</properties>
+	</persistence-unit>
+</persistence>

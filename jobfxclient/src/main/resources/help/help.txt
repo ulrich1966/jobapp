@@ -1,0 +1,3 @@
+https://incubator.apache.org/odftoolkit/simple/document/index.html
+https://incubator.apache.org/odftoolkit/simple/document/cookbook/Text%20Document.html#Get%20TextDocument
+http://jodreports.sourceforge.net/

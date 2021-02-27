@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Tooltip?>
+
+<AnchorPane stylesheets="@style.css" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.juli.jobfxclient.controller.CreateController">
+	<children>
+		<TabPane fx:id="tp_create" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+			<tabs>
+				<Tab text="Bearbeiten Unternehmen">
+					<content>
+						<AnchorPane prefHeight="477.0" prefWidth="800.0">
+							<children>
+								<Label styleClass="headline" text="Unternehmen" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="20.0" />
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints />
+										<RowConstraints />
+									</rowConstraints>
+									<children>
+										<Label text="Name:" />
+										<Label text="PLZ:" GridPane.rowIndex="1" />
+										<Label text="Strasse" GridPane.rowIndex="2" />
+										<Label text="Ort:" GridPane.rowIndex="3" />
+										<Label text="Web:" GridPane.rowIndex="4" />
+										<TextField fx:id="txt_name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<TextField fx:id="txt_zip" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<TextField fx:id="txt_street" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<TextField fx:id="txt_city" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+										<TextField fx:id="txt_web" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+									</children>
+								</GridPane>
+								<Label styleClass="headline" text="Kontakt" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="250.0" />
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="280.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints />
+									</rowConstraints>
+									<children>
+										<Label text="Anrede:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+										<ComboBox fx:id="cb_title" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<Label text="Vorname:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+										<TextField fx:id="txt_firstName" minWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<Label text="Nachname:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+										<TextField fx:id="txt_LastName" minWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<Label text="Festnetz:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+										<FlowPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+											<children>
+												<TextField fx:id="txt_phone" minWidth="283.0" />
+												<Label text="Mobil:" />
+												<TextField fx:id="txt_mobile" minWidth="283.0" />
+											</children>
+										</FlowPane>
+										<Label text="E-MAil:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+										<TextField fx:id="txt_email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Bearbeiten Job">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="800.0">
+							<children>
+								<Label styleClass="headline" text="Job" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="20.0" />
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints valignment="TOP" />
+										<RowConstraints valignment="TOP" />
+									</rowConstraints>
+									<children>
+										<Label text="Titel:" />
+										<Label text="Verdienst:" GridPane.rowIndex="1" />
+										<Label text="Quelle:" GridPane.rowIndex="2" />
+										<Label text="Web Link:" GridPane.rowIndex="3" />
+										<Label text="Textvorlage:" GridPane.rowIndex="4" />
+										<Label text="Notitz:" GridPane.rowIndex="5" />
+										<TextField fx:id="txt_title" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<TextField fx:id="txt_salary" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<FlowPane hgap="10.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+											<children>
+												<ComboBox fx:id="cb_jobAd" onAction="#jobAdChange" />
+												<DatePicker fx:id="dp_jobAdDate" />
+												<Button onAction="#newJobSource" text="Neu" />
+											</children>
+										</FlowPane>
+										<TextField fx:id="txt_webLink" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+										<ComboBox fx:id="cb_doc" onAction="#docChange" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+										<TextArea fx:id="ta_note" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Bearbeiten Historie">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<GridPane layoutX="50.0" layoutY="50.0" prefHeight="330.0" prefWidth="700.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="200.0" prefHeight="300.0" valignment="TOP" vgrow="ALWAYS" />
+										<RowConstraints minHeight="50.0" prefHeight="50.0" valignment="TOP" vgrow="ALWAYS" />
+									</rowConstraints>
+									<children>
+										<Label styleClass="headline" text="Verlauf" GridPane.columnIndex="1" />
+										<Label text="Status:" GridPane.rowIndex="1" />
+										<ComboBox fx:id="cb_state" onAction="#stateChange" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+										<Label fx:id="lbl_state" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<Label alignment="TOP_LEFT" styleClass="output" text="Notitz:" GridPane.rowIndex="3" />
+										<TextArea fx:id="ta_note" prefHeight="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+		<FlowPane hgap="10.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0">
+			<children>
+				<Button onAction="#cancel">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-caret-left" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Abbrechen" />
+					</tooltip>
+				</Button>
+				<Button onAction="#save" >
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-floppy-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz speichern" />
+					</tooltip>
+				</Button>
+				<Button onAction="#newModel" >
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-file-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Neuen Datensatz anlegen" />
+					</tooltip>
+				</Button>
+			</children>
+		</FlowPane>
+	</children>
+</AnchorPane>

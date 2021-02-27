@@ -1,0 +1,14 @@
+Sehr ${cnt_sex} ${cnt_title} ${cnt_last_name},
+
+aufgrund ihrer Stellenausscheibung vom ${job_date} ${src_pronomen} ${src_source}, 
+sende ich Ihen anbei meine Bewerbunsunterlagen als 
+${job_title} im Anhang dieser Mail.
+
+Mit freundlichem Gruß
+
+Ulrich Kloodt
+
+
+P.S.: Um Ihren Posteingang nicht unnötig zu belasten, habe ich mich im Anhang auf ein
+kuzes Profil beschränkt. Ein umfassendes Profil incl. Zeugnisse, ehalten Sie über folgenden 
+Link: ${cloud_link} aus der Cloud.

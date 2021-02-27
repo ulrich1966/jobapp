@@ -1,0 +1,66 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<!-- FacesServlet is main servlet responsible to handle all request. It acts as central controller. This servlet initializes the JSF components before the JSP is displayed. -->
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>de.juli.jobweb.web.listener.SessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>de.juli.jobweb.web.listener.ContextListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>de.juli.jobweb.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/app/*</url-pattern>
+	</filter-mapping>
+
+	<context-param>
+		<!-- -1 = kein refresh z.B. fuer Produktionssystem -->
+		<param-name>javax.faces.FACELETS_REFRESH_PERIODE</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	<context-param>
+		<!-- XML Kommentare ind den Seiten sollen nicht geraendert werden -->
+		<param-name>javax.faces.FACELETS_SKIPCOMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<!-- XML Kommentare ind den Seiten sollen nicht geraendert werden -->
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/error404.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/error500.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error/errorThrowable.xhtml</location>
+	</error-page>
+</web-app>      

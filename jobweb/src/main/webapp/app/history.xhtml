@@ -1,0 +1,54 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{history.preRender}" type="preRenderView" />
+			<b:jumbotron>
+				<b:messages globalOnly="true" id="msg" />
+				form id="frm"
+					<b:dataTable value="#{history.model.states}" var="model">
+						<f:facet name="header">
+							<tr>
+								<th>Datum</th>
+								<th>Status</th>
+								<th>Notiz</th>
+							</tr>
+						</f:facet>
+						<b:dataTableColumn>
+							<h:outputText value="#{model.timeStamp}" converter="timeConverter" />
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{model.jobState.name}" />
+						<b:dataTableColumn value="#{model.state.note}" />
+					</b:dataTable>
+					<b:row>
+						<b:column medium-screen="2">
+							<h:outputLabel value="Anschreiben:" />
+						</b:column>
+						<b:column medium-screen="4">
+							<b:selectOneMenu value="#{history.selected}" >
+								<f:selectItem itemValue="#{history.model.historyLastEntry.appHistory}" itemLabel="#{history.model.historyLastEntry.appHistory}" />
+								<f:selectItems value="#{history.model.states}" var="s" itemLabel="#{s.stateName}" />
+							</b:selectOneMenu>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="2">
+							<h:outputLabel value="Bemerkung hinzufügen:" />
+						</b:column>
+						<b:column medium-screen="10">
+							<b:inputTextarea value="#{history.note}" />
+						</b:column>
+					</b:row>
+					<b:row styleClass="cmd">
+						<b:column offset="2" medium-screen="4">
+							<h:commandButton value="Speichern" action="#{history.update}" class="btn btn-lg btn-info" />
+						</b:column>
+					</b:row>
+				</h:form>
+			</b:jumbotron>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<h:outputStylesheet name="common-style.css" library="css" />
+	<h:outputStylesheet name="css/global.css" />
+	<title>Jobsuche</title>
+</h:head>
+<ui:composition>
+	<b:panel style-class="nav-bar" style="border: none;">
+		<b:navBar brand="Job-App" brandHref="#" fixed="top" inverse="true">
+			<b:navbarLinks>
+				<b:navLink value="Home" href="#{request.contextPath}/app/index.xhtml" />
+				<b:navLink value="List" href="#{request.contextPath}/app/list_view.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="Create" href="#{request.contextPath}/app/create_job.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="Db Console" href="#{home.webConsoleUrl}" target="_blur" rendered="#{home.renderStart eq false and home.session.login}" />
+				<b:navLink value="Einstellungen" href="#{request.contextPath}/app/account.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="Dokumente" href="#{request.contextPath}/app/upload.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="Fundstellen" href="#{request.contextPath}/app/create_source.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="App Settings" href="#{request.contextPath}/app/app_setting.xhtml" rendered="#{home.session.login}" />
+				<b:navLink value="Test" href="#{request.contextPath}/app/test.xhtml" rendered="#{home.session.login}" />
+			</b:navbarLinks>
+			<b:form class="navbar-form navbar-right hidden-md hidden-sm hidden-xs">
+				<b:row>
+					<b:column medium-screen="4" style-class="white">
+						<h:outputLabel value="Name:" />
+					</b:column>
+					<b:column medium-screen="2" style-class="green">
+						<h:outputLabel value="#{apphome.session.account.name}" />
+					</b:column>
+					<b:column medium-screen="2">
+						<b:commandButton value="Logout" action="#{login.logout}" rendered="#{home.session.login}" look="danger" />
+					</b:column>
+				</b:row>
+			</b:form>
+		</b:navBar>
+	</b:panel>
+</ui:composition>
+</html>

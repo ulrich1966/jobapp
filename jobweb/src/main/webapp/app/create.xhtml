@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<b:container>
+			<f:event listener="#{create.preRender}" type="preRenderView" />
+			<b:jumbotron>
+				<b:messages globalOnly="true" id="msg" />
+				<h:form id="frm">
+					<h2>Firmenangaben</h2>
+					<b:row>
+						<b:column medium-screen="4">Name:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.company.name}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">PLZ:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.company.zip}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">Ort:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.company.city}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">Strasse:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.company.street}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">Webseite:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.company.web}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column>
+							<h2>Kontaktangaben</h2>
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">Anrede:</b:column>
+						<b:column medium-screen="6">
+							<b:selectOneMenu value="#{create.model.title}">
+								<f:selectItem itemLabel="(Please select)" itemValue="" />
+								<f:selectItems value="#{create.selections.titles}" var="t" itemLabel="#{t.name}" itemValue="#{t}" />
+							</b:selectOneMenu>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Vorname:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.contact.firstName}" />
+						</b:column>
+
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Nachname:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.contact.lastName}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Telefon:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.contact.phone}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Mobil:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.contact.mobile}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">E-Mail:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.contact.email}" />
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column>
+							<h2>Jobangaben</h2>
+						</b:column>
+					</b:row>
+
+					<b:row>
+						<b:column medium-screen="4">Jobtitel:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.job.title}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Notitz / Ref:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.job.note}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Link Stellenausschreibung:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.job.webLink}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Bewerbungsschreiben:</b:column>
+						<b:column medium-screen="6">
+							<b:selectOneMenu value="#{create.model.job.letter}">
+								<f:selectItem itemLabel="(Please select)" itemValue="" />
+								<f:selectItems value="#{create.selections.letters}" var="d" itemLabel="#{d.name}" />
+							</b:selectOneMenu>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Lebenslauf:</b:column>
+						<b:column medium-screen="6">
+							<b:selectOneMenu value="#{create.model.job.vita}">
+								<f:selectItem itemLabel="(Please select)" itemValue="" />
+								<f:selectItems value="#{create.selections.vitas}" var="d" itemLabel="#{d.name}" />
+							</b:selectOneMenu>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">E-Mail:</b:column>
+						<b:column medium-screen="6">
+							<b:selectOneMenu value="#{create.model.job.email}">
+								<f:selectItem itemLabel="(Please select)" itemValue="" />
+								<f:selectItems value="#{create.selections.emails}" var="d" itemLabel="#{d.name}" />
+							</b:selectOneMenu>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Ausschreibedatum:</b:column>
+						<b:column medium-screen="6">
+							<b:datepicker mode="toggle-icon" value="#{create.model.dateConvert}">
+								<f:convertDateTime dateStyle="short" />
+							</b:datepicker>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Gehaltswunsch:</b:column>
+						<b:column medium-screen="6">
+							<b:inputText size="100" value="#{create.model.job.salary}" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4">Fundort:</b:column>
+						<b:column medium-screen="6">
+							<b:selectOneMenu id="id_source" value="#{jobsource.model}">
+								<f:selectItem itemLabel="(Please select)" itemValue=""  />
+								<f:selectItems value="#{jobsource.sources}" var="s" itemLabel="#{s.name}" />
+							</b:selectOneMenu>
+						</b:column>
+						<!-- <b:column medium-screen="2">
+							<b:navLink onclick="$('.formValidationModalClass').modal('show')" value="neu" update="@form">
+								<ui:include src="../app/job_source.xhtml" />
+							</b:navLink>
+						</b:column> -->
+					</b:row>
+					<b:row>
+						<b:column offset="4" medium-screen="6">
+							<b:commandButton value="Speichern" action="#{create.addJob}" look="primary" />
+						</b:column>
+					</b:row>
+				</h:form>
+			</b:jumbotron>
+		</b:container>
+	</ui:define>
+</ui:composition>
+</html>

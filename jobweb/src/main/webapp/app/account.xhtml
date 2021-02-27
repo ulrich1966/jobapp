@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{account.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg" />
+			<h:form id="frm">
+				<b:row>
+					<b:column style-class="head-line" medium-screen="12">
+						<h:outputText value="Angaben zum Kontakt:" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Name:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.name}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Passwort:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputSecret size="100" value="#{account.model.pass}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Email-Port:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.port}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Cloud-link:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.profillink}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Sender E-Mail:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.sender}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="SMTP:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.smtp}" />
+					</b:column>
+				</b:row>
+
+
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="E-Mail User:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.user}" />
+					</b:column>
+				</b:row>
+
+				<!-- //TODO PAsseingaben verschluesseln -->
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="E-Mail Pass:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputSecret size="100" value="#{account.model.smtpPass}" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column offset="2" medium-screen="4">
+						<h:commandButton value="Speichern" action="#{account.update}" class="btn btn-lg btn-info" />
+					</b:column>
+					<b:column medium-screen="4">
+						<h:commandButton value="Neu" action="#{account.create}" class="btn btn-lg btn-info" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+</html>

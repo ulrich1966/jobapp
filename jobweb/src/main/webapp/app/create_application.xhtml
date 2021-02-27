@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{createapplication.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg" />
+			<h:form id="frm">
+				<b:row>
+					<b:column style-class="head-line" medium-screen="12">
+						<h:outputText value="Angaben zu:" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Bewerbungsschreiben:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:selectOneMenu value="#{createapplication.selections.selectedLetter}">
+							<f:selectItem itemLabel="(Please select)" itemValue="" />
+							<f:selectItems value="#{createapplication.selections.letters}" var="d" itemLabel="#{d.name}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Lebenslauf:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:selectOneMenu value="#{createapplication.selections.selectedVita}">
+							<f:selectItem itemLabel="(Please select)" itemValue="" />
+							<f:selectItems value="#{createapplication.selections.vitas}" var="d" itemLabel="#{d.name}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Lebenslauf:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:selectOneMenu value="#{createapplication.selections.selectedEmail}">
+							<f:selectItem itemLabel="(Please select)" itemValue="" />
+							<f:selectItems value="#{createapplication.selections.emails}" var="d" itemLabel="#{d.name}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Fundort:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:selectOneMenu id="id_source" value="#{createapplication.selections.selectedSource}">
+							<f:selectItem itemLabel="(Please select)" itemValue="" />
+							<f:selectItems value="#{createapplication.selections.sources}" var="s" itemLabel="#{s.name}" />
+						</b:selectOneMenu>
+					</b:column>
+					<!-- 
+						<b:column medium-screen="2">
+							<b:navLink onclick="$('.formValidationModalClass').modal('show')" value="neu" update="@form" auto-update="true">
+								<ui:include src="../app/job_source.xhtml" />
+							</b:navLink>
+						</b:column>
+						 -->
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Ausschreibedatum:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:datepicker mode="toggle-icon" value="#{createapplication.date}">
+							<f:convertDateTime dateStyle="short" />
+						</b:datepicker>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="4">
+						<h:outputLabel value="Gehaltswunsch:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{createapplication.model.salary}" />
+					</b:column>
+				</b:row>
+				<b:row style-class="cmds">
+					<b:column offset="4" medium-screen="6">
+						<b:commandButton value="weiter" action="#{createapplication.create}" look="primary" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+</html>

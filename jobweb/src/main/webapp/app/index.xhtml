@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{apphome.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages global-only="true" id="msg" />
+			<b:row>
+				<b:column style-class="head-line" medium-screen="12">
+					Hallo <span class="green">#{apphome.session.account.name}</span> willkommen auf Deiner Jobapp
+			</b:column>
+			</b:row>
+			<h2></h2>
+			<b:row>
+				<b:column medium-screen="4">
+					<h:outputLabel value="Aktuelle Datenbank:" />
+				</b:column>
+				<b:column medium-screen="4" style-class="red">
+					<h:outputText value="#{apphome.session.dbUser}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="4">
+					<h:outputLabel value="Datenbankbenutzer:" />
+				</b:column>
+				<b:column medium-screen="4" style-class="red">
+					<h:outputText value="#{apphome.session.dataBase}" />
+				</b:column>
+			</b:row>
+			<b:messages globalOnly="true" id="msg" />
+		</b:jumbotron>
+	</ui:define>
+
+</ui:composition>
+</html>

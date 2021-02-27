@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+function moin() {
+	alert('Moin!');
+}

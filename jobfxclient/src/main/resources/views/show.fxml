@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Tooltip?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.juli.jobfxclient.controller.ShowController">
+	<children>
+		<TabPane fx:id="tp_show" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+			<tabs>
+				<Tab text="Anzeige Job">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="800.0">
+							<children>
+								<FlowPane layoutX="130.0" layoutY="20.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="70.0">
+									<children>
+									</children>
+								</FlowPane>
+								<GridPane layoutX="50.0" layoutY="60.0" vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+									</rowConstraints>
+									<children>
+										<Label styleClass="headline" text="Job" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<Label text="Titel:" GridPane.rowIndex="1" />
+										<Label text="Verdienst:" GridPane.rowIndex="2" />
+										<Label text="Quelle:" GridPane.rowIndex="3" />
+										<Label text="Web Link:" GridPane.rowIndex="4" />
+										<Label text="Textvorlage:" GridPane.rowIndex="5" />
+										<Label text="Notitz:" GridPane.rowIndex="6" />
+										<Label text="" GridPane.rowIndex="7" />
+										<Label text="Bei:" GridPane.rowIndex="7" />
+										<Label fx:id="lbl_title" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<Label fx:id="lbl_salary" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<FlowPane hgap="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+											<children>
+												<Label fx:id="lbl_jobAdSource" styleClass="output" />
+												<Label styleClass="output" text="Vom:" />
+												<Label fx:id="lbl_jobAdDate" styleClass="output" />
+											</children>
+										</FlowPane>
+										<FlowPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+											<Label fx:id="lbl_webLink" styleClass="output" />
+											<Button onAction="#copyLink">
+												<graphic>
+													<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-copy" />
+												</graphic>
+												<tooltip>
+													<Tooltip styleClass="tootip" text="Link in die Zwischenablage kopieren" />
+												</tooltip>
+											</Button>
+										</FlowPane>
+										<Label fx:id="lbl_doc" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+										<Label fx:id="lbl_note" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+										<Label styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+										<Label fx:id="lbl_company" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Anzeige Unternehmen">
+					<content>
+						<AnchorPane prefWidth="800.0">
+							<children>
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+									</rowConstraints>
+									<children>
+										<Label styleClass="headline" text="Unternehmen" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<Label text="Name:" GridPane.rowIndex="1" />
+										<Label text="PLZ:" GridPane.rowIndex="2" />
+										<Label text="Strasse" GridPane.rowIndex="3" />
+										<Label text="Ort:" GridPane.rowIndex="4" />
+										<Label text="Web:" GridPane.rowIndex="5" />
+										<Label fx:id="lbl_name" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<Label fx:id="lbl_zip" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<Label fx:id="lbl_street" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+										<Label fx:id="lbl_city" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+										<Label fx:id="lbl_web" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+									</children>
+								</GridPane>
+
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="270.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+									</rowConstraints>
+									<children>
+										<Label styleClass="headline" text="Kontakt" GridPane.columnIndex="1" />
+										<Label fx:id="lbl_contact_title" styleClass="output" text="" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+										<FlowPane hgap="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+											<children>
+												<Label fx:id="lbl_firstName" styleClass="output" text="" />
+												<Label fx:id="lbl_LastName" styleClass="output" text="" />
+											</children>
+										</FlowPane>
+										<Label text="Festnetz:" GridPane.rowIndex="2" />
+										<Label fx:id="lbl_phone" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<Label text="Mobil:" GridPane.rowIndex="3" />
+										<Label fx:id="lbl_mobile" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+										<Label text="E-MAil:" GridPane.rowIndex="4" />
+										<Label fx:id="lbl_email" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Anzeige Historie">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+							<children>
+								<GridPane vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+									<columnConstraints>
+										<ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+										<ColumnConstraints hgrow="ALWAYS" maxWidth="800.0" minWidth="80.0" prefWidth="80.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="ALWAYS" />
+										<RowConstraints minHeight="330.0" prefHeight="330.0" valignment="TOP" vgrow="ALWAYS" />
+									</rowConstraints>
+									<children>
+										<Label styleClass="headline" text="Verlauf" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+										<Label fx:id="lbl_state_date" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+										<Label fx:id="lbl_state" styleClass="output" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+									</children>
+								</GridPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+		<FlowPane hgap="10.0" prefHeight="20.0" prefWidth="800.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0">
+			<children>
+				<Button fx:id="cmd_start" onAction="#datasetStart">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-fast-backward" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz editieren" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_back" onAction="#datasetBack">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-step-backward" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz editieren" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_next" onAction="#datasetNext">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-step-forward" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz editieren" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_end" onAction="#datasetEnd">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-fast-forward" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz editieren" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_edit" onAction="#edit">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-pencil-square-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz editieren" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_create" onAction="#create">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-save" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Für diese Position Bewerbungsunterlagen erstellen" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_new" onAction="#newModel">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-file-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Neuen Daensatz anlegen" />
+					</tooltip>
+				</Button>
+				<Button onAction="#delete">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-remove" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Datensatz löschen" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_open" onAction="#open" disable="true">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-folder-open-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Ordner öffnen" />
+					</tooltip>
+				</Button>
+				<Button fx:id="cmd_send" onAction="#send">
+					<graphic>
+						<FontIcon iconColor="#1188ff" styleClass="icons" iconLiteral="fa-send-o" />
+					</graphic>
+					<tooltip>
+						<Tooltip styleClass="tootip" text="Für diese Position Bewerbungsunterlagen erstellen" />
+					</tooltip>
+				</Button>
+			</children>
+		</FlowPane>
+	</children>
+</AnchorPane>

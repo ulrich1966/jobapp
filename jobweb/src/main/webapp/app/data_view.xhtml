@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{data.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages global-only="true" id="msg" />
+			<b:row>
+				<b:column style-class="head-line" medium-screen="12">
+					<h:outputText value="Detaills zu der Bewerbung:" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="12" style-class="green">
+					<h:outputText value="#{data.model.stateLastEntry.jobState.stateName}" />
+				</b:column>
+			</b:row>
+
+			<!-- Firma -->
+
+			<b:row>
+				<b:column>
+					<div class="head">Firmendaten</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Firma:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.company.name}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Ort:" />
+				</b:column>
+				<b:column medium-screen="4">
+					<h:outputText value="#{data.model.company.zip}" />
+				</b:column>
+				<b:column medium-screen="6">
+					<h:outputText value="#{data.model.company.city}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Straße:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.company.street}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Web:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputLink value="#{data.model.company.web}" target="_blur" converter="linkConverter">
+							#{data.model.company.web}
+						</h:outputLink>
+				</b:column>
+			</b:row>
+
+			<!-- Kontakt -->
+
+			<b:row>
+				<b:column>
+					<div class="head">Kontakt</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Name:" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.company.contact.title.name}" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.company.contact.firstName}" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.company.contact.lastName}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Telefon:" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.company.contact.phone}" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputLabel value="Mobil:" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.company.contact.mobile}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="E-Mail:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.company.contact.email}" />
+				</b:column>
+			</b:row>
+
+			<!-- Bewerbung -->
+
+			<b:row>
+				<b:column style-class="center">
+					<div class="head">Bewerbung</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Job:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.title}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Notiz/Ref:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.note}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Angebotsdatum:" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputText value="#{data.model.jobAdDate}" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputLabel value="Link:" />
+				</b:column>
+				<b:column medium-screen="3">
+					<h:outputLink value="#{data.model.webLink}" target="_blur" converter="linkConverter">
+							Angebotsquelle
+						</h:outputLink>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Gehalt:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.salary}" />
+				</b:column>
+			</b:row>
+
+			<!-- Verwaltung -->
+
+			<b:row>
+				<b:column style-class="center">
+					<div class="head">Verwaltung</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Status:" />
+				</b:column>
+				<b:column medium-screen="2" style-class="green">
+					<h:outputText value="#{data.model.stateLastEntry.timeStamp}" converter="dateConverter" />
+				</b:column>
+				<b:column medium-screen="4" style-class="green">
+					<h:outputText value="#{data.model.stateLastEntry.jobState.stateName}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Zur Vorlage beim Jobcebnter gelistet:" />
+				</b:column>
+				<b:column medium-screen="2" style-class="green">
+					<h:outputText value="#{data.model.isListed}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Fundort:" />
+				</b:column>
+				<b:column medium-screen="8">
+					<h:outputText value="#{data.model.source.pronomen}" />
+					&nbsp;
+					<h:outputText value="#{data.model.source.name}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Unterlagen Verz.:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.localDocDir}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column style-class="center">
+					<div class="head">Vorlagen für die Dokumentenerstellung</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Anschreiben:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.letter.name}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Lebenslauf:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.vita.name}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="E-Mail:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.email.name}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column style-class="center">
+					<div class="head">Pfade der erstellen Dokumente</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Anschreiben:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.letter.target}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="Lebenslauf:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.vita.target}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="E-Mail:" />
+				</b:column>
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.email.target}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="2">
+					<h:outputLabel value="PDF Anschreiben:" />
+				</b:column>
+			</b:row>
+
+			<!-- Commands -->
+			
+			<b:row styleClass="cmd">
+				<b:form class="hidden-md hidden-sm hidden-xs">
+					<b:row styleClass="cmd">
+						<b:column medium-screen="2">
+							<b:commandButton value="Edit" action="#{data.edit}" look="success" />
+						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Speichern" action="#{data.save}" disabled="#{!data.hasChanged}" look="primary" />
+						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Datensatz löschen" action="#{data.delete}" look="danger" />
+						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Verlauf ansehen" action="#{data.history}" look="default" />
+						</b:column>
+					</b:row>
+					<b:row styleClass="cmd">
+						<b:column medium-screen="2">
+							<b:commandButton value="Dokumente erstellen" action="#{data.createDocs}" disabled="#{data.dirExist}" look="info" />
+						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Dokumente löschen" action="#{data.deldocs}" disabled="#!{data.dirExist}" look="warning" />
+						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Bewerben" action="#{data.send}" disabled="#{!data.docCreated}" look="primary" />
+						</b:column>
+					</b:row>
+				</b:form>
+			</b:row>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+
+</html>

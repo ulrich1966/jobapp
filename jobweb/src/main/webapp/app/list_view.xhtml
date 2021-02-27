@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{list.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg"/>
+			<b:row>
+				<b:column style-class="head-line" medium-screen="12">
+					<h:outputText value="Liste der erstellten Bewergungen:" />
+				</b:column>
+			</b:row>
+			<b:container class="head">Moin <span class="red">#{list.count}</span> Jobs gefunden</b:container>
+				<b:dataTable value="#{list.currentJobs.entrySet().toArray()}" var="model">
+					<f:facet name="header">
+						<tr>
+							<th>Unternehmen</th>
+							<th>Kontakt</th>
+							<th>Änderung</th>
+							<th>Status</th>
+							<th>
+								&nbsp;
+							</th>
+						</tr>
+					</f:facet>
+					<b:dataTableColumn value="#{model.value.company.name}" />
+					<b:dataTableColumn value="#{model.value.contact.title.name} #{model.value.contact.lastName}" />
+					<b:dataTableColumn>
+						<h:outputText value="#{model.value.state.timeStamp}" converter="dateConverter" />
+					</b:dataTableColumn>
+					<b:dataTableColumn>
+						<h:outputText styleClass="green" value="#{model.value.state.jobState.stateName}" />
+					</b:dataTableColumn>
+					<b:dataTableColumn>
+						<b:commandLink value="Details" action="#{list.dataView}">
+							<f:param value="#{model.value.job.id}" name="id" />
+						</b:commandLink>
+						<br />
+						<b:commandLink value="Edit" action="#{list.dataEdit}">
+							<f:param value="#{model.value.job.id}" name="id" />
+						</b:commandLink>
+						<br />
+						<b:commandLink value="Verlauf" action="#{list.history}">
+							<f:param value="#{model.value.job.id}" name="id" />
+						</b:commandLink>
+					</b:dataTableColumn>
+				</b:dataTable>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<b:jumbotron style-class="#{style.name}">
+			<f:event listener="#{setting.preRender}" type="preRenderView" />
+			<b:messages globalOnly="true" id="msg" />
+			<b:row>
+				<b:column style-class="head-line" medium-screen="12">
+					<h:outputText value="Angaben zu allgemeinen Einstellungen der Applikation" />
+				</b:column>
+			</b:row>
+			<h:form id="frm">
+				<b:row>
+					<b:column style-class="center">
+						<div class="head">Libre Office Instllation des Servers zur PDF Erzeugung</div>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Libre Office Path:" />
+					</b:column>
+					<b:column medium-screen="10">
+						<b:inputText size="200" value="#{setting.model.libreOfficeHome}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Service cmd Line:" />
+					</b:column>
+					<b:column medium-screen="10">
+						<b:inputText size="200" value="#{setting.model.cmd}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column style-class="center">
+						<div class="head">Theme für die Aplication aussuchen</div>
+					</b:column>
+				</b:row>
+					<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel value="Theme:" />
+					</b:column>
+					<b:column medium-screen="10">
+						<b:selectOneMenu value="#{setting.selectedStyle}" style="text-align='left';">
+							<f:selectItem itemLabel="(Theme auswählen)" itemValue="" />
+							<f:selectItems value="#{setting.styles}" var="s" itemLabel="#{s.name}" itemValue="#{s}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row style-class="cmds">
+					<b:column medium-screen="12">
+						<b:commandButton value="Speichern" action="#{setting.update}" look="primary" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+</html>
