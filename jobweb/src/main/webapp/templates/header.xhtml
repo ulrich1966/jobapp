@@ -24,10 +24,10 @@
 			<b:form class="navbar-form navbar-right hidden-md hidden-sm hidden-xs">
 				<b:row>
 					<b:column medium-screen="4" style-class="white">
-						<h:outputLabel value="Name:" />
+						<h:outputLabel styleClass="label" value="Name:" />
 					</b:column>
 					<b:column medium-screen="2" style-class="green">
-						<h:outputLabel value="#{apphome.session.account.name}" />
+						<h:outputLabel styleClass="label" value="#{apphome.session.account.name}" />
 					</b:column>
 					<b:column medium-screen="2">
 						<b:commandButton value="Logout" action="#{login.logout}" rendered="#{home.session.login}" look="danger" />

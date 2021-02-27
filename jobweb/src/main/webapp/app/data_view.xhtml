@@ -28,7 +28,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Firma:" />
+					<h:outputLabel styleClass="label" value="Firma:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.company.name}" />
@@ -36,7 +36,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Ort:" />
+					<h:outputLabel styleClass="label" value="Ort:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<h:outputText value="#{data.model.company.zip}" />
@@ -47,7 +47,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Straße:" />
+					<h:outputLabel styleClass="label" value="Straße:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.company.street}" />
@@ -55,7 +55,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Web:" />
+					<h:outputLabel styleClass="label" value="Web:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputLink value="#{data.model.company.web}" target="_blur" converter="linkConverter">
@@ -73,7 +73,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Name:" />
+					<h:outputLabel styleClass="label" value="Name:" />
 				</b:column>
 				<b:column medium-screen="3">
 					<h:outputText value="#{data.model.company.contact.title.name}" />
@@ -87,13 +87,13 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Telefon:" />
+					<h:outputLabel styleClass="label" value="Telefon:" />
 				</b:column>
 				<b:column medium-screen="3">
 					<h:outputText value="#{data.model.company.contact.phone}" />
 				</b:column>
 				<b:column medium-screen="3">
-					<h:outputLabel value="Mobil:" />
+					<h:outputLabel styleClass="label" value="Mobil:" />
 				</b:column>
 				<b:column medium-screen="3">
 					<h:outputText value="#{data.model.company.contact.mobile}" />
@@ -101,7 +101,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="E-Mail:" />
+					<h:outputLabel styleClass="label" value="E-Mail:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.company.contact.email}" />
@@ -117,7 +117,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Job:" />
+					<h:outputLabel styleClass="label" value="Job:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.title}" />
@@ -125,7 +125,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Notiz/Ref:" />
+					<h:outputLabel styleClass="label" value="Notiz/Ref:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.note}" />
@@ -133,23 +133,21 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Angebotsdatum:" />
+					<h:outputLabel styleClass="label" value="Angebotsdatum:" />
 				</b:column>
 				<b:column medium-screen="3">
-					<h:outputText value="#{data.model.jobAdDate}" />
+					<h:outputText value="#{data.model.jobAdDate}" converter="sqlDateConverter"/>
 				</b:column>
 				<b:column medium-screen="3">
-					<h:outputLabel value="Link:" />
+					<h:outputLabel styleClass="label" value="Link:" />
 				</b:column>
 				<b:column medium-screen="3">
-					<h:outputLink value="#{data.model.webLink}" target="_blur" converter="linkConverter">
-							Angebotsquelle
-						</h:outputLink>
+					<h:outputLink value="#{data.model.webLink}" target="_blur" converter="linkConverter">Angebotsquelle</h:outputLink>
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Gehalt:" />
+					<h:outputLabel styleClass="label" value="Gehalt:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.salary}" />
@@ -165,28 +163,28 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Status:" />
+					<h:outputLabel styleClass="label" value="Status:" />
 				</b:column>
-				<b:column medium-screen="2" style-class="green">
+				<b:column offset="1" medium-screen="2" style-class="green">
 					<h:outputText value="#{data.model.stateLastEntry.timeStamp}" converter="dateConverter" />
 				</b:column>
-				<b:column medium-screen="4" style-class="green">
+				<b:column medium-screen="7" style-class="green">
 					<h:outputText value="#{data.model.stateLastEntry.jobState.stateName}" />
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Zur Vorlage beim Jobcebnter gelistet:" />
+					<h:outputLabel styleClass="label" value="In Vorlege-Liste:" />
 				</b:column>
-				<b:column medium-screen="2" style-class="green">
-					<h:outputText value="#{data.model.isListed}" />
+				<b:column offset="1" medium-screen="2" style-class="green">
+					<h:outputText value="#{data.model.isListed}" converter="trueFalseConverter"/>
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Fundort:" />
+					<h:outputLabel styleClass="label" value="Fundort:" />
 				</b:column>
-				<b:column medium-screen="8">
+				<b:column offset="1" medium-screen="9">
 					<h:outputText value="#{data.model.source.pronomen}" />
 					&nbsp;
 					<h:outputText value="#{data.model.source.name}" />
@@ -194,9 +192,9 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Unterlagen Verz.:" />
+					<h:outputLabel styleClass="label" value="Unterlagen Verz.:" />
 				</b:column>
-				<b:column medium-screen="10">
+				<b:column offset="1" medium-screen="9">
 					<h:outputText value="#{data.model.localDocDir}" />
 				</b:column>
 			</b:row>
@@ -207,7 +205,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Anschreiben:" />
+					<h:outputLabel styleClass="label" value="Anschreiben:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.letter.name}" />
@@ -215,7 +213,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Lebenslauf:" />
+					<h:outputLabel styleClass="label" value="Lebenslauf:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.vita.name}" />
@@ -223,7 +221,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="E-Mail:" />
+					<h:outputLabel styleClass="label" value="E-Mail:" />
 				</b:column>
 				<b:column medium-screen="10">
 					<h:outputText value="#{data.model.email.name}" />
@@ -236,31 +234,34 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Anschreiben:" />
+					<h:outputLabel styleClass="label" value="Anschreiben:" />
 				</b:column>
-				<b:column medium-screen="10">
+				<b:column offset="1"	 medium-screen="9">
 					<h:outputText value="#{data.model.letter.target}" />
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Lebenslauf:" />
+					<h:outputLabel styleClass="label" value="Lebenslauf:" />
 				</b:column>
-				<b:column medium-screen="10">
+				<b:column offset="1" medium-screen="9">
 					<h:outputText value="#{data.model.vita.target}" />
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="E-Mail:" />
+					<h:outputLabel styleClass="label" value="E-Mail:" />
 				</b:column>
-				<b:column medium-screen="10">
+				<b:column offset="1" medium-screen="9">
 					<h:outputText value="#{data.model.email.target}" />
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="PDF Anschreiben:" />
+					<h:outputLabel styleClass="label" value="PDF Anschreiben:" />
+				</b:column>
+				<b:column offset="1" medium-screen="9">
+					<h:outputText value="#{data.model.pdf.target}" />
 				</b:column>
 			</b:row>
 

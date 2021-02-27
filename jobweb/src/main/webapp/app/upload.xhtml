@@ -18,7 +18,7 @@
 				
 				<b:row>
 					<b:column medium-screen="4">
-						<h:outputLabel value="Lebenslauf hochladen:" />
+						<h:outputLabel styleClass="label" value="Lebenslauf hochladen:" />
 					</b:column>
 					<b:column medium-screen="4">
 						<h:inputFile value="#{upload.vitaFile}" />
@@ -30,7 +30,7 @@
 				
 				<b:row>
 					<b:column medium-screen="2">
-						<h:outputLabel value="Vorhanden:" />
+						<h:outputLabel styleClass="label" value="Vorhanden:" />
 					</b:column>
 					<h:dataTable value="#{upload.selections.vitas}" var="vita" rows="2">
 						<b:row>
@@ -45,7 +45,7 @@
 
 				<b:row>
 					<b:column medium-screen="4">
-						<h:outputLabel value="Anschreiben Vorlage hochladen:" />
+						<h:outputLabel styleClass="label" value="Anschreiben Vorlage hochladen:" />
 					</b:column>
 					<b:column medium-screen="4">
 						<h:inputFile value="#{upload.letterFile}" />
@@ -57,7 +57,7 @@
 
 				<b:row>
 					<b:column medium-screen="4">
-						<h:outputLabel value="Vorhanden:" />
+						<h:outputLabel styleClass="label" value="Vorhanden:" />
 					</b:column>
 					<h:dataTable value="#{upload.selections.letters}" var="letter" rows="2">
 						<h:column>
@@ -71,7 +71,7 @@
 
 				<b:row>
 					<b:column medium-screen="4"> 
-						<h:outputLabel value="E-Mail Vorlage hochladen:" />
+						<h:outputLabel styleClass="label" value="E-Mail Vorlage hochladen:" />
 					</b:column>
 					<b:column medium-screen="4">
 						<h:inputFile value="#{upload.emailFile}" />
@@ -82,7 +82,7 @@
 				</b:row>
 				<b:row>
 					<b:column medium-screen="4">
-						<h:outputLabel value="Vorhanden:" />
+						<h:outputLabel styleClass="label" value="Vorhanden:" />
 					</b:column>
 					<h:dataTable value="#{upload.selections.emails}" var="email" rows="2">
 						<h:column>

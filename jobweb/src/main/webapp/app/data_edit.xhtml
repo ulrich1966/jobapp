@@ -21,7 +21,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Firma:" />
+					<h:outputLabel styleClass="label" value="Firma:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.name}" />
@@ -29,7 +29,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Empfänger:" />
+					<h:outputLabel styleClass="label" value="Empfänger:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.addressee}" />
@@ -37,7 +37,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Straße:" />
+					<h:outputLabel styleClass="label" value="Straße:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.street}" />
@@ -45,7 +45,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Ort:" />
+					<h:outputLabel styleClass="label" value="Ort:" />
 				</b:column>
 				<b:column medium-screen="2">
 					<b:inputText value="#{edit.model.company.zip}" />
@@ -56,7 +56,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Web:" />
+					<h:outputLabel styleClass="label" value="Web:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.web}" />
@@ -70,7 +70,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Name:" />
+					<h:outputLabel styleClass="label" value="Name:" />
 				</b:column>
 				<b:column medium-screen="2">
 					<b:selectOneMenu value="#{edit.model.company.contact.title}">
@@ -86,13 +86,13 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Telefon:" />
+					<h:outputLabel styleClass="label" value="Telefon:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.contact.phone}" />
 				</b:column>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Mobil:" />
+					<h:outputLabel styleClass="label" value="Mobil:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.contact.mobile}" />
@@ -100,7 +100,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="E-Mail:" />
+					<h:outputLabel styleClass="label" value="E-Mail:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.company.contact.email}" />
@@ -114,7 +114,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Job:" />
+					<h:outputLabel styleClass="label" value="Job:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.title}" />
@@ -122,7 +122,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Notiz/Ref:" />
+					<h:outputLabel styleClass="label" value="Notiz/Ref:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.note}" />
@@ -130,7 +130,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Angebotsdatum:" />
+					<h:outputLabel styleClass="label" value="Angebotsdatum:" />
 				</b:column>
 				<b:column medium-screen="2">
 					<b:datepicker mode="toggle-icon" value="#{edit.date}">
@@ -138,7 +138,7 @@
 					</b:datepicker>
 				</b:column>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Link:" />
+					<h:outputLabel styleClass="label" value="Link:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.webLink}" />
@@ -146,7 +146,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Gehalt:" />
+					<h:outputLabel styleClass="label" value="Gehalt:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:inputText value="#{edit.model.salary}" />
@@ -157,7 +157,7 @@
 
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Status:" />
+					<h:outputLabel styleClass="label" value="Status:" />
 				</b:column>
 				<b:column medium-screen="2" style-class="green">
 					<h:outputText value="#{edit.model.stateLastEntry.timeStamp}" converter="dateConverter" />
@@ -169,7 +169,7 @@
 
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Zur Vorlage gelistet:" />
+					<h:outputLabel styleClass="label" value="Zur Vorlage gelistet:" />
 				</b:column>
 				<b:column medium-screen="2" style-class="green">
 					<h:outputText value="#{edit.model.isListed}" converter="trueFalseConverter" />
@@ -178,7 +178,7 @@
 
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Fundort::" />
+					<h:outputLabel styleClass="label" value="Fundort::" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:selectOneMenu id="id_source" value="#{edit.model.source}">
@@ -196,7 +196,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Anschreiben:" />
+					<h:outputLabel styleClass="label" value="Anschreiben:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:selectOneMenu value="#{edit.model.letter}">
@@ -207,7 +207,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Lebenslauf:" />
+					<h:outputLabel styleClass="label" value="Lebenslauf:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:selectOneMenu value="#{edit.model.vita}">
@@ -218,7 +218,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="E-Mail:" />
+					<h:outputLabel styleClass="label" value="E-Mail:" />
 				</b:column>
 				<b:column medium-screen="4">
 					<b:selectOneMenu value="#{edit.model.email}">
@@ -229,7 +229,7 @@
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel value="Bemerkung:" />
+					<h:outputLabel styleClass="label" value="Bemerkung:" />
 				</b:column>
 
 				<b:column medium-screen="8">
