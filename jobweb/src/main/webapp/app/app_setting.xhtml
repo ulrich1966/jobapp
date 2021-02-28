@@ -22,15 +22,15 @@
 					<b:column medium-screen="2">
 						<h:outputLabel styleClass="label" value="Libre Office Path:" />
 					</b:column>
-					<b:column medium-screen="10">
-						<b:inputText size="200" value="#{setting.model.libreOfficeHome}" />
+					<b:column offset="1" medium-screen="9">
+						<b:inputText value="#{setting.model.libreOfficeHome}" />
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column medium-screen="2">
 						<h:outputLabel styleClass="label" value="Service cmd Line:" />
 					</b:column>
-					<b:column medium-screen="10">
+					<b:column offset="1" medium-screen="9">
 						<b:inputText size="200" value="#{setting.model.cmd}" />
 					</b:column>
 				</b:row>
@@ -43,7 +43,7 @@
 					<b:column medium-screen="2">
 						<h:outputLabel styleClass="label" value="Theme:" />
 					</b:column>
-					<b:column medium-screen="10">
+					<b:column offset="1" medium-screen="4">
 						<b:selectOneMenu value="#{setting.selectedStyle}" style="text-align='left';">
 							<f:selectItem itemLabel="(Theme auswählen)" itemValue="" />
 							<f:selectItems value="#{setting.styles}" var="s" itemLabel="#{s.name}" itemValue="#{s}" />

@@ -21,7 +21,7 @@ public class StyleBean implements Serializable {
 	private static final Logger LOG = LoggerFactory.getLogger(StyleBean.class);
 	private static final long serialVersionUID = 1L;
 	private String currentStyle;
-	private String name = "";
+	private String name = "dark";
 	@Inject
 	private Session session;
 	
@@ -50,12 +50,13 @@ public class StyleBean implements Serializable {
 				}
 			}
 		}		
-		name = session.getAccount().getStyleTheme();			
-		if(name == null) {
-			name = Styles.DEFAULT.getName();
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Du hast noch kein Theme ausgewaehlt. Das kann bei den App Settings erfolgen");
-			session.addMesssage(msg);
-		}
+
+		//TODO Zeitverschwendung mach dal lieber ueber unterschiedliche css Dateien
+//		if(session.getAccount() == null) {
+//			name = "dark";
+//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Du hast noch kein Theme ausgewaehlt. Das kann bei den App Settings erfolgen");
+//			session.addMesssage(msg);
+//		}
 	}
 	
 	public StyleBean() {

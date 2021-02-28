@@ -25,10 +25,5 @@ public class LoginFilter implements Filter {
 		Boolean login = session.getLogin();
 		LOG.debug("Loged in: {}", login);
 		chain.doFilter(request, response);
-//	    if (login) {
-//        	chain.doFilter(request, response);
-//        } else {
-//            ((HttpServletResponse) response).sendRedirect("/index.xhtml");
-//        }
     }
 }

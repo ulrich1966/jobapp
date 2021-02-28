@@ -31,7 +31,7 @@
 			<property name="hibernate.connection.user" value="tomcat" />
 			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" /> <!-- update, create -->
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.use_sql_comments" value="false" />

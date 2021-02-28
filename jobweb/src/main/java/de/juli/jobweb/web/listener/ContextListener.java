@@ -5,65 +5,81 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.juli.jobmodel.controller.AccountController;
 import de.juli.jobmodel.controller.AppSettingController;
 import de.juli.jobmodel.model.Account;
 import de.juli.jobmodel.model.AppSetting;
+import de.juli.jobweb.exeptions.ShittHappensExeption;
+import de.juli.jobweb.util.AccoundHelper;
+import javassist.NotFoundException;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
+	private static final Logger LOG = LoggerFactory.getLogger(ContextListener.class);
+	private AccountController controller = new AccountController();
+	private AppSettingController settingController = new AppSettingController();
 
-    @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println(this.getClass().getName()+" Starting up!");
-        AccountController controller = new AccountController();
-        AppSettingController settingController = new AppSettingController();
-        Account admin;
-        Account uli;
-
-        AppSetting setting;
-		try {
-			admin = controller.findByName("admin");
-		} catch (NoResultException e) {
-			admin = new Account();
-			admin.setName("admin");
-			admin.setPass("admin");
-			admin.setProfillink("https://www.dropbox.com/s/8gj77t1xx47nkdc/profil_kloodt.pdf?dl=0");
-			admin.setPort(587);
-			admin.setSender("ulrich.kloodt@gmx.de");
-			admin.setSmtp("mail.gmx.net");
-			admin.setSmtpPass("Wrssdnuw@1966");
-			admin.setUser("ulrich.kloodt@gmx.de");
-			controller.persist(admin);
-		}
+	/**
+	 * Wird nach dem App-Atart aufgerufen und prueft ob es einen Accounds fuer
+	 * Benutzer gibt. Wenn nicht, weren weleche angelegt, damit man sich
+	 * einloggen kann und die die App benutzt werden kann.
+	 */
+	@Override
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		LOG.debug("{} Starting up!", this.getClass().getName());
+		AppSetting settings = null;
 		
-		try {
-			uli = controller.findByName("uli");
-		} catch (NoResultException e) {
-			uli = new Account();
-			uli.setName("uli");
-			uli.setPass("uli");
-			uli.setProfillink("https://www.dropbox.com/s/8gj77t1xx47nkdc/profil_kloodt.pdf?dl=0");
-			uli.setPort(587);
-			uli.setSender("ulrich.kloodt@gmx.de");
-			uli.setSmtp("mail.gmx.net");
-			uli.setSmtpPass("Wrssdnuw@1966");
-			uli.setUser("ulrich.kloodt@gmx.de");
-			controller.persist(uli);
+		String name = "admin";
+		if(!checkAccount(name)) {
+			throw new ShittHappensExeption(String.format("Das Ersestellen eines Accounds fuer %s ist voll in die Hose gegangen", name));
 		}
-		try {
-			setting = settingController.findFirst();
-		} catch (NoResultException e) {
-			setting = new AppSetting();
-			setting.setLibreOfficeHome("C:\\Program Files (x86)\\LibreOffice 5\\program");
-			setting.setCmd("soffice.exe");
-			settingController.persist(setting);
+		name = "uli";
+		if(!checkAccount(name)) {
+			throw new ShittHappensExeption(String.format("Das Ersestellen eines Accounds fuer %s ist voll in die Hose gegangen", name));
 		}
-    }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
-    	//DbServerStart.getInstance().stop();;
-        System.out.println(this.getClass().getName()+" Shutting down!");
-    }
+		try {
+			settings = settingController.findFirst();
+		} catch (NoResultException e) {
+			settings = new AppSetting();
+			settings.setLibreOfficeHome("C:\\Program Files (x86)\\LibreOffice 5\\program");
+			settings.setCmd("soffice.exe");
+			settingController.persist(settings);
+		}
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		// DbServerStart.getInstance().stop();;
+		LOG.debug("{} Shutting down!", this.getClass().getName());
+	}
+
+	/**
+	 * Pruefen auf Vorhandensein eines Accounds angegebenen Namens oder Estellen der Accounds 
+	 * mit angebebenen Namen wenn nicht vorhanden.
+	 */
+	private boolean checkAccount(String name) {
+		Account account = null;
+		boolean success = false;
+		try {
+			account = controller.findByName(name);
+			success = true;
+		} catch (NoResultException e) {
+			LOG.debug("Account wurde nicht gefunden!\n{}", e.getMessage());
+			try {
+				account = AccoundHelper.getInstance().fillAccoundByProperties(name);
+				controller.persist(account);
+				success = true;
+			} catch (NotFoundException e1) {
+				LOG.debug("Eine Propertiy fuer den Account wurde nicht gefunden!\n{}", e1.getMessage());
+				e1.printStackTrace();
+			} catch (Exception e2) {
+				LOG.error("{}", e2);
+			}
+		}
+		return success;
+	}
 }

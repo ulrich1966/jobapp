@@ -32,16 +32,17 @@ public abstract class WebBean implements Serializable {
 		httpSession = request.getSession(true);
 		persistService = new PersistService();
 	}
-	
+
 	/**
-	 * Bevor die View geraendert wird auf eventuelle Fehlermeldungen 
-	 * pruefen
+	 * Bevor die View geraendert wird auf eventuelle Fehlermeldungen pruefen
 	 */
-	public void preRender(ComponentSystemEvent event){
-		for (FacesMessage msg : getSession().getMessageList()) {
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			msg.rendered();
-			getSession().setMessageList(null);
+	public void preRender(ComponentSystemEvent event) {
+		if (getSession().getMessageList() != null && !getSession().getMessageList().isEmpty()) {
+			for (FacesMessage msg : getSession().getMessageList()) {
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				msg.rendered();
+				getSession().setMessageList(null);
+			}
 		}
 	}
 

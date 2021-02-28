@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- 1. Benutzer -->
+	<entry key="admin.name">admin</entry>
+	<entry key="admin.pass">admin</entry>
+	<entry key="admin.profillink">not set</entry>
+	<entry key="admin.port">587</entry>
+	<entry key="admin.sender">post2uli@gmx.de</entry>
+	<entry key="admin.smtp">mail.gmx.net</entry>
+	<entry key="admin.smtp.pass">Wrssdnuw@1966</entry>
+	<entry key="admin.email.user">ulrich.kloodt@gmx.de</entry>
+	<entry key="admin.roll">admin</entry>
+	<entry key="admin.theme">dark</entry>
+	<!-- 2. Benutzer -->
+	<entry key="uli.name">uli</entry>
+	<entry key="uli.pass">DD55CEC2CE59ACA4E6647DCFBC90DC27</entry>
+	<entry key="uli.profillink">not set</entry>
+	<entry key="uli.port">587</entry>
+	<entry key="uli.sender">ulrich.kloodt@gmx.de</entry>
+	<entry key="uli.smtp">mail.gmx.net</entry>
+	<entry key="uli.smtp.pass">Wrssdnuw@1966</entry>
+	<entry key="uli.email.user">ulrich.kloodt@gmx.de</entry>
+	<entry key="uli.roll">user</entry>
+	<entry key="uli.theme">dark</entry>
+</properties>
+
+

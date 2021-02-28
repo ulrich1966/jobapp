@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -15,10 +16,12 @@ import javax.persistence.OneToMany;
 	  @NamedQuery(name="Account.findByName", query="SELECT model FROM Account model WHERE model.name = :name")
 	})
 public class Account extends Model{
+	@Column(unique = true)
 	private String name;
 	private String pass;
 	private Integer port;
 	private String user;
+	@Column(unique = true)
 	private String sender;
 	private String smtpPass;
 	private String profillink;
@@ -26,7 +29,7 @@ public class Account extends Model{
 	private String styleTheme;
 	@OneToMany(mappedBy="account", cascade=CascadeType.ALL)
 	private List<Job> jobs;
-	
+
 	public String getName() {
 		return name;
 	}

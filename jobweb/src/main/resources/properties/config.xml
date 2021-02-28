@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="style.default">dark</entry>
+	<entry key="libreoffice.home">C:/Program Files (x86)/LibreOffice 5/program</entry>
+	<entry key="libreoffice.cmd">soffice.exe</entry>
+</properties>
