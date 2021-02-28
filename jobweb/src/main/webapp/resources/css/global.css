@@ -15,6 +15,10 @@ div .label {
 	letter-spacing: 0.13em;	
 }
 
+div .checkbox {
+	margin: 0;
+}
+
 .jumbotron.dark td {
 	color: #555555;
 	font-size: 1em;

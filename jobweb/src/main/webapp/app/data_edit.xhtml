@@ -169,10 +169,10 @@
 
 			<b:row>
 				<b:column medium-screen="2">
-					<h:outputLabel styleClass="label" value="Zur Vorlage gelistet:" />
+					<h:outputLabel styleClass="label" value="Jobcenter Liste:" />
 				</b:column>
-				<b:column medium-screen="2" style-class="green">
-					<h:outputText value="#{edit.model.isListed}" converter="trueFalseConverter" />
+				<b:column medium-screen="10">
+						<b:selectBooleanCheckbox value="#{createjob.model.isListed}" caption="hinzufügen" />
 				</b:column>
 			</b:row>
 
@@ -237,14 +237,15 @@
 				</b:column>
 			</b:row>
 			<!-- Commands -->
-			<b:row style-class="cmd">
-				<b:column medium-screen="2">
-					<b:commandButton value="Details" action="#{edit.view}" look="success" />
-				</b:column>
-				<b:column medium-screen="2">
-					<b:commandButton value="Speichern" action="#{edit.update}" look="primary" />
-				</b:column>
-			</b:row>
+			<h:form id="frm">
+				<b:row style-class="cmd">
+					<b:column medium-screen="2">
+						<b:commandButton value="Details" action="#{edit.view}" look="success" />
+					</b:column>
+					<b:column medium-screen="2">
+						<b:commandButton value="Speichern" action="#{edit.update}" look="primary" />
+					</b:column>
+				</b:row>
 			</h:form>
 		</b:jumbotron>
 	</ui:define>

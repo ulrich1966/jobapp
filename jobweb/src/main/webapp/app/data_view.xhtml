@@ -75,13 +75,9 @@
 				<b:column medium-screen="2">
 					<h:outputLabel styleClass="label" value="Name:" />
 				</b:column>
-				<b:column medium-screen="3">
-					<h:outputText value="#{data.model.company.contact.title.name}" />
-				</b:column>
-				<b:column medium-screen="3">
-					<h:outputText value="#{data.model.company.contact.firstName}" />
-				</b:column>
-				<b:column medium-screen="3">
+				<b:column medium-screen="10">
+					<h:outputText value="#{data.model.company.contact.title.name}" />&nbsp;
+					<h:outputText value="#{data.model.company.contact.firstName}" />&nbsp;
 					<h:outputText value="#{data.model.company.contact.lastName}" />
 				</b:column>
 			</b:row>
@@ -135,13 +131,12 @@
 				<b:column medium-screen="2">
 					<h:outputLabel styleClass="label" value="Angebotsdatum:" />
 				</b:column>
-				<b:column medium-screen="3">
+				<b:column medium-screen="2">
 					<h:outputText value="#{data.model.jobAdDate}" converter="sqlDateConverter"/>
 				</b:column>
-				<b:column medium-screen="3">
+				<b:column offset="1" medium-screen="7">
 					<h:outputLabel styleClass="label" value="Link:" />
-				</b:column>
-				<b:column medium-screen="3">
+					&nbsp;
 					<h:outputLink value="#{data.model.webLink}" target="_blur" converter="linkConverter">Angebotsquelle</h:outputLink>
 				</b:column>
 			</b:row>
@@ -198,6 +193,9 @@
 					<h:outputText value="#{data.model.localDocDir}" />
 				</b:column>
 			</b:row>
+			
+			<!--  Dokumentenerstellung -->
+			
 			<b:row>
 				<b:column style-class="center">
 					<div class="head">Vorlagen für die Dokumentenerstellung</div>

@@ -50,10 +50,7 @@
 						<h:outputLabel styleClass="label" value="Jobcenter Liste:" />
 					</b:column>
 					<b:column medium-screen="6">
-						<b:panelGrid size="xs" columns="6">
-							<b:radiobutton value="#{createjob.model.isListed}" itemLabel="Ja" itemValue="true" />
-							<b:radiobutton value="#{createjob.model.isListed}" itemLabel="Nein" itemValue="false" />
-						</b:panelGrid>
+							<b:selectBooleanCheckbox value="#{createjob.model.isListed}" caption="hinzufügen" />
 					</b:column>
 				</b:row>
 				<b:row style-class="cmds">
