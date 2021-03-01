@@ -1,4 +1,4 @@
-package de.juli.jobrest.api.controller;
+package de.juli.jobapp.jobrest.api.controller;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

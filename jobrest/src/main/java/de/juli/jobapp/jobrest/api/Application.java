@@ -1,4 +1,4 @@
-package de.juli.jobrest.api;
+package de.juli.jobapp.jobrest.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
