@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobmodel.controller.AccountController;
 import de.juli.jobmodel.model.Account;
-import de.juli.jobweb.util.Md5Handler;
+import de.juli.jobmodel.util.Md5Handler;
 import de.juli.jobweb.util.PropertyBean;
 
 @Named("login")
@@ -27,10 +27,9 @@ public class LoginBean implements Serializable {
 	private AccountController controller = new AccountController();
 	private String username;
 	private String password;
+	private	Md5Handler md5 = new Md5Handler();
 	@Inject
 	private Session session;
-	@Inject
-	private	Md5Handler md5;
 	
 	/**
 	 * Bevor die View geraendert wird ...  

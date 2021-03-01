@@ -7,6 +7,9 @@ import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.juli.jobmodel.controller.SourceController;
 import de.juli.jobmodel.model.Account;
 import de.juli.jobmodel.model.Job;
@@ -16,6 +19,7 @@ import de.juli.jobweb.viewmodel.CurrentData;
 
 public class JobService implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory.getLogger(JobService.class);
 
 	public JobService() {
 		super();
@@ -53,11 +57,11 @@ public class JobService implements Serializable {
 			}
 			for (Job model : models) {
 				Long id = model.getId();
-				System.out.println(String.format("Model mit Id: %s hinzufuegen", id));
+				LOG.debug("Model mit Id: {} hinzufuegen", id);
 				datas.put(model.getId(), new CurrentData(model));
 			}
 		} catch (EntityNotFoundException e) {
-			System.err.println(e.getMessage());
+			LOG.error("{}", e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

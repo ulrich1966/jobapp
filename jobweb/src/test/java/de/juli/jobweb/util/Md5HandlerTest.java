@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobmodel.util.Md5Handler;
+
 public class Md5HandlerTest {
 	private static final Logger LOG = LoggerFactory.getLogger(Md5HandlerTest.class);
 

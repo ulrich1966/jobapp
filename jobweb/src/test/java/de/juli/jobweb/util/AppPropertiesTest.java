@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobmodel.util.AppProperties;
 import javassist.NotFoundException;
 
 public class AppPropertiesTest {

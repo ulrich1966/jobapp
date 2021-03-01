@@ -6,6 +6,7 @@ import de.juli.jobmodel.model.Document;
 import de.juli.jobmodel.model.Model;
 
 public class DocumentController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public Model create(Document model){
 		return persist(model);

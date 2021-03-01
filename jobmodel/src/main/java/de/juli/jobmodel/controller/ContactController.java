@@ -5,6 +5,7 @@ import java.util.List;
 import de.juli.jobmodel.model.Contact;
 
 public class ContactController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public Contact create(Contact model){
 		return persist(model);

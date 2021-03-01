@@ -21,6 +21,8 @@
 		<version.xdocreport>2.0.1</version.xdocreport>
 		<version.email>1.2</version.email>
 		<version.jopendocument>1.3</version.jopendocument>
+		<version.jaxb-api>2.3.1</version.jaxb-api>
+		<version.docx4j>6.0.1</version.docx4j>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 	</properties>
@@ -69,12 +71,18 @@
 		<dependency>
 			<groupId>org.docx4j</groupId>
 			<artifactId>docx4j</artifactId>
-			<version>6.0.1</version>
+			<version>${version.docx4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>${version.email}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>${version.jaxb-api}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

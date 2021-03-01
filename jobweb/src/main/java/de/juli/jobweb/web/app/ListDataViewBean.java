@@ -24,7 +24,7 @@ public class ListDataViewBean extends WebBean {
 	
 	@PostConstruct
 	public void init() {
-		Account account = (Account) session.getAccount();
+		Account account = session.getAccount();
 		if(null != account) {
 			currentJobs = jobService.getCurrentJobs(account);			
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 import de.juli.jobmodel.model.Account;
 
 public class AccountController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public Account create(Account model){
 		return persist(model);

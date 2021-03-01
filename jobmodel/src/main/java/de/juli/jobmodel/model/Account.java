@@ -119,5 +119,4 @@ public class Account extends Model{
 		builder.append("]");
 		return builder.toString();
 	}
-	
 }

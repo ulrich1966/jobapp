@@ -5,6 +5,7 @@ import java.util.List;
 import de.juli.jobmodel.model.AppSetting;
 
 public class AppSettingController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public AppSetting create(AppSetting model){
 		return persist(model);

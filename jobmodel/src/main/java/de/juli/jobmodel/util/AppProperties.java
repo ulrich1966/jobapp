@@ -1,4 +1,4 @@
-package de.juli.jobweb.util;
+package de.juli.jobmodel.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +39,7 @@ public class AppProperties {
 		propertiesLoadXML();
 		String result = currentProps.getProperty(prop);
 		if (result == null) {
-			String msg = String.format("Es wurde kein passender Eintrag für %s gefunden!", prop);
+			String msg = String.format("Es wurde kein passender Eintrag fï¿½r %s gefunden!", prop);
 			LOG.error(msg);
 			throw new NotFoundException(msg);
 		}

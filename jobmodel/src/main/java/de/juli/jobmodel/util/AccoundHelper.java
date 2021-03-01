@@ -1,4 +1,4 @@
-package de.juli.jobweb.util;
+package de.juli.jobmodel.util;
 
 import java.security.NoSuchAlgorithmException;
 

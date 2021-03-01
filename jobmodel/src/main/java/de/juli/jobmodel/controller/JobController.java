@@ -11,6 +11,7 @@ import de.juli.jobmodel.model.Job;
 import de.juli.jobmodel.model.Model;
 
 public class JobController extends Controller{
+	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(JobController.class);
 	
 	public Job create(Job model){

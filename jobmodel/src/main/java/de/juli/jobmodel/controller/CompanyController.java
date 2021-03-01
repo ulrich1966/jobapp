@@ -3,10 +3,10 @@ package de.juli.jobmodel.controller;
 import java.util.List;
 
 import de.juli.jobmodel.model.Company;
-import de.juli.jobmodel.model.Job;
 import de.juli.jobmodel.model.Model;
 
 public class CompanyController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public Company create(Company model){
 		return persist(model);

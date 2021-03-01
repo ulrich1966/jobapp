@@ -5,6 +5,7 @@ import java.util.List;
 import de.juli.jobmodel.model.Source;
 
 public class SourceController extends Controller {
+	private static final long serialVersionUID = 1L;
 
 	public Source create(Source model){
 		return persist(model);
