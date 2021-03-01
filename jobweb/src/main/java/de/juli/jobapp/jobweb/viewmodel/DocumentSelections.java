@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import de.juli.jobmodel.model.Email;
-import de.juli.jobmodel.model.Letter;
-import de.juli.jobmodel.model.Source;
-import de.juli.jobmodel.model.Vita;
+import de.juli.jobapp.jobmodel.model.Email;
+import de.juli.jobapp.jobmodel.model.Letter;
+import de.juli.jobapp.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.model.Vita;
 
 public class DocumentSelections implements Serializable {
 	private static final long serialVersionUID = 1L;

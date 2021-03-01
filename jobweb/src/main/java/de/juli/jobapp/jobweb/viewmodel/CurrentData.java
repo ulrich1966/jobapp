@@ -3,16 +3,16 @@ package de.juli.jobapp.jobweb.viewmodel;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import de.juli.jobmodel.enums.Title;
-import de.juli.jobmodel.model.Company;
-import de.juli.jobmodel.model.Contact;
-import de.juli.jobmodel.model.Email;
-import de.juli.jobmodel.model.History;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.model.Letter;
-import de.juli.jobmodel.model.Source;
-import de.juli.jobmodel.model.State;
-import de.juli.jobmodel.model.Vita;
+import de.juli.jobapp.jobmodel.enums.Title;
+import de.juli.jobapp.jobmodel.model.Company;
+import de.juli.jobapp.jobmodel.model.Contact;
+import de.juli.jobapp.jobmodel.model.Email;
+import de.juli.jobapp.jobmodel.model.History;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.model.Letter;
+import de.juli.jobapp.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.model.State;
+import de.juli.jobapp.jobmodel.model.Vita;
 
 /**
  * Vereifacht den Zugriff auf das Model in den View und 

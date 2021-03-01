@@ -6,10 +6,10 @@ import javax.inject.Named;
 
 import org.jboss.weld.exceptions.IllegalArgumentException;
 
+import de.juli.jobapp.jobmodel.enums.AppHistory;
+import de.juli.jobapp.jobmodel.model.History;
+import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.enums.AppHistory;
-import de.juli.jobmodel.model.History;
-import de.juli.jobmodel.model.Job;
 
 @Named("history")
 @RequestScoped

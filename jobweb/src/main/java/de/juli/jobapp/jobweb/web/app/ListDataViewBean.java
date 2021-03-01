@@ -6,10 +6,10 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobweb.service.JobService;
 import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobapp.jobweb.viewmodel.CurrentData;
-import de.juli.jobmodel.model.Account;
 
 @Named("list")
 @RequestScoped

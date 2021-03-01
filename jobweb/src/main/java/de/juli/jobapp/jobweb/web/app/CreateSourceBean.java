@@ -9,8 +9,8 @@ import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 
+import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.model.Source;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("jobsource")

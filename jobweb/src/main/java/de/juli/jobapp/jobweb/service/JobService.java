@@ -10,11 +10,11 @@ import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.jobmodel.controller.SourceController;
-import de.juli.jobmodel.model.Account;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.model.Source;
-import de.juli.jobmodel.service.PersistService;
+import de.juli.jobapp.jobmodel.controller.SourceController;
+import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.viewmodel.CurrentData;
 
 public class JobService implements Serializable {

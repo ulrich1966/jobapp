@@ -8,10 +8,10 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.enums.Title;
+import de.juli.jobapp.jobmodel.model.Contact;
+import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.enums.Title;
-import de.juli.jobmodel.model.Contact;
-import de.juli.jobmodel.model.Job;
 
 @Named("createcontact")
 @RequestScoped
