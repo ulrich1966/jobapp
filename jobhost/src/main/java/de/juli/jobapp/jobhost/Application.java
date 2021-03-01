@@ -21,8 +21,9 @@ import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,11 +31,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @SpringBootApplication 
-public class Application {
+public class Application extends SpringBootServletInitializer {
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Application.class, args);
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return configureApplication(builder);
 	}
+
+    // start everything
+    public static void main(String[] args) {
+    	configureApplication(new SpringApplicationBuilder()).run(args);
+    }
+    
+    private static SpringApplicationBuilder configureApplication(SpringApplicationBuilder builder) {
+		return builder.sources(Application.class);
+    	
+    }
 
 	@Bean
 	protected ServletContextListener listener() {
