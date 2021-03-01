@@ -1,8 +1,0 @@
-${name}
-${first_name} ${last_name}
-${zip} ${city}
-${street}
-
-${title}
-
-${sex} ${appell} ${last_name}
