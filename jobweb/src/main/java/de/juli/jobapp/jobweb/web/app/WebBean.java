@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,8 +13,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import de.juli.jobapp.jobweb.web.Session;
 import de.juli.jobmodel.service.PersistService;
-import de.juli.jobweb.web.Session;
 
 public abstract class WebBean implements Serializable {
 	private static final long serialVersionUID = 1L;

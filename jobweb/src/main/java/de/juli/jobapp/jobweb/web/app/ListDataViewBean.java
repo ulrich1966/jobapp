@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.util.Map;
 
@@ -6,10 +6,10 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import de.juli.jobapp.jobweb.service.JobService;
+import de.juli.jobapp.jobweb.util.PropertyBean;
+import de.juli.jobapp.jobweb.viewmodel.CurrentData;
 import de.juli.jobmodel.model.Account;
-import de.juli.jobweb.service.JobService;
-import de.juli.jobweb.util.PropertyBean;
-import de.juli.jobweb.viewmodel.CurrentData;
 
 @Named("list")
 @RequestScoped

@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -8,10 +8,10 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobmodel.enums.Title;
 import de.juli.jobmodel.model.Contact;
 import de.juli.jobmodel.model.Job;
-import de.juli.jobweb.util.PropertyBean;
 
 @Named("createcontact")
 @RequestScoped

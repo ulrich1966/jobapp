@@ -1,4 +1,4 @@
-package de.juli.jobweb.service;
+package de.juli.jobapp.jobweb.service;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package de.juli.jobweb.service;
+package de.juli.jobapp.jobweb.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;

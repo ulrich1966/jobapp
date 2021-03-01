@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +15,13 @@ import javax.servlet.http.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
+import de.juli.jobapp.jobweb.service.DirService;
+import de.juli.jobapp.jobweb.util.AppDirectories;
+import de.juli.jobapp.jobweb.util.PropertyBean;
+import de.juli.jobapp.jobweb.viewmodel.DocumentSelections;
 import de.juli.jobmodel.enums.DocType;
 import de.juli.jobmodel.model.Account;
-import de.juli.jobweb.exeptions.ShittHappensExeption;
-import de.juli.jobweb.service.DirService;
-import de.juli.jobweb.util.AppDirectories;
-import de.juli.jobweb.util.PropertyBean;
-import de.juli.jobweb.viewmodel.DocumentSelections;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("upload")
@@ -116,7 +116,7 @@ public class Upload extends WebBean {
 				throw new ShittHappensExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");				
 			} catch (ShittHappensExeption e) {
 				LOG.error(e.getMessage());
-				FacesMessages.error(null, "Es wurde keine Datei ausgewählt!");
+				FacesMessages.error(null, "Es wurde keine Datei ausgewï¿½hlt!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.io.IOException;
 
@@ -12,6 +12,10 @@ import org.jboss.weld.exceptions.IllegalArgumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
+import de.juli.jobapp.jobweb.service.SendService;
+import de.juli.jobapp.jobweb.util.AppDirectories;
+import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobmodel.enums.AppHistory;
 import de.juli.jobmodel.enums.JobState;
 import de.juli.jobmodel.model.History;
@@ -19,10 +23,6 @@ import de.juli.jobmodel.model.Job;
 import de.juli.jobmodel.model.State;
 import de.juli.jobmodel.service.DocumentService;
 import de.juli.jobmodel.service.PersistService;
-import de.juli.jobweb.exeptions.ShittHappensExeption;
-import de.juli.jobweb.service.SendService;
-import de.juli.jobweb.util.AppDirectories;
-import de.juli.jobweb.util.PropertyBean;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("data")

@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,15 +15,15 @@ import javax.persistence.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobweb.service.DirService;
+import de.juli.jobapp.jobweb.util.AppDirectories;
+import de.juli.jobapp.jobweb.util.PropertyBean;
+import de.juli.jobapp.jobweb.viewmodel.DocumentSelections;
 import de.juli.jobmodel.enums.JobState;
 import de.juli.jobmodel.enums.Title;
 import de.juli.jobmodel.model.Job;
 import de.juli.jobmodel.model.Source;
 import de.juli.jobmodel.model.State;
-import de.juli.jobweb.service.DirService;
-import de.juli.jobweb.util.AppDirectories;
-import de.juli.jobweb.util.PropertyBean;
-import de.juli.jobweb.viewmodel.DocumentSelections;
 import net.bootsfaces.utils.FacesMessages;
 
 
@@ -97,7 +97,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 			model = getPersistService().persist(getModel());
 			getSession().getAccount().addJob(getModel());
 			getModel().addState(new State(JobState.UPDATED));
-			FacesMessages.info(null, "Die Änderngen wuren übernommen!");
+			FacesMessages.info(null, "Die ï¿½nderngen wuren ï¿½bernommen!");
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern. Die Bewerbung konnte nicht gespeichert werden!");

@@ -1,4 +1,4 @@
-package de.juli.jobweb.util;
+package de.juli.jobapp.jobweb.util;
 
 import org.junit.Assert;
 import org.junit.Test;

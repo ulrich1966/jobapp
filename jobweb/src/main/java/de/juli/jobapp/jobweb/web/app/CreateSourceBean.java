@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.inject.Named;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 
+import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobmodel.model.Source;
-import de.juli.jobweb.util.PropertyBean;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("jobsource")
@@ -65,7 +65,7 @@ public class CreateSourceBean extends WebBean {
 			} catch (PersistenceException e) {
 				FacesMessages.error("messages", "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");
 			}
-			FacesMessages.info("messages", String.format("Quelle [ %s ] hinzugefügt", model.getName()));
+			FacesMessages.info("messages", String.format("Quelle [ %s ] hinzugefï¿½gt", model.getName()));
 		} else {
 			FacesMessages.error("messages", String.format("Source model ist null"));			
 		}

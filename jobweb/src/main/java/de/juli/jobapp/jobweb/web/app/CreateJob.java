@@ -1,11 +1,11 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobmodel.model.Job;
-import de.juli.jobweb.util.PropertyBean;
 
 @Named("createjob")
 @RequestScoped

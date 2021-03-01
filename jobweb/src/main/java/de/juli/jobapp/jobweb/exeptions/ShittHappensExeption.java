@@ -1,4 +1,4 @@
-package de.juli.jobweb.exeptions;
+package de.juli.jobapp.jobweb.exeptions;
 
 import com.sun.star.uno.RuntimeException;
 

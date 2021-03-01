@@ -1,4 +1,4 @@
-package de.juli.jobweb.viewmodel;
+package de.juli.jobapp.jobweb.viewmodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;

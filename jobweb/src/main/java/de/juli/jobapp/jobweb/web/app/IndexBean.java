@@ -1,4 +1,4 @@
-package de.juli.jobweb.web.app;
+package de.juli.jobapp.jobweb.web.app;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ComponentSystemEvent;

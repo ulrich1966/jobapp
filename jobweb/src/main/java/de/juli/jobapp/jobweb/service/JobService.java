@@ -1,4 +1,4 @@
-package de.juli.jobweb.service;
+package de.juli.jobapp.jobweb.service;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import de.juli.jobmodel.model.Account;
 import de.juli.jobmodel.model.Job;
 import de.juli.jobmodel.model.Source;
 import de.juli.jobmodel.service.PersistService;
-import de.juli.jobweb.viewmodel.CurrentData;
+import de.juli.jobapp.jobweb.viewmodel.CurrentData;
 
 public class JobService implements Serializable {
 	private static final long serialVersionUID = 1L;
