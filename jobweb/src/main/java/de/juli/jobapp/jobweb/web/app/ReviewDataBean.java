@@ -5,10 +5,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
+import de.juli.jobapp.jobmodel.enums.JobState;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.enums.JobState;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.model.State;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("datareview")

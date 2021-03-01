@@ -4,8 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.model.Job;
 
 @Named("createjob")
 @RequestScoped

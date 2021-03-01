@@ -2,10 +2,10 @@ package de.juli.jobapp.jobweb.viewmodel;
 
 import java.util.List;
 
-import de.juli.jobmodel.model.Company;
-import de.juli.jobmodel.model.Document;
-import de.juli.jobmodel.model.History;
-import de.juli.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.model.Company;
+import de.juli.jobapp.jobmodel.model.Document;
+import de.juli.jobapp.jobmodel.model.History;
+import de.juli.jobapp.jobmodel.model.Source;
 
 public class JobDataList {
 	private Company company;

@@ -13,8 +13,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.web.Session;
-import de.juli.jobmodel.service.PersistService;
 
 public abstract class WebBean implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.jobmodel.model.Account;
-import de.juli.jobmodel.util.AccoundHelper;
+import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.util.AccoundHelper;
 import javassist.NotFoundException;
 
 

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.juli.jobmodel.model.Email;
-import de.juli.jobmodel.model.Letter;
-import de.juli.jobmodel.model.Vita;
+import de.juli.jobapp.jobmodel.model.Email;
+import de.juli.jobapp.jobmodel.model.Letter;
+import de.juli.jobapp.jobmodel.model.Vita;
 
 public class DirService {
 	

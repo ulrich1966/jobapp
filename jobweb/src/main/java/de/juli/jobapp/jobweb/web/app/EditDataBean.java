@@ -15,15 +15,15 @@ import javax.persistence.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.enums.JobState;
+import de.juli.jobapp.jobmodel.enums.Title;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobweb.service.DirService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobapp.jobweb.viewmodel.DocumentSelections;
-import de.juli.jobmodel.enums.JobState;
-import de.juli.jobmodel.enums.Title;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.model.Source;
-import de.juli.jobmodel.model.State;
 import net.bootsfaces.utils.FacesMessages;
 
 

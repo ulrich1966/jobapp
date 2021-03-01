@@ -8,21 +8,20 @@ import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
-import org.jboss.weld.exceptions.IllegalArgumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.enums.AppHistory;
+import de.juli.jobapp.jobmodel.enums.JobState;
+import de.juli.jobapp.jobmodel.model.History;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.model.State;
+import de.juli.jobapp.jobmodel.service.DocumentService;
+import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 import de.juli.jobapp.jobweb.service.SendService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobmodel.enums.AppHistory;
-import de.juli.jobmodel.enums.JobState;
-import de.juli.jobmodel.model.History;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.model.State;
-import de.juli.jobmodel.service.DocumentService;
-import de.juli.jobmodel.service.PersistService;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("data")

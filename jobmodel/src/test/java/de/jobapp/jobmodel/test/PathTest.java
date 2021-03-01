@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import org.junit.After;
 import org.junit.Test;
 
-import de.juli.jobmodel.service.DocumentService;
+import de.juli.jobapp.jobmodel.service.DocumentService;
 
 public class PathTest {
 

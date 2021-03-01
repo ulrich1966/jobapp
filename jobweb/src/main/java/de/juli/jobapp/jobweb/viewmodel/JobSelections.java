@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import de.juli.jobmodel.enums.Title;
-import de.juli.jobmodel.model.Document;
-import de.juli.jobmodel.model.Source;
+import de.juli.jobapp.jobmodel.enums.Title;
+import de.juli.jobapp.jobmodel.model.Document;
+import de.juli.jobapp.jobmodel.model.Source;
 
 @Deprecated
 public class JobSelections {

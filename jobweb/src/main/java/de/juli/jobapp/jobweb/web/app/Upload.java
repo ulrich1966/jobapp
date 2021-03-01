@@ -15,13 +15,13 @@ import javax.servlet.http.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.enums.DocType;
+import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 import de.juli.jobapp.jobweb.service.DirService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
 import de.juli.jobapp.jobweb.viewmodel.DocumentSelections;
-import de.juli.jobmodel.enums.DocType;
-import de.juli.jobmodel.model.Account;
 import net.bootsfaces.utils.FacesMessages;
 
 @Named("upload")

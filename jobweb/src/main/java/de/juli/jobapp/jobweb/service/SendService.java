@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.juli.jobmodel.model.Account;
-import de.juli.jobmodel.model.Job;
-import de.juli.jobmodel.service.MailSerrvice;
+import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobmodel.service.MailSerrvice;
 
 public class SendService  {
 	private final MailSerrvice service;
