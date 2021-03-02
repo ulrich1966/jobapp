@@ -28,7 +28,7 @@ public class MyController {
 	@GetMapping("/getMessage2")
 	public ModelAndView getMessage() {
 
-		var mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("message", message);
 		mav.setViewName("show");
 
@@ -38,13 +38,13 @@ public class MyController {
 	@GetMapping("/getMessageAndTime")
 	public String getMessageAndTime(ModelMap map) {
 
-		var ldt = LocalDateTime.now();
-		var fmt = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter fmt = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 
 		fmt.withLocale(new Locale("de", "DE"));
 		fmt.withZone(ZoneId.of("CET"));
 
-		var time = fmt.format(ldt);
+		String time = fmt.format(ldt);
 
 		map.addAttribute("message", message).addAttribute("time", time);
 

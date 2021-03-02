@@ -12,22 +12,9 @@
 
 	<properties>
 		<version.jobmodel>0.0.1-SNAPSHOT</version.jobmodel>
-		<maven.compiler.release>10</maven.compiler.release>
-		<downloadSources>true</downloadSources>
-		<downloadJavadocs>true</downloadJavadocs>
 	</properties>
 
-	<!-- <dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version></version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement> -->
+	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-dependencies</artifactId> <version></version> <type>pom</type> <scope>import</scope> </dependency> </dependencies> </dependencyManagement> -->
 
 	<dependencies>
 		<!-- spring mvc, rest -->
@@ -68,12 +55,12 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<!-- freemarker templating -->
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>de.juli</groupId>
@@ -92,19 +79,9 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<release>10</release>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -21,9 +21,10 @@
 	<properties>
 		<version.slf4j>1.8.0-beta0</version.slf4j>
 		<version.junit>4.13.1</version.junit>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler>1.8</maven.compiler>
 		<version.docuhandle>0.0.1-SNAPSHOT</version.docuhandle>
+		<downloadSources>true</downloadSources>
+		<downloadJavadocs>true</downloadJavadocs>
 		<skipTests>true</skipTests>
 	</properties>
 	<dependencies>
@@ -49,8 +50,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${maven.compiler}</source>
+					<target>${maven.compiler}</target>
 					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
