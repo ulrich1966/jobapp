@@ -13,23 +13,23 @@
  *  implied.  See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-package de.juli.jobapp.domain;
+package de.juli.jobapp.jobweb;
 
-public class IPAddress {
+import java.net.InetAddress;
 
-    private final long id;
-    private final String ipAddress;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-    public IPAddress(long id, String ipAddress) {
-        this.id = id;
-        this.ipAddress = ipAddress;
-    }
+import de.juli.jobapp.jobweb.model.IPAddress;
 
-    public long getId() {
-        return id;
-    }
+@RestController
+public class IPAddressController {
 
-    public String getIpAddress() {
-        return ipAddress;
+    private int counter;
+
+    @RequestMapping(value = "/ip", method = RequestMethod.GET)
+    public IPAddress ipaddress() throws Exception {
+        return new IPAddress(++counter, InetAddress.getLocalHost().getHostAddress());
     }
 }

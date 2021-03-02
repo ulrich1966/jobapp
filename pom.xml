@@ -16,8 +16,6 @@
 		<module>jobmodel</module>
 		<module>jobweb</module>
 		<module>jobrest</module>
-		<module>jobhost</module>
-		<module>job-web-client</module>
 		<module>job-web</module>
 	</modules>
 

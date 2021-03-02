@@ -13,20 +13,23 @@
  *  implied.  See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-package de.juli.jobapp;
+package de.juli.jobapp.jobweb.model;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+public class IPAddress {
 
-@Configuration
-@ComponentScan
-@EnableAutoConfiguration
-public class App {
+    private final long id;
+    private final String ipAddress;
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+    public IPAddress(long id, String ipAddress) {
+        this.id = id;
+        this.ipAddress = ipAddress;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
 }
