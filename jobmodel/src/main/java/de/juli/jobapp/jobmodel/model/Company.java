@@ -1,5 +1,6 @@
 package de.juli.jobapp.jobmodel.model;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,13 +104,21 @@ public class Company extends Model{
 		this.jobs.add(job);
 	}
 
+	public void removeJob(Job job) {
+		if(this.jobs != null) {
+			this.jobs.remove(job);		
+		}
+	}
+
 	@Override
+	@Transient
 	public String toString() {
 		return "Company [name=" + name + ", zip=" + zip + ", city=" + city + ", street=" + street + ", web=" + web
 				+ ", jobs=" + jobs + ", contact=" + contact + "]";
 	}
 
 	@Override
+	@Transient
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -119,6 +128,7 @@ public class Company extends Model{
 	}
 
 	@Override
+	@Transient
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -139,4 +149,5 @@ public class Company extends Model{
 			return false;
 		return true;
 	}
+
 }

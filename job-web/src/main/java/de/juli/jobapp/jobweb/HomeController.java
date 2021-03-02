@@ -13,21 +13,36 @@
  *  implied.  See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-package de.juli.jobapp;
+package de.juli.jobapp.jobweb;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
+	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
-    @Value("${welcome}")
+    @Value("${welcome.message}")
     private String welcome;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String ipaddress() throws Exception {
+    	LOG.debug("Mesage: {}", welcome);
         return "Reply: " + welcome;
+    }
+    
+    // /hello?name=kotlin
+    @GetMapping("/hello")
+    public String mainWithParam(@RequestParam(name = "name", required = false, defaultValue = "default") String name, Model model) {
+    	LOG.debug("RequestParam: {}", name);
+        model.addAttribute("message", name);
+        return "welcome"; //view
     }
 }

@@ -11,7 +11,7 @@ import javassist.NotFoundException;
 
 public class AppProperties {
 	private static final Logger LOG = LoggerFactory.getLogger(AppProperties.class);
-	public static final String DEFAULT_PROP = "properties/config.xml";
+	public static final String CONFIG_PROP = "properties/config.xml";
 	public static final String USERS_PROP = "properties/users.xml";
 	private Properties currentProps = null;
 	private String propertyFile = null;

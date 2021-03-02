@@ -28,8 +28,8 @@ public class AppPropertiesTest {
 
 	@Test
 	public void testPropertyCongigFind() throws NotFoundException {
-		LOG.debug("Die config.xml {}", AppProperties.DEFAULT_PROP);
-		AppProperties properties = AppProperties.getInstance(AppProperties.DEFAULT_PROP);
+		LOG.debug("Die config.xml {}", AppProperties.CONFIG_PROP);
+		AppProperties properties = AppProperties.getInstance(AppProperties.CONFIG_PROP);
 		Assert.assertNotNull(properties);
 		Properties props = properties.propertiesLoadXML();
 		Assert.assertNotNull(props);
