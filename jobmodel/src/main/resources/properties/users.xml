@@ -8,7 +8,7 @@
 	<entry key="admin.port">587</entry>
 	<entry key="admin.sender">post2uli@gmx.de</entry>
 	<entry key="admin.smtp">mail.gmx.net</entry>
-	<entry key="admin.smtp.pass">Wrssdnuw@1966</entry>
+	<entry key="admin.smtp.pass">geheimes password</entry>
 	<entry key="admin.email.user">ulrich.kloodt@gmx.de</entry>
 	<entry key="admin.roll">admin</entry>
 	<entry key="admin.theme">dark</entry>
@@ -19,7 +19,7 @@
 	<entry key="uli.port">587</entry>
 	<entry key="uli.sender">ulrich.kloodt@gmx.de</entry>
 	<entry key="uli.smtp">mail.gmx.net</entry>
-	<entry key="uli.smtp.pass">Wrssdnuw@1966</entry>
+	<entry key="uli.smtp.pass">geheimes password</entry>
 	<entry key="uli.email.user">ulrich.kloodt@gmx.de</entry>
 	<entry key="uli.roll">user</entry>
 	<entry key="uli.theme">dark</entry>

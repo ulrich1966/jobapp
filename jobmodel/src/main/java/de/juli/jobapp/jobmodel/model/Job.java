@@ -1,5 +1,6 @@
 package de.juli.jobapp.jobmodel.model;
 
+import java.beans.Transient;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,6 +133,7 @@ public class Job extends Model {
 		this.note = note;
 	}
 
+	@Transient
 	public State getStateLastEntry() {
 		State state = null;
 		if (states != null && !states.isEmpty()) {
@@ -140,6 +142,7 @@ public class Job extends Model {
 		return state;
 	}
 
+	@Transient
 	public History getHistoryLastEntry() {
 		History history = null;
 		if (historys != null && !historys.isEmpty()) {
@@ -212,6 +215,7 @@ public class Job extends Model {
 		this.isListed = isListed;
 	}
 
+	@Transient
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -239,8 +243,6 @@ public class Job extends Model {
 		builder.append(email);
 		builder.append(", pdf=");
 		builder.append(pdf);
-		builder.append(", account=");
-		builder.append(account.getName());
 		builder.append("]");
 		return builder.toString();
 	}

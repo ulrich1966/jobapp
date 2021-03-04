@@ -32,7 +32,7 @@ public class JsonServiceTest2 {
 	public void test() throws Exception {
 		testWriteJob();
 		//testWrite_List();
-		//testRead_List();
+		testRead_List();
 	}
 
 	@Ignore

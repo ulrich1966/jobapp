@@ -20,10 +20,10 @@ public class JsonServiceTest {
 
 	@Test
 	public void test() throws Exception {
-//		testWrite();
-//		testWrite_List();
-//		testRead_Instance();
-//		testRead_Type();
+		testWrite();
+		testWrite_List();
+		testRead_Instance();
+		testRead_Type();
 		testRead_List();
 	}
 
