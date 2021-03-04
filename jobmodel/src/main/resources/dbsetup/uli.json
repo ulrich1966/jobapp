@@ -8,7 +8,7 @@
 	"port": 587,
 	"user": "user",
 	"sender": "ulrich.kloodt@gmx.de",
-	"smtpPass": "Wrssdnuw@1966",
+	"smtpPass": "gehaimespasswort",
 	"profillink": "not set",
 	"smtp": "mail.gmx.net",
 	"styleTheme": "dark",

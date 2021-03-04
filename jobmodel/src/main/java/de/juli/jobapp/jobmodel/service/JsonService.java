@@ -52,9 +52,9 @@ public class JsonService<T> {
 		String jsonString = null;
 		try {
 			mapper.writeValue(createFile(name), (T) model);
-			//jsonString = mapper.writeValueAsString(model);
-			jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
-			LOG.debug(jsonString);
+			jsonString = mapper.writeValueAsString(model);
+			String jsonStringPretty = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
+			LOG.debug(jsonStringPretty);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -161,7 +161,7 @@ public class JsonService<T> {
 			file$ = resourceUrl.getFile();
 			file = new File(file$);
 		}
-		LOG.debug("Akruelle Datei: {}", file.getPath());
+		LOG.debug("Aktuelle Datei: {}", file.getPath());
 		return file;
 	}
 

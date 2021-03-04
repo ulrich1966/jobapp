@@ -103,6 +103,12 @@ public class Company extends Model{
 		this.jobs.add(job);
 	}
 
+	public void removeJob(Job job) {
+		if(this.jobs != null) {
+			this.jobs.remove(job);		
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Company [name=" + name + ", zip=" + zip + ", city=" + city + ", street=" + street + ", web=" + web
@@ -139,4 +145,5 @@ public class Company extends Model{
 			return false;
 		return true;
 	}
+
 }

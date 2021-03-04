@@ -47,7 +47,7 @@ public class AccountHelperTest {
 	public void testFillAccoundByJson() throws NotFoundException {
 		AccountHelper helper = AccountHelper.getInstance();
 		Assert.assertNotNull(helper);
-		List<Account> list = helper.fillAccoundByJsonFile("userList");
+		List<Account> list = helper.fillAccoundByJsonFile("user-list");
 		Assert.assertNotNull(list);
 		Assert.assertFalse(list.isEmpty());
 		list.forEach(e -> LOG.debug("{}", e));
