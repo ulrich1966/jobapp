@@ -4,58 +4,97 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.juli.jobapp.jobmodel.controller.AccountController;
-import de.juli.jobapp.jobmodel.controller.SourceController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.juli.jobapp.jobmodel.controller.CriteriaController;
 import de.juli.jobapp.jobmodel.enums.Title;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Company;
 import de.juli.jobapp.jobmodel.model.Contact;
 import de.juli.jobapp.jobmodel.model.Job;
-import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobmodel.service.PersistService;
+import de.juli.jobapp.jobmodel.util.AccountHelper;
+import de.juli.jobapp.jobmodel.util.AppProperties;
 import de.juli.jobapp.jobmodel.util.ToolService;
+import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 
-public class SetUpJobs {
+public class SetUpDataBase {
+	private static final Logger LOG = LoggerFactory.getLogger(SetUpDataBase.class);
 	private PersistService ps = new PersistService();
-	private SourceController sc = new SourceController();
-	private AccountController ac = new AccountController();
-	private List<Source> sources;
 	private Account account;
-	
-	public SetUpJobs(){
-		//docs = dc.findByType("odt");
-		sources = sc.findAll();
-		account = ac.findByName("uli");
+	private static SetUpDataBase setUpDataBase;
+
+	private SetUpDataBase() {
 	}
-	
-	public void create() {
-		List<Job> jobs = createJobs();
-		jobs.forEach(j -> ps.persist(j));	
-		jobs.forEach(j -> System.out.println("job: "+j.getId()+" created"));
+
+	public static SetUpDataBase getInstance() {
+		if (setUpDataBase == null) {
+			setUpDataBase = new SetUpDataBase();
+		}
+		return setUpDataBase;
 	}
-	
+
+	/**
+	 * Findest duch den CriteriaController heraus, ob eine Tabelle eines bestimmten durch Class<T> clazz
+	 * angegebenen Typs Daten saetze enthaelt und gibt ensprechend true/false zurueck.   
+	 */
+	public <T> boolean tableIsEmty(Class<T> clazz) {
+		CriteriaController<T> cc = new CriteriaController<>();
+		Long size = cc.getTableSize(clazz);
+		if (size != null) {
+			LOG.debug("Datacount: {}", size);
+		} else {
+			throw new ShittHappensExeption(String.format("Das Ersestellen eines Accounds fuer %s ist voll in die Hose gegangen\n" + "Die Anzahl der Datensaetze in der Tabelle %s konnte nicht ermittelt werden", clazz.getSimpleName()));
+		}
+		if(size == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean persitSomeAccounds() {
+		try {
+			String value = AppProperties.getInstance(AppProperties.CONFIG_PROP).propertyFind("json.data.user");
+			List<Account> accounds = AccountHelper.getInstance().fillAccoundByJsonFile(value);
+			accounds.forEach(e -> ps.getAccountController().persist(e));
+			return true;
+		} catch (Exception e) {
+			LOG.error("{}", e.getMessage());
+		}
+		return false;
+
+	}
+
+//	public <T> void create(Model model) {
+//		List<Job> jobs = createJobs();
+//		jobs.forEach(j -> 
+//		jobs.forEach(j -> LOG.debug("\"job ID: {} created", j.getId()));
+//	}
+
 	private List<Job> createJobs() {
 		List<Job> jobs = new ArrayList<>();
 		Job job = null;
 		for (int i = 1; i <= 3; i++) {
 			job = new Job();
-		
-			//Document doc = docs.get(ToolService.randomInt(docs.size()));
-			Source source = sources.get(ToolService.randomInt(sources.size()));
+
+			// Document doc = docs.get(ToolService.randomInt(docs.size()));
+			// Source source =
+			// sources.get(ToolService.randomInt(sources.size()));
 			Integer salary = new Integer(ToolService.randomInt(10000, 100000));
-		
+
 			job.setNote("note_" + i);
 			job.setTitle("title_" + i);
 			job.setWebLink("http://google.de");
 			job.setSalary(salary);
 			job.setJobAdDate(new Date(new java.util.Date().getTime()));
 
-			//job.setLetter(doc);
-			job.setSource(source);
+			// job.setLetter(doc);
+			// job.setSource(source);
 			job.setCompany(createCompany(i));
-			
+
 			account.addJob(job);
-			
+
 			jobs.add(job);
 		}
 		return jobs;

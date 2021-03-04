@@ -1,25 +1,33 @@
 package de.juli.jobapp.jobmodel.util;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.service.JsonService;
 import javassist.NotFoundException;
 
-public class AccoundHelper {
-	private static final Logger LOG = LoggerFactory.getLogger(AccoundHelper.class);
-	private static AccoundHelper helper;
+public class AccountHelper {
+	private static final Logger LOG = LoggerFactory.getLogger(AccountHelper.class);
+	private static AccountHelper helper;
 	
-	private AccoundHelper() {
+	private AccountHelper() {
 	}
 	
-	public static AccoundHelper getInstance() {
+	public static AccountHelper getInstance() {
 		if(helper == null) {
-			AccoundHelper.helper = new AccoundHelper();
+			AccountHelper.helper = new AccountHelper();
 		}		
-		return AccoundHelper.helper;
+		return AccountHelper.helper;
+	}
+	
+	public List<Account> fillAccoundByJsonFile(String name) throws NotFoundException {
+		JsonService<Account> service = new JsonService<>();
+		List<Account> list = service.readList(Account.class, name);
+		return list;
 	}
 	
 	public Account fillAccoundByProperties(String name) throws NotFoundException {

@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.AppSetting;
 import de.juli.jobapp.jobmodel.service.PersistService;
-import de.juli.jobapp.jobweb.util.SetUpJobs;
 import de.juli.jobapp.jobweb.web.StyleBean;
 
 @Named("setting")
@@ -46,12 +45,6 @@ public class AppSettingBean extends WebBean implements CrudBean {
 		}
 		setSelectedStyle(account.getStyleTheme());
 		styles = StyleBean.Styles.values();
-	}
-
-	public String dBsetup() {
-		SetUpJobs setUp = new SetUpJobs();
-		setUp.create();
-		return "";
 	}
 
 	/**

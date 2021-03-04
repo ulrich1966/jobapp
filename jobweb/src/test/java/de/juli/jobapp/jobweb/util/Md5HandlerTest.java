@@ -16,7 +16,7 @@ public class Md5HandlerTest {
 	public void testGenerateMd5() throws NoSuchAlgorithmException {
 		Md5Handler handler = new Md5Handler();
 		Assert.assertNotNull(handler);
-		String hash = handler.generateMd5("test");
+		String hash = handler.generateMd5("admin");
 		Assert.assertNotNull(hash);
 		LOG.debug(hash);
 		LOG.debug("done 1");
@@ -26,9 +26,9 @@ public class Md5HandlerTest {
 	public void testCompareMd5() throws NoSuchAlgorithmException {
 		Md5Handler handler = new Md5Handler();
 		Assert.assertNotNull(handler);
-		String hash = handler.generateMd5("test");
+		String hash = handler.generateMd5("admin");
 		Assert.assertNotNull(hash);
-		Assert.assertTrue(handler.compareMd5("test", hash));
+		Assert.assertTrue(handler.compareMd5("admin", hash));
 		LOG.debug("done 2");
 	}
 

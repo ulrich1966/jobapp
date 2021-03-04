@@ -4,4 +4,6 @@
 	<entry key="style.default">dark</entry>
 	<entry key="libreoffice.home">C:/Program Files (x86)/LibreOffice 5/program</entry>
 	<entry key="libreoffice.cmd">soffice.exe</entry>
+	<entry key="json.data.setup.dir">dbsetup</entry>
+	<entry key="json.data.user">userList</entry>
 </properties>
