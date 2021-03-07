@@ -2,4 +2,5 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="json.data.setup.dir">dbsetup</entry>
+	<entry key="json.data.users">model</entry>
 </properties>

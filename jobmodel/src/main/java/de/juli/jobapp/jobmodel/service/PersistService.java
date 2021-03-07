@@ -1,5 +1,7 @@
 package de.juli.jobapp.jobmodel.service;
 
+import java.io.Serializable;
+
 import de.juli.jobapp.jobmodel.controller.AccountController;
 import de.juli.jobapp.jobmodel.controller.AppSettingController;
 import de.juli.jobapp.jobmodel.controller.CompanyController;
@@ -9,7 +11,8 @@ import de.juli.jobapp.jobmodel.controller.JobController;
 import de.juli.jobapp.jobmodel.controller.SourceController;
 import de.juli.jobapp.jobmodel.model.Job;
 
-public class PersistService {
+public class PersistService implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private AccountController accountController;
 	private CompanyController companyController;
 	private ContactController contactController;

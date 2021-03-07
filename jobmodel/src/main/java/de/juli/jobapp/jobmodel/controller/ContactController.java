@@ -3,6 +3,7 @@ package de.juli.jobapp.jobmodel.controller;
 import java.util.List;
 
 import de.juli.jobapp.jobmodel.model.Contact;
+import de.juli.jobapp.jobmodel.model.Model;
 
 public class ContactController extends Controller {
 	private static final long serialVersionUID = 1L;

@@ -16,8 +16,24 @@ div .label {
 }
 
 .jumbotron.dark td {
-	color: #555555;
+	color: inherit;
 	font-size: 1em;
+}
+
+.jumbotron.dark tr.odd {
+	color: #484848;
+	font-size: 1em;
+	background-color: #c3c3c3;
+}
+
+.jumbotron.dark tr.even {
+	color: #484848;
+	font-size: 1em;
+	background-color: #e1e1e1;;
+}
+
+.jumbotron.dark tr a {
+	color: #337ab7;
 }
 
 
@@ -51,14 +67,6 @@ div .label {
 
 .row.cmds.light{
 	border-top: 1px solid gray;	
-}
-
-.odd {
-	background-color: red;
-}
-
-.even {
-	background-color: #e1e1e1;;
 }
 
 .nav-bar {

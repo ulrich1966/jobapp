@@ -19,7 +19,7 @@ import javassist.NotFoundException;
  * Erstellen und auslesen von Dateien im JSON Format !!! Zieldatei muss im
  * jobmodel/target vorhanden sein! Vorsicht mit mvn clean
  */
-public class JsonService<T> {
+public class JsonService {
 	private static final Logger LOG = LoggerFactory.getLogger(JsonService.class);
 	private String jsonDir;
 
@@ -48,7 +48,7 @@ public class JsonService<T> {
 	 * @throws NotFoundException 
 	 */
 	@SuppressWarnings("unchecked")
-	public String write(Model model, String name) throws NotFoundException {
+	public <T> String write(Model model, String name) throws NotFoundException {
 		String jsonString = null;
 		try {
 			mapper.writeValue(createFile(name), (T) model);
@@ -69,7 +69,7 @@ public class JsonService<T> {
 	 * ligt dann im jobmodel/target, also Vorsicht mit mvn clean!!!  
 	 */
 	@SuppressWarnings("unchecked")
-	public String write(List<T> list, String name) throws NotFoundException {
+	public <T> String write(List<T> list, String name) throws NotFoundException {
 		String jsonString = null;
 		try {
 			mapper.writeValue(createFile(name), (T) list);
@@ -85,8 +85,9 @@ public class JsonService<T> {
 	/**
 	 * Parst JSON aus einer Datei des uebergebenen Namens und git ein Model-Type des in der 
 	 * Klasse angebebenen Typs zurueck.  
+	 * @return 
 	 */
-	public T read(Class<T> clazz, String name) throws NotFoundException {
+	public <T> T read(Class<T> clazz, String name) throws NotFoundException {
 		T result = null;
 		try {
 			result = mapper.readValue(createFile(name), clazz);			
@@ -122,7 +123,7 @@ public class JsonService<T> {
 	 * liegt, ist mit mvn clean vorsichtigt umzugehen. Die Datei wird zwar in createFile(name)
 	 * ezeugt, ist dann aber leer.    
 	 */
-	public List<T> readList(Class<T> clazz, String name) {
+	public <T> List<T> readList(Class<T> clazz, String name) {
 		List<T> result = null;
 		try {
 			result = mapper.readerForListOf(clazz).readValue(createFile(name));

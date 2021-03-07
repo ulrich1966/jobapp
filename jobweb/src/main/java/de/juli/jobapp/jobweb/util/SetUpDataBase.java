@@ -17,8 +17,6 @@ import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobmodel.service.PersistService;
-import de.juli.jobapp.jobmodel.util.AccountHelper;
-import de.juli.jobapp.jobmodel.util.AppProperties;
 import de.juli.jobapp.jobmodel.util.ToolService;
 import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 
@@ -56,18 +54,18 @@ public class SetUpDataBase {
 		}
 		return false;
 	}
-
-	public boolean persitSomeAccounds() {
-		try {
-			String value = AppProperties.getInstance(AppProperties.CONFIG_PROP).propertyFind("json.data.user");
-			List<Account> accounds = AccountHelper.getInstance().fillAccoundByJsonFile(value);
-			accounds.forEach(e -> ps.getAccountController().persist(e));
-			return true;
-		} catch (Exception e) {
-			LOG.error("{}", e.getMessage());
-		}
-		return false;
-	}
+//
+//	public boolean persitSomeAccounds() {
+//		try {
+//			String value = AppProperties.getInstance(AppProperties.CONFIG_PROP).propertyFind("json.data.user");
+//			List<Account> accounds = AccountHelper.getInstance().fillAccoundByJsonFile(value);
+//			accounds.forEach(e -> ps.getAccountController().persist(e));
+//			return true;
+//		} catch (Exception e) {
+//			LOG.error("{}", e.getMessage());
+//		}
+//		return false;
+//	}
 
 	// public <T> void create(Model model) {
 	// List<Job> jobs = createJobs();

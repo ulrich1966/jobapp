@@ -24,7 +24,6 @@ public class Company extends Model{
 	private String city;
 	private String street;
 	private String addressee;
-	@Column(unique=true)
 	private String web;
 	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
 	private List<Job> jobs;

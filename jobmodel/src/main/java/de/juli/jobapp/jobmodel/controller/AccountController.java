@@ -3,6 +3,7 @@ package de.juli.jobapp.jobmodel.controller;
 import java.util.List;
 
 import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.model.Model;
 
 public class AccountController extends Controller {
 	private static final long serialVersionUID = 1L;

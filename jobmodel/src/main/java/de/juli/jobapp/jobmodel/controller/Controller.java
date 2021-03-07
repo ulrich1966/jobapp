@@ -11,4 +11,5 @@ public abstract class Controller implements Serializable {
 	public Controller() {
 		em = EmController.getEm();
 	}
+
 }

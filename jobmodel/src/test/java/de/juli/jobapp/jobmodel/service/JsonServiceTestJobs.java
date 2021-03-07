@@ -31,7 +31,7 @@ public class JsonServiceTestJobs {
 	@Test
 	public void test() throws Exception {
 		testWriteJob();
-		//testWrite_List();
+		testWrite_List();
 		testRead_List();
 	}
 
@@ -43,7 +43,7 @@ public class JsonServiceTestJobs {
 			jobs.add(createJob(i));
 		}
 
-		JsonService<Job> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		String string = service.write(jobs, "job-list");
 		Assert.assertNotNull(string);
@@ -59,7 +59,7 @@ public class JsonServiceTestJobs {
 		Job job = new Job();
 		job = new Job();
 		job.setTitle("Toller Job " + i);
-		job.setJobfunction("Joberfüller für Job@ " + i);
+		job.setJobfunction("Joberfüller für Job " + i);
 		job.setNote("Der beste Job, den man kriegen kann" + i);
 		job.setWebLink("https://www.qwant.com");
 		job.setEmail(createEmail());
@@ -98,13 +98,13 @@ public class JsonServiceTestJobs {
 
 	private Source createSource(int i) {
 		Source source = new Source();
-		source.setName("Job Anzeigenbörse");
+		source.setName("Job Anzeigenbörse " + i);
 		source.setPronomen("auf der");
 		return source;
 	}
 	
 	private Account readAccount(String name) throws NotFoundException {
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		Account account = (Account) service.read(Account.class, name);
 		Assert.assertNotNull(account);
@@ -140,7 +140,7 @@ public class JsonServiceTestJobs {
 		Job job1 = new Job();
 		Job job2 = new Job();
 
-		JsonService<Job> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 
 		List<Job> list = new ArrayList<>();

@@ -25,7 +25,7 @@ public class AccountHelper {
 	}
 	
 	public List<Account> fillAccoundByJsonFile(String name) throws NotFoundException {
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		List<Account> list = service.readList(Account.class, name);
 		return list;
 	}

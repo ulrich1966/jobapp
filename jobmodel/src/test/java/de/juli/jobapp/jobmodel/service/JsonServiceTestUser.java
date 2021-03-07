@@ -33,7 +33,7 @@ public class JsonServiceTestUser {
 		String name = "uli";
 		Account account = AccountHelper.getInstance().fillAccoundByProperties(name);
 		Assert.assertNotNull(account);
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		String result = service.write(account, name);
 		Assert.assertNotNull(result);
@@ -53,7 +53,7 @@ public class JsonServiceTestUser {
 		Account admin = AccountHelper.getInstance().fillAccoundByProperties(user_admin);
 		Assert.assertNotNull(admin);
 
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 
 		List<Account> list = new ArrayList<>();
@@ -72,7 +72,7 @@ public class JsonServiceTestUser {
 	@Test
 	public void testRead_Instance() throws Exception {
 		String name = "uli";
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		Account account = (Account) service.read(new Account(), name);
 		Assert.assertNotNull(account);
@@ -85,7 +85,7 @@ public class JsonServiceTestUser {
 	@Test
 	public void testRead_Type() throws Exception {
 		String name = "uli";
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		Account account = (Account) service.read(Account.class, name);
 		Assert.assertNotNull(account);
@@ -97,7 +97,7 @@ public class JsonServiceTestUser {
 	@Ignore
 	@Test
 	public void testRead_List() throws Exception {
-		JsonService<Account> service = new JsonService<>();
+		JsonService service = new JsonService();
 		Assert.assertNotNull(service);
 		List<Account> list = service.readList(Account.class, "user-list");
 		Assert.assertNotNull(list);
