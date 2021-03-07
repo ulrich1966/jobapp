@@ -24,7 +24,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
 
 import de.juli.docuworks.docuhandle.OpenOfficeFileService;
 import de.juli.docuworks.docuhandle.OpenOfficePdfService;
-import de.juli.jobapp.jobmodel.controller.AppSettingController;
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.converter.DayTimeConverter;
 import de.juli.jobapp.jobmodel.enums.FileTyps;
 import de.juli.jobapp.jobmodel.enums.Title;
@@ -177,8 +177,8 @@ public class DocumentService {
 
 	@Deprecated
 	public Job createPdf(Job model) throws Exception {
-		AppSettingController contoller = new AppSettingController();
-		AppSetting setting = contoller.findFirst();
+		ModelController contoller = new ModelController();
+		AppSetting setting = contoller.findFirst(AppSetting.class);
 		String companyName = model.getCompany().getName();
 		String source = model.getLetter().getTarget();
 		String target = String.format("%s\\%s.%s", model.getLocalDocDir(), "anschreiben", "pdf");
@@ -215,8 +215,8 @@ public class DocumentService {
 	
 	public Job createOpenOfficePdf(Job model) {
 		OpenOfficePdfService service = new OpenOfficePdfService(OpenOfficePdfService.CreationVia.OPEN_OFFICE);
-		AppSettingController contoller = new AppSettingController();
-		AppSetting setting = contoller.findFirst();
+		ModelController contoller = new ModelController();
+		AppSetting setting = contoller.findFirst(AppSetting.class);
 		boolean success = false;
 		
 		Pdf pdf = new Pdf();

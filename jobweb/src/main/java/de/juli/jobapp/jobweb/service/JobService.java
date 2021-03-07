@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.controller.ModelController;
-import de.juli.jobapp.jobmodel.controller.SourceController;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Source;
@@ -70,8 +69,8 @@ public class JobService implements Serializable {
 	}
 
 	public List<Source> getSources() {
-		SourceController sc = new SourceController();
-		return sc.findAll();
+		ModelController sc = new ModelController();
+		return sc.findAll(Source.class);
 	}
 
 	public ModelController getController() {

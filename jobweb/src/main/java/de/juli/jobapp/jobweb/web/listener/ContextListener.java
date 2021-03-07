@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import de.juli.jobapp.jobmodel.controller.CriteriaController;
 import de.juli.jobapp.jobmodel.controller.EmController;
 import de.juli.jobapp.jobmodel.controller.ModelController;
-import de.juli.jobapp.jobmodel.controller.PersistenceController;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.AppSetting;
 import de.juli.jobapp.jobmodel.model.Job;
@@ -42,21 +41,20 @@ public class ContextListener implements ServletContextListener {
 
 		if (cc.getTableSize(Account.class) == 0) {
 			AppProperties properties = AppProperties.getInstance(AppProperties.CONFIG_PROP);
-			ModelController modelController = new ModelController();
+			ModelController controller = new ModelController();
 			JsonService jsonService = new JsonService();
 			
 			try {
 				String usersFileName = properties.propertyFind("json.data.users");
 				List<Account> accounts = jsonService.<Account>readList(Account.class, usersFileName);
-				accounts.forEach(e -> modelController.create(e));
+				accounts.forEach(e -> controller.create(e));
 				LOG.debug("{}", "Ein paar Benutzerdaten wurden neu angelegt!");
 				
 				if(cc.getTableSize(AppSetting.class) == 0) {
 					AppSetting setting = new AppSetting();
-					PersistenceController<AppSetting> settingController = new PersistenceController<>();
 					setting.setLibreOfficeHome(properties.propertyFind("libreoffice.home"));
 					setting.setCmd(properties.propertyFind("libreoffice.cmd"));
-					settingController.create(setting);
+					controller.create(setting);
 				}
 				
 				if(cc.getTableSize(Job.class) == 0 && Boolean.valueOf(properties.propertyFind("db.data.job.setup"))) {
@@ -67,7 +65,7 @@ public class ContextListener implements ServletContextListener {
 							if(a.getName().equals(properties.propertyFind("main.account.name"))){
 								jobs.forEach(j -> {
 									a.addJob(j);									
-									modelController.create(a);								
+									controller.create(a);								
 								});
 							}
 						} catch (NotFoundException e1) {

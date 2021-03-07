@@ -17,7 +17,7 @@ import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.jobapp.jobmodel.controller.JobController;
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.enums.AppHistory;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.History;
@@ -113,8 +113,8 @@ public class MailSerrvice implements Runnable{
 				send = email.send();
 				LOG.info("Send Email {}", send);
 				currentJob.addHistory(new History(AppHistory.SEND));
-				final JobController conroler = new JobController();
-				conroler.update(currentJob);
+				final ModelController conroller = new ModelController();
+				conroller.update(currentJob);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;

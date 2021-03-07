@@ -57,13 +57,12 @@ public class ModelController extends Controller {
 	//TODO Dasa Loeschen muss ich mir noch mal ansehen!
 	public boolean remove(Company model) {
 		boolean success = false;
-		JobController jc = new JobController();
 		try {
 			if(!em.contains(model)){
 				em.merge(model);
 			}
 			em.getTransaction().begin();
-			model.getJobs().forEach(e -> jc.delete(e));
+			model.getJobs().forEach(e -> remove(e));
 			remove(model.getContact());
 			remove(model);
 			em.getTransaction().commit();
