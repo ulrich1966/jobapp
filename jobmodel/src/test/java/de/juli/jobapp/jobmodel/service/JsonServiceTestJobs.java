@@ -25,8 +25,8 @@ import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobmodel.model.State;
 import javassist.NotFoundException;
 
-public class JsonServiceTest2 {
-	private static final Logger LOG = LoggerFactory.getLogger(JsonServiceTest2.class);
+public class JsonServiceTestJobs {
+	private static final Logger LOG = LoggerFactory.getLogger(JsonServiceTestJobs.class);
 
 	@Test
 	public void test() throws Exception {
