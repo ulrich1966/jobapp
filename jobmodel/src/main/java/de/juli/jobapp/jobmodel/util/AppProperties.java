@@ -39,7 +39,7 @@ public class AppProperties {
 		propertiesLoadXML();
 		String result = currentProps.getProperty(prop);
 		if (result == null) {
-			String msg = String.format("Es wurde kein passender Eintrag f�r %s gefunden!", prop);
+			String msg = String.format("Es wurde kein passender Eintrag fuer %s gefunden!", prop);
 			LOG.error(msg);
 			throw new NotFoundException(msg);
 		}

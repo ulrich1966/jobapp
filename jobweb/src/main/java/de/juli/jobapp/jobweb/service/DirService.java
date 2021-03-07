@@ -11,23 +11,14 @@ import de.juli.jobapp.jobmodel.model.Email;
 import de.juli.jobapp.jobmodel.model.Letter;
 import de.juli.jobapp.jobmodel.model.Vita;
 
+/**
+ * Verwaltung der Folder Pathes fur die Bewerbungsunterlagen 
+ */
 public class DirService {
 	
-//	public Document[] dirContentToArray(Path path) throws IOException {
-//		List<Document> list = dirContent(path);
-//		return list.toArray(new Document[list.size()]);
-//	}
-	
-//	public List<Document> dirContent(Path path) throws IOException {
-//		List<Document> docs = new ArrayList<>(); 
-//		List<Path> list = Files.walk(path).filter(p -> p.toFile().isFile()).collect(Collectors.toList());
-//		for (Path source : list) {
-//			String fileName = source.getFileName().toString();
-//			docs.add(new Document(source.toString(), fileName));
-//		}
-//		return docs;
-//	}
-
+	/**
+	 * Liest fuer den aktuellen Benutzer die hinterlegten Lebenslaeuf Tempates aus dem Verzeichnis des Servers 
+	 */
 	public List<Vita> vitaDir(Path path) throws IOException {
 		List<Vita> docs = new ArrayList<>(); 
 		List<Path> list = Files.walk(path).filter(p -> p.toFile().isFile()).collect(Collectors.toList());
@@ -38,6 +29,9 @@ public class DirService {
 		return docs;
 	}
 
+	/**
+	 * Liest fuer den aktuellen Benutzer die hinterlegten Anschreiben Tempates aus dem Verzeichnis des Servers 
+	 */
 	public List<Letter> letterDir(Path path) throws IOException {
 		List<Letter> docs = new ArrayList<>(); 
 		List<Path> list = Files.walk(path).filter(p -> p.toFile().isFile()).collect(Collectors.toList());
@@ -48,6 +42,9 @@ public class DirService {
 		return docs;
 	}
 
+	/**
+	 * Liest fuer den aktuellen Benutzer die hinterlegten E-Mail Tempates aus dem Verzeichnis des Servers 
+	 */
 	public List<Email> emailDir(Path path) throws IOException {
 		List<Email> docs = new ArrayList<>(); 
 		List<Path> list = Files.walk(path).filter(p -> p.toFile().isFile()).collect(Collectors.toList());

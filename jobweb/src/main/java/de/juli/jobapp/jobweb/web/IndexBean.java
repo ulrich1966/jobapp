@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.juli.jobapp.jobweb.util.PropertyBean;
-import de.juli.jobapp.jobweb.util.SetUpJobs;
 
 @Named("home")
 @RequestScoped
@@ -32,12 +31,6 @@ public class IndexBean implements Serializable {
 
 	public void init(ComponentSystemEvent event) {
 		
-	}
-	
-	public String setUp() {
-		SetUpJobs setUp = new SetUpJobs();
-		setUp.create();
-		return PropertyBean.HOME;
 	}
 	
 	public Boolean getRenderStart() {
