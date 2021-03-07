@@ -13,16 +13,16 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import de.juli.jobapp.jobmodel.service.PersistService;
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobweb.web.Session;
 
 public abstract class WebBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String REDIRECT_TRUE = "faces-redirect=true";
-	private PersistService persistService;
 	private ExternalContext context;
 	private HttpSession httpSession;
 	private HttpServletRequest request;
+	private ModelController controller;
 	@Inject
 	protected Session session;
 
@@ -30,7 +30,6 @@ public abstract class WebBean implements Serializable {
 		context = FacesContext.getCurrentInstance().getExternalContext();
 		request = (HttpServletRequest) context.getRequest();
 		httpSession = request.getSession(true);
-		persistService = new PersistService();
 	}
 
 	/**
@@ -92,11 +91,10 @@ public abstract class WebBean implements Serializable {
 		return session;
 	}
 
-	public PersistService getPersistService() {
-		return persistService;
-	}
-
-	public void setPersistService(PersistService persistService) {
-		this.persistService = persistService;
+	public ModelController getController() {
+		if(this.controller == null) {
+			this.controller = new ModelController();
+		}
+		return controller;
 	}
 }

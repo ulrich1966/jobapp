@@ -63,7 +63,7 @@ public class CreateApplication extends WebBean implements CrudBean {
 			@SuppressWarnings("unchecked")
 			List<Source> sources = (List<Source>) getSession().getContent("sources");
 			if(sources == null || sources.isEmpty()) {
-				sources = getPersistService().getSourceController().findAll();
+				sources = super.getController().findAll(Source.class);
 			}
 			getSession().addContent("sources", sources);
 			selections.setSources(sources);

@@ -10,16 +10,17 @@ import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.controller.SourceController;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Source;
-import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.viewmodel.CurrentData;
 
 public class JobService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(JobService.class);
+	ModelController controller;
 
 	public JobService() {
 		super();
@@ -31,10 +32,10 @@ public class JobService implements Serializable {
 	}
 
 	public Job writeInDb(CurrentData data, Account account) throws Exception {
-		PersistService controller = new PersistService();
+		ModelController controller = getController();
 		Job job = data.getJob();
 		account.addJob(job);
-		Job persist = controller.persist(job);
+		Job persist = (Job) controller.persist(job);
 		return persist;
 	}
 
@@ -43,8 +44,8 @@ public class JobService implements Serializable {
 	}
 
 	public Job update(Job model) throws Exception {
-		PersistService controller = new PersistService();
-		Job persist = controller.persist(model);
+		ModelController controller = getController();
+		Job persist = (Job) controller.persist(model);
 		return persist;
 	}
 
@@ -71,6 +72,13 @@ public class JobService implements Serializable {
 	public List<Source> getSources() {
 		SourceController sc = new SourceController();
 		return sc.findAll();
+	}
+
+	public ModelController getController() {
+		if(this.controller == null) {
+			this.controller = new ModelController();
+		}
+		return controller;
 	}
 
 }

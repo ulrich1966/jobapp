@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import org.jboss.weld.exceptions.IllegalArgumentException;
 
-import de.juli.jobapp.jobmodel.controller.AccountController;
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobweb.util.PropertyBean;
 
@@ -56,7 +56,7 @@ public class AccountBean extends WebBean implements CrudBean {
 
 	@Override
 	public String update() {
-		AccountController controller = new AccountController();
+		ModelController controller = super.getController();
 		controller.persist(model);
 		return PropertyBean.HOME;	
 	}
@@ -65,4 +65,5 @@ public class AccountBean extends WebBean implements CrudBean {
 	public String delete() {
 		return null;
 	}
+	
 }

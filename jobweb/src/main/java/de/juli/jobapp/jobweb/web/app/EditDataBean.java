@@ -59,7 +59,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 				}
 			}			
 			
-			List<Source> list = getPersistService().getSourceController().findAll();
+			List<Source> list = super.getController().findAll(Source.class);
 			selections.setSources(list);			
 			titles = Title.values();
 			
@@ -94,7 +94,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 	@Override
 	public String update() {
 		try {
-			model = getPersistService().persist(getModel());
+			model = super.getController().persist(getModel());
 			getSession().getAccount().addJob(getModel());
 			getModel().addState(new State(JobState.UPDATED));
 			FacesMessages.info(null, "Die �nderngen wuren �bernommen!");

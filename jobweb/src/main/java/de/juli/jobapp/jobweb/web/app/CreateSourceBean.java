@@ -31,7 +31,7 @@ public class CreateSourceBean extends WebBean {
 	@PostConstruct
 	public void init() {
 		try {
-			sourceList = super.getPersistService().getSourceController().findAll();
+			sourceList = super.getController().findAll(Source.class);
 		} catch (EntityNotFoundException e) {
 			FacesMessages.info("messages", "Es sind noch keine Quellen in der Datenbank vorhaden");
 			sourceList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class CreateSourceBean extends WebBean {
 	public String save() {
 		if (getModel().getName() != null && !getModel().getName().isEmpty()) {
 			try {
-				model = getPersistService().getSourceController().persist(model);
+				model = super.getController().persist(model);
 				if(getSession().getContent(PropertyBean.SOURCE) == null) {
 					getSession().addContent(PropertyBean.SOURCE, new ArrayList<Source>());
 				}

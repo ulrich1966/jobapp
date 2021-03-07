@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.AppSetting;
-import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.web.StyleBean;
 
 @Named("setting")
@@ -19,7 +18,6 @@ import de.juli.jobapp.jobweb.web.StyleBean;
 public class AppSettingBean extends WebBean implements CrudBean {
 	private static final Logger LOG = LoggerFactory.getLogger(AppSettingBean.class);
 	private static final long serialVersionUID = 1L;
-	private PersistService service;
 	private Boolean newStyle;	
 	private AppSetting model;
 	private Account account;
@@ -35,7 +33,7 @@ public class AppSettingBean extends WebBean implements CrudBean {
 	 */
 	@PostConstruct
 	public void init() {
-		model = getService().getAppSettingController().findFirst();
+		model = super.getController().findFirst(AppSetting.class);
 		if(model == null) {
 			this.create();
 		}
@@ -57,7 +55,7 @@ public class AppSettingBean extends WebBean implements CrudBean {
 		FacesMessage msg = null;
 		try {
 			account.setStyleTheme(selectedStyle.getName());
-			account = getService().getAccountController().persist(account);
+			account = super.getController().persist(account);
 			setSelectedStyle(account.getStyleTheme());
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Settings wurden angelegt!");
 		} catch (Exception e) {
@@ -75,7 +73,7 @@ public class AppSettingBean extends WebBean implements CrudBean {
 	 */
 	@Override
 	public String delete() {
-		getService().getAppSettingController().remove(model);
+		super.getController().remove(model);
 		return "";
 	}
 
@@ -103,13 +101,6 @@ public class AppSettingBean extends WebBean implements CrudBean {
 
 	public void setModel(AppSetting model) {
 		this.model = model;
-	}
-
-	public PersistService getService() {
-		if(service == null) {
-			this.service = new PersistService();
-		}
-		return service;
 	}
 
 	public StyleBean.Styles [] getStyles() {

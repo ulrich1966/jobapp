@@ -12,11 +12,11 @@ public class CriteriaTest {
 
 	@Test
 	public void testGetTableSize() {
-		CriteriaController<Account> cb = new CriteriaController<>();
+		CriteriaController cb = new CriteriaController();
 		Assert.assertNotNull(cb);
 		Long size = cb.getTableSize(Account.class);
 		Assert.assertNotNull(size);
-		LOG.debug("{}", size);
+		LOG.debug("Count: {}", size);
 	}
 
 }

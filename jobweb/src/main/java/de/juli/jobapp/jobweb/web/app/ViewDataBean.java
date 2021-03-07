@@ -17,7 +17,6 @@ import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobmodel.service.DocumentService;
-import de.juli.jobapp.jobmodel.service.PersistService;
 import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 import de.juli.jobapp.jobweb.service.SendService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
@@ -29,7 +28,6 @@ import net.bootsfaces.utils.FacesMessages;
 public class ViewDataBean extends WebBean {
 	private static final Logger LOG = LoggerFactory.getLogger(ViewDataBean.class);
 	private static final long serialVersionUID = 1L;
-	private PersistService persistService = new PersistService();
 	private DocumentService service = new DocumentService();
 	private Boolean docCreated = false;
 	private Boolean docDeleted = false;
@@ -109,7 +107,7 @@ public class ViewDataBean extends WebBean {
 	public String save() {
 		try {
 			model.addState(new State(JobState.CREATED));
-			model = getPersistService().getJobController().persist(model);
+			model = super.getController().persist(model);
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern.");
@@ -133,7 +131,7 @@ public class ViewDataBean extends WebBean {
 		try {
 			service.delDocuments(model);
 			model.addState(new State(JobState.DOC_DELETED, null));
-			model = persistService.getJobController().persist(model);
+			model = super.getController().persist(model);
 		} catch (IOException e) {
 			LOG.error(e.getMessage());
 		}
@@ -155,7 +153,7 @@ public class ViewDataBean extends WebBean {
 			model = service.createOpenOfficePdf(model);
 			model.addState(new State(JobState.DOC_CREATED, null));
 			model.addHistory(new History(AppHistory.NOT_SEND, null));
-			model = persistService.getJobController().persist(model);
+			model = super.getController().persist(model);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			FacesMessages.error(null, "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");

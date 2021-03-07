@@ -14,7 +14,7 @@ import javax.persistence.NoResultException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.jobapp.jobmodel.controller.AccountController;
+import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.util.Md5Handler;
 import de.juli.jobapp.jobweb.util.PropertyBean;
@@ -24,7 +24,6 @@ import de.juli.jobapp.jobweb.util.PropertyBean;
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(LoginBean.class);
-	private AccountController controller = new AccountController();
 	private String username;
 	private String password;
 	private	Md5Handler md5 = new Md5Handler();
@@ -47,7 +46,8 @@ public class LoginBean implements Serializable {
 	public String login() {
 		Account account = null;
 		try {
-			account = controller.findByName(username);
+			ModelController controller = new ModelController();
+			account = controller.findByName(Account.class, username);
 		} catch (NoResultException e1) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", 
 					String.format("Ein Benutzer namens %s wurde nicht gefunden!\nDu solltes Dich regestriern", username));
