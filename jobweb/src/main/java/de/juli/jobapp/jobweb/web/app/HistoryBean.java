@@ -52,7 +52,7 @@ public class HistoryBean extends WebBean {
 			History history = new History(getSelected());
 			history.setNote(note);
 			model.addHistory(history);
-			model = super.getController().update(model);
+			model = (Job) super.getController().<Job>update(model);
 		}
 		return "";
 	}

@@ -3,7 +3,6 @@ package de.juli.jobapp.jobmodel.controller;
 import java.util.List;
 
 import de.juli.jobapp.jobmodel.model.Company;
-import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Model;
 
 public class ModelController extends Controller {
@@ -26,7 +25,7 @@ public class ModelController extends Controller {
 		return (T) model;
 	}
 
-	public Job update(Job model) {
+	public <T> Model update(Model model) {
 		if(!em.contains(model)) {
 			em.merge(model);
 		}
