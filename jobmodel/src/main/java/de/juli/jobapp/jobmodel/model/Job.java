@@ -14,12 +14,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity
-// @formater:off
+//@formatter:off
 @NamedQueries({ 
 	@NamedQuery(name = "Job.findAll", query = "SELECT model FROM Job model"), 
 	@NamedQuery(name = "Job.findByTitle", query = "SELECT model FROM Job model WHERE model.title = :title"), 
 })
+//@formatter:on
+@Entity
 public class Job extends Model {
 	private String title;
 	private String jobfunction;
