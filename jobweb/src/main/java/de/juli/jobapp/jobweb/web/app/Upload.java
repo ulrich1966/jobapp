@@ -42,6 +42,10 @@ public class Upload extends WebBean {
 	public Upload() {
 	}
 	
+	/**
+	 * Nauch Aufruf der View wird der Server nach Vorhandensein der Uploaddatein untersucht
+	 * und der Pfad  
+	 */
 	@PostConstruct
 	public void init() {
 		account = getSession().getAccount();
@@ -57,7 +61,7 @@ public class Upload extends WebBean {
 			Path emailPath = AppDirectories.getEmailPath(root, user);
 			selections.setEmails(dirService.emailDir(emailPath));
 		} catch (IOException e) {
-			FacesMessages.error("Aulisten der Dateien fehlgeschlagen");
+			FacesMessages.error("Auflisten der Dateien fehlgeschlagen");
 		}
 	}
 

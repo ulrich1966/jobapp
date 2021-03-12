@@ -8,8 +8,8 @@ public enum JobState {
 	CREATED("Bewerbung angelegt und in der Datenbank gespeichert"),
 	DOC_CREATED("Dokumente erstellt"),
 	SEND("Bewerbung versandt"),
-	DOC_DELETED("Dokumente geloescht"),
-	UPDATED("Aenderungen gespeichert");
+	DOC_DELETED("Dokumente gel"+Uml.o_UML.getName()+"scht"),
+	UPDATED(Uml.A_UML.getName()+"nderungen gespeichert");
 
 	private String name;
 
@@ -20,16 +20,16 @@ public enum JobState {
 	public static List<String> getNames(){
 		List<String> names = new ArrayList<>();
 		for (JobState e : JobState.values()) {
-			names.add(e.getStateName());
+			names.add(e.name);
 		}
 		return names;
 	}
 
-	public String getStateName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setStateName(String stateName) {
-		this.name = stateName;
+	public void setName(String name) {
+		this.name = name;
 	}
 }

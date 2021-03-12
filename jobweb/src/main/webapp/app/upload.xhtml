@@ -10,12 +10,13 @@
 		<b:jumbotron style-class="#{style.name}">
 			<h:form enctype="multipart/form-data">
 				<b:messages global-only="true" id="msg" />
+			
 				<b:row>
 					<b:column style-class="head-line" medium-screen="12">
 						<h:outputText value="Auswählen und Uploaden der Bewerbungsunterlagen:" />
 					</b:column>
 				</b:row>
-				
+
 				<b:row>
 					<b:column medium-screen="4">
 						<h:outputLabel styleClass="label" value="Lebenslauf hochladen:" />
@@ -27,17 +28,15 @@
 						<b:commandButton icon="upload" action="#{upload.vita}" style="margin-left: 10px;" size="lg" look="primary" />
 					</b:column>
 				</b:row>
-				
+
 				<b:row>
-					<b:column medium-screen="2">
+					<b:column medium-screen="4">
 						<h:outputLabel styleClass="label" value="Vorhanden:" />
 					</b:column>
 					<h:dataTable value="#{upload.selections.vitas}" var="vita" rows="2">
-						<b:row>
-							<b:column>
-								<h:outputText value="#{vita.name}" />
-							</b:column>
-						</b:row>
+						<h:column>
+							<h:outputText value="#{vita.name}" />
+						</h:column>
 					</h:dataTable>
 				</b:row>
 
@@ -61,16 +60,15 @@
 					</b:column>
 					<h:dataTable value="#{upload.selections.letters}" var="letter" rows="2">
 						<h:column>
-								#{letter.name}
-    						</h:column>
+							<h:outputText value="#{letter.name}" />
+						</h:column>
 					</h:dataTable>
 				</b:row>
 
 				<hr />
 
-
 				<b:row>
-					<b:column medium-screen="4"> 
+					<b:column medium-screen="4">
 						<h:outputLabel styleClass="label" value="E-Mail Vorlage hochladen:" />
 					</b:column>
 					<b:column medium-screen="4">
@@ -86,12 +84,11 @@
 					</b:column>
 					<h:dataTable value="#{upload.selections.emails}" var="email" rows="2">
 						<h:column>
-								#{email.name}
-    						</h:column>
+							<h:outputText value="#{email.name}" />
+						</h:column>
 					</h:dataTable>
 				</b:row>
-				
-				
+
 			</h:form>
 		</b:jumbotron>
 	</ui:define>

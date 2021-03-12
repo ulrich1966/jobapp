@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.enums.JobState;
 import de.juli.jobapp.jobmodel.enums.Title;
+import de.juli.jobapp.jobmodel.enums.Uml;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobmodel.model.State;
@@ -41,7 +42,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 	}
 
 	/**
-	 * Zum editieren des Job-Objekts, wir es aus der Session geholt und die Daten fuer die Select-Bocxen beschafft.
+	 * Zum editieren des Job-Objekts, wir es aus der Session geholt und die Daten fuer die Select-Boxen beschafft.
 	 * Wenn noch kein Job-Objekt angelegt wurde, gib es einen Fehler und 
 	 * es wird auf die List Seite umgeleitet. 
 	 */
@@ -94,10 +95,9 @@ public class EditDataBean extends WebBean implements CrudBean {
 	@Override
 	public String update() {
 		try {
+			model.addState(new State(JobState.UPDATED));
 			model = super.getController().persist(getModel());
-			getSession().getAccount().addJob(getModel());
-			getModel().addState(new State(JobState.UPDATED));
-			FacesMessages.info(null, "Die �nderngen wuren �bernommen!");
+			getSession().addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Die "+Uml.A_UML.getName()+"nderungen wurden "+Uml.u_UML.getName()+"bernommen!"));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern. Die Bewerbung konnte nicht gespeichert werden!");
@@ -122,10 +122,6 @@ public class EditDataBean extends WebBean implements CrudBean {
 		return dirService;
 	}
 
-	public Job getModel() {
-		return model;
-	}
-	
 	public Date getDate() {
 		return new Date(getModel().getJobAdDate().getTime());
 	}
@@ -147,6 +143,10 @@ public class EditDataBean extends WebBean implements CrudBean {
 	@Override
 	public String delete() {
 		return null;
+	}
+
+	public Job getModel() {
+		return model;
 	}
 
 }

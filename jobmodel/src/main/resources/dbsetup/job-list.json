@@ -69,7 +69,7 @@
 				"updateDate": null,
 				"timeStamp": 1615149983060,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_SEND"
+				"appHistory": "NOT_BUILD"
 			}
 		],
 		"account": null
@@ -133,7 +133,7 @@
 				"updateDate": null,
 				"timeStamp": 1615149983060,
 				"note": "Dieser Job ist neu angelegt",
-				"jobState": "READY_TO_PERSIST"
+				"jobState": "CREATED"
 			}
 		],
 		"historys": [
@@ -144,7 +144,7 @@
 				"updateDate": null,
 				"timeStamp": 1615149983060,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_SEND"
+				"appHistory": "NOT_BUILD"
 			}
 		],
 		"account": null
@@ -208,7 +208,7 @@
 				"updateDate": null,
 				"timeStamp": 1615149983060,
 				"note": "Dieser Job ist neu angelegt",
-				"jobState": "READY_TO_PERSIST"
+				"jobState": "CREATED"
 			}
 		],
 		"historys": [
@@ -219,7 +219,7 @@
 				"updateDate": null,
 				"timeStamp": 1615149983060,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_SEND"
+				"appHistory": "NOT_BUILD"
 			}
 		],
 		"account": null

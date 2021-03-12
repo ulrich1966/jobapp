@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AppHistory {
+	NOT_BUILD("Unterlagen sind nicht erstellt oder gel"+Uml.o_UML.getName()+"scht"),
 	NOT_SEND("Unterlagen erstellt aber noch nicht verdandt"),
 	SEND("Bewerbungsunterlagen versandt"),
 	REPLY("Es gab eine Antwort auf die Bewerbung"),
@@ -21,16 +22,16 @@ public enum AppHistory {
 	public static List<String> getNames(){
 		List<String> names = new ArrayList<>();
 		for (AppHistory e : AppHistory.values()) {
-			names.add(e.getStateName());
+			names.add(e.name);
 		}
 		return names;
 	}
-
-	public String getStateName() {
+	
+	public String getName() {
 		return name;
 	}
 
-	public void setStateName(String stateName) {
-		this.name = stateName;
+	public void setName(String name) {
+		this.name = name;
 	}
 }
