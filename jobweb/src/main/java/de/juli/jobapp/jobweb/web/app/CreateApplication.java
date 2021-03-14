@@ -14,8 +14,11 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.juli.jobapp.jobmodel.enums.AppHistory;
 import de.juli.jobapp.jobmodel.enums.JobState;
+import de.juli.jobapp.jobmodel.enums.Uml;
 import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.Source;
 import de.juli.jobapp.jobmodel.model.State;
@@ -103,6 +106,8 @@ public class CreateApplication extends WebBean implements CrudBean {
 		current_Job.setEmail(selections.getSelectedEmail());
 		current_Job.setSource(selections.getSelectedSource());
 		current_Job.addState(new State(JobState.READY_TO_PERSIST, null));
+		current_Job.addHistory(new History(AppHistory.NOT_BUILD));
+		getSession().addMesssage(new FacesMessage(FacesMessage.SEVERITY_WARN, "Spericher Deine Angaben!", "Die Angaben f"+Uml.u_UML.getUchar()+"r die Bewerbung wurden aufgenomen, sind aber nocht nicht gespeichert."));
 		return PropertyBean.DETAILS;
 	}
 	

@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<b:jumbotron>
+			<b:row>
+				<b:column style-class="error">Oh! Deine View ist nicht mehr gültig!</b:column>
+				<b:column style-class="error">Du solltest Dich neu einloggen</b:column>
+			</b:row>
+			<b:row>
+				<b:column>Schau auch ind den Serverlog, um zu erfahren, was genau passiert ist.</b:column>
+			</b:row>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+
+</html>

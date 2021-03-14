@@ -32,6 +32,20 @@ public abstract class WebBean implements Serializable {
 		httpSession = request.getSession(true);
 	}
 
+	@PostConstruct
+	public void init() {
+		try {
+			if (!session.getLogin()) {
+				kickMeHome();
+			}
+		} catch (ViewExpiredException e) {
+			System.err.println("Session augelaufen");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+		}
+	}
+
 	/**
 	 * Bevor die View geraendert wird auf eventuelle Fehlermeldungen pruefen
 	 */
@@ -45,18 +59,12 @@ public abstract class WebBean implements Serializable {
 		}
 	}
 
-	@PostConstruct
-	public void init() {
-		try {
-			if (!session.getLogin()) {
-				kickMeHome();
-			}
-		} catch (ViewExpiredException e) {
-			System.err.println("Session augelaufen");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-		}
+	/**
+	 * Setzt eine Message in den FacesContext
+	 * @param msg
+	 */
+	public void addMsg(FacesMessage msg, String id) {
+		FacesContext.getCurrentInstance().addMessage(id, msg);		
 	}
 
 	public void redirect(String url) {

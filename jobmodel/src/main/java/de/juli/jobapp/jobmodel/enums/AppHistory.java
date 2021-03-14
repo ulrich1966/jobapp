@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AppHistory {
-	NOT_BUILD("Unterlagen sind nicht erstellt oder gel"+Uml.o_UML.getName()+"scht"),
+	NOT_BUILD("Unterlagen sind nicht erstellt oder gel"+Uml.o_UML.getUchar()+"scht"),
 	NOT_SEND("Unterlagen erstellt aber noch nicht verdandt"),
 	SEND("Bewerbungsunterlagen versandt"),
 	REPLY("Es gab eine Antwort auf die Bewerbung"),

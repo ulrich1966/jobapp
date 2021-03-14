@@ -35,16 +35,19 @@
 					</b:column>
 				</b:row>
 				<b:row>
-					<b:column medium-screen="2">
+					<b:column medium-screen="2" >
 						<h:outputLabel styleClass="label" value="Bemerkung:" />
 					</b:column>
 					<b:column medium-screen="10">
-						<b:inputTextarea value="#{history.note}" />
+						<b:inputTextarea value="#{history.model.historyLastEntry.note}" />
 					</b:column>
 				</b:row>
 				<b:row style-class="cmd">
-					<b:column offset="2" medium-screen="4">
-						<h:commandButton value="Speichern" action="#{history.update}" class="btn btn-lg btn-info" />
+					<b:column medium-screen="2">
+						<b:commandButton value="Details" action="#{history.details}" look="success" />
+					</b:column>
+					<b:column offset="2" medium-screen="2" style="margin: 0;">
+						<b:commandButton value="Speichern" action="#{history.update}" look="primary" />
 					</b:column>
 				</b:row>
 			</h:form>

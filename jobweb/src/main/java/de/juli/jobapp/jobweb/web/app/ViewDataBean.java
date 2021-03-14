@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.enums.AppHistory;
 import de.juli.jobapp.jobmodel.enums.JobState;
+import de.juli.jobapp.jobmodel.enums.Uml;
 import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.State;
@@ -32,7 +33,9 @@ public class ViewDataBean extends WebBean {
 	private Boolean docCreated = false;
 	private Boolean docDeleted = false;
 	private Boolean hasChanged = false;
+	private Boolean isNew = false;
 	private Boolean dirExist = false;
+	private Boolean hasTaplates = false;
 	private Job model;
 
 	public ViewDataBean() {
@@ -40,9 +43,10 @@ public class ViewDataBean extends WebBean {
 
 	/**
 	 * Holt das aktuelle Job-Objekt aus der Session stelltes in dieser Bean fuer
-	 * die View zur Verfuegung und setze die Satusse zum anzeigen/ausblenden der Aktion-Butttons. 
-	 * Prueft ob es ein lokales Verzeichnis angelegt wurde. Gibt es kein Objekt wird eine Fehlermeldung
-	 * generiert und auf die Startseite unmgeleitet.
+	 * die View zur Verfuegung und setze die Satusse zum anzeigen/ausblenden der
+	 * Aktion-Butttons. Prueft ob es ein lokales Verzeichnis angelegt wurde.
+	 * Gibt es kein Objekt wird eine Fehlermeldung generiert und auf die
+	 * Startseite unmgeleitet.
 	 */
 	@PostConstruct
 	public void init() {
@@ -66,7 +70,7 @@ public class ViewDataBean extends WebBean {
 				hasChanged = true;
 				break;
 			case READY_TO_PERSIST:
-				hasChanged = true;
+				isNew = true;
 				break;
 			case DOC_CREATED:
 				docCreated = true;
@@ -82,27 +86,34 @@ public class ViewDataBean extends WebBean {
 				dirExist = true;
 			}
 
+			if (!(model.getEmail() == null && model.getLetter() == null && model.getVita() == null)) {
+				hasTaplates = true;
+			}
+
 		} catch (IllegalArgumentException e) {
 			LOG.error(e.getMessage());
 		}
+
+		String msg = makeStateString();
+		addMsg(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg), "footer_msg");
 	}
 
 	/**
-	 * Leitet zur Edit-Seite weiter 
+	 * Leitet zur Edit-Seite weiter
 	 */
 	public String edit() {
 		return PropertyBean.EDIT;
 	}
 
 	/**
-	 * Leitet zur Verlaufs-Seite weiter 
+	 * Leitet zur Verlaufs-Seite weiter
 	 */
 	public String history() {
 		return PropertyBean.HISTORY;
 	}
 
 	/**
-	 * Speichert das aktuelle Job-Objekt als Bewerbung
+	 * Speichert ein neu angegtes Job-Objekt als Bewerbung
 	 */
 	public String save() {
 		try {
@@ -116,21 +127,22 @@ public class ViewDataBean extends WebBean {
 	}
 
 	/**
-	 * Loescht den aktuellen Datensatz aus der Datenbank 
+	 * Loescht den aktuellen Datensatz aus der Datenbank
 	 */
 	public String delete() {
 		// Kommt noch
-		//super.getPersistService().getCompanyController().remove(current_job.getCompany());
+		// super.getPersistService().getCompanyController().remove(current_job.getCompany());
 		return PropertyBean.DETAILS;
 	}
 
 	/**
-	 * Das Verzeichnis mit den Dokumenten fue die aktuelle Bewerbung loeschen 
+	 * Das Verzeichnis mit den Dokumenten fue die aktuelle Bewerbung loeschen
 	 */
 	public String deldocs() {
 		try {
 			service.delDocuments(model);
 			model.addState(new State(JobState.DOC_DELETED, null));
+			model.addHistory(new History(AppHistory.NOT_BUILD, "Die Dokumente wurden von Dir gel"+Uml.o_UML.getUchar()+"scht!"));
 			model = super.getController().persist(model);
 		} catch (IOException e) {
 			LOG.error(e.getMessage());
@@ -139,20 +151,22 @@ public class ViewDataBean extends WebBean {
 	}
 
 	/**
-	 * Erstellt die Dokumente fuer die Bewerbung durch entsprechenenden Serviceaufruf 
-	 * im DocumentService, persisteriert das aktuelle Job-Objekt, aktuallisiert den Status 
-	 * und setzt das Objekt neu in die Session. 
+	 * Erstellt die Dokumente fuer die Bewerbung durch entsprechenenden
+	 * Serviceaufruf im DocumentService, persisteriert das aktuelle Job-Objekt,
+	 * aktuallisiert den Status und setzt das Objekt neu in die Session.
 	 */
 	public String createDocs() {
 		try {
-			model.setLocalDocDir(AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName()));
+			String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
+			String msg = String.format("Die unterlagen wurden erstellt und liegen auf dem Server: %s", targetPath);
+			model.setLocalDocDir(targetPath);
 			model = service.createRootDir(model);
 			model = service.createLetter(model);
 			model = service.createEmail(model);
 			model = service.createVita(model);
 			model = service.createOpenOfficePdf(model);
 			model.addState(new State(JobState.DOC_CREATED, null));
-			model.addHistory(new History(AppHistory.NOT_SEND, null));
+			model.addHistory(new History(AppHistory.NOT_SEND, msg));
 			model = super.getController().persist(model);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -162,8 +176,8 @@ public class ViewDataBean extends WebBean {
 	}
 
 	/**
-	 * Schickt das Job-Objekt zum Verenden an den SendService und setzt des Objekt 
-	 * frisch in die Session 
+	 * Schickt das Job-Objekt zum Verenden an den SendService und setzt des
+	 * Objekt frisch in die Session
 	 */
 	public String send() {
 		SendService service = new SendService(model);
@@ -175,12 +189,33 @@ public class ViewDataBean extends WebBean {
 				throw new ShittHappensExeption("Das versenden der Bewerbung ist schief gelaufen!");
 			} catch (ShittHappensExeption e) {
 				LOG.error(e.getMessage());
-				FacesMessages.error(null, "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");			
+				FacesMessages.error(null, "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 		return PropertyBean.DETAILS;
+	}
+	
+	/**
+	 * Bietet eine Uebersicht der aktuellen Satuse als String zur kontolle der 
+	 * Rednervorgaenge. Ist nur in der Entwicklungphase sinnvoll.  
+	 */
+	private String makeStateString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dokumente erstellt: ");
+		sb.append(docCreated);
+		sb.append(" | Dokumente geloescht: ");
+		sb.append(docDeleted);
+		sb.append(" | Datensatz geaendert: ");
+		sb.append(hasChanged);
+		sb.append(" | Verzeichnis existiert: ");
+		sb.append(dirExist);
+		sb.append(" | Datensatz ist neu: ");
+		sb.append(isNew);
+		sb.append(" | Alle Vorlagen vorhanden: ");
+		sb.append(hasTaplates);
+		return sb.toString();
 	}
 
 	public Job getModel() {
@@ -201,5 +236,13 @@ public class ViewDataBean extends WebBean {
 
 	public Boolean getHasChanged() {
 		return hasChanged;
+	}
+
+	public Boolean getIsNew() {
+		return isNew;
+	}
+
+	public Boolean getHasTaplates() {
+		return hasTaplates;
 	}
 }

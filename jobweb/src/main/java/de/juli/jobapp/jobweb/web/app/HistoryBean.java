@@ -56,6 +56,11 @@ public class HistoryBean extends WebBean {
 		}
 		return "";
 	}
+	
+	public String details() {
+		return PropertyBean.DETAILS;
+	}
+	
 
 	public Job getModel() {
 		return model;
@@ -79,5 +84,9 @@ public class HistoryBean extends WebBean {
 
 	public AppHistory getSelected() {
 		return selected;
+	}
+
+	public void setSelected(AppHistory selected) {
+		this.selected = selected;
 	}
 }

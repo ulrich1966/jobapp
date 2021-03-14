@@ -97,7 +97,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 		try {
 			model.addState(new State(JobState.UPDATED));
 			model = super.getController().persist(getModel());
-			getSession().addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Die "+Uml.A_UML.getName()+"nderungen wurden "+Uml.u_UML.getName()+"bernommen!"));
+			getSession().addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Die "+Uml.A_UML.getUchar()+"nderungen wurden "+Uml.u_UML.getUchar()+"bernommen!"));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern. Die Bewerbung konnte nicht gespeichert werden!");

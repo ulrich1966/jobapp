@@ -272,7 +272,7 @@
 							<b:commandButton value="Edit" action="#{data.edit}" look="success" />
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Speichern" action="#{data.save}" disabled="#{!data.hasChanged}" look="primary" />
+							<b:commandButton value="Speichern" action="#{data.save}" disabled="#{!data.isNew}" look="primary" />
 						</b:column>
 						<b:column medium-screen="2">
 							<b:commandButton value="Datensatz löschen" action="#{data.delete}" look="danger" />
@@ -283,10 +283,10 @@
 					</b:row>
 					<b:row style-class="cmd">
 						<b:column medium-screen="2">
-							<b:commandButton value="Dokumente erstellen" action="#{data.createDocs}" disabled="#{data.dirExist}" look="info" />
+							<b:commandButton value="Dokumente erstellen" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" look="info" />
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Dokumente löschen" action="#{data.deldocs}" disabled="#!{data.dirExist}" look="warning" />
+							<b:commandButton value="Dokumente löschen" action="#{data.deldocs}" disabled="#{!data.dirExist}" look="warning" />
 						</b:column>
 						<b:column medium-screen="2">
 							<b:commandButton value="Bewerben" action="#{data.send}" disabled="#{!data.docCreated}" look="primary" />

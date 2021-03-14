@@ -8,8 +8,8 @@ public enum JobState {
 	CREATED("Bewerbung angelegt und in der Datenbank gespeichert"),
 	DOC_CREATED("Dokumente erstellt"),
 	SEND("Bewerbung versandt"),
-	DOC_DELETED("Dokumente gel"+Uml.o_UML.getName()+"scht"),
-	UPDATED(Uml.A_UML.getName()+"nderungen gespeichert");
+	DOC_DELETED("Dokumente gel"+Uml.o_UML.getUchar()+"scht"),
+	UPDATED(Uml.A_UML.getUchar()+"nderungen gespeichert");
 
 	private String name;
 

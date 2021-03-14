@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.jobapp.jobmodel.enums.DocType;
+import de.juli.jobapp.jobmodel.enums.Uml;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
 import de.juli.jobapp.jobweb.service.DirService;
@@ -70,7 +70,6 @@ public class Upload extends WebBean {
 			Path path = AppDirectories.getVitaPath(root, user);
 			path = createDir(path);
 			path = save(path, vitaFile);
-			persist(path, DocType.VITA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +81,6 @@ public class Upload extends WebBean {
 			Path path = AppDirectories.getLetterPath(root, user);
 			path = createDir(path);
 			path = save(path, letterFile);
-			persist(path, DocType.LETTER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -94,7 +92,6 @@ public class Upload extends WebBean {
 			Path path = AppDirectories.getEmailPath(root, user);
 			path = createDir(path);
 			path = save(path, emailFile);
-			persist(path, DocType.EMAIL);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -120,29 +117,12 @@ public class Upload extends WebBean {
 				throw new ShittHappensExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");				
 			} catch (ShittHappensExeption e) {
 				LOG.error(e.getMessage());
-				FacesMessages.error(null, "Es wurde keine Datei ausgew�hlt!");
+				FacesMessages.error(null, "Es wurde keine Datei ausgew"+Uml.a_UML.getUchar()+"hlt!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return target; 
-	}
-	
-	private boolean persist(Path path, DocType docType) {
-		boolean success = true;
-//		if(path != null) {
-//			Document doc = new Document(docType, path.toString());
-//			if(!account.getDocs().contains(doc)) {
-//				account.addDoc(doc);
-//				controller.persist(account);
-//				success = true;
-//			} else {
-//				System.err.println(this.getClass().getName() + "persist(Path path, DocType docType) -> Entry [" + path + "] already existiert in DB");
-//			}
-//		} else {
-//			throw new IllegalArgumentException(this.getClass().getName() + "persist(Path path, DocType docType) -> path is NULL!");			
-//		}
-		return success;
 	}
 	
 	public Account getAccount() {

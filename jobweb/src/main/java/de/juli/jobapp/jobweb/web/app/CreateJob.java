@@ -26,17 +26,13 @@ public class CreateJob extends WebBean implements CrudBean {
 	 */
 	@PostConstruct
 	public void init() {
-		current_Job = (Job) getSession().getContent(PropertyBean.CURRENT_JOB);
-		if(current_Job == null) {
-			current_Job = new Job();
-		}
-		if(current_Job.getAccount() == null) {
-			current_Job.setAccount(getSession().getAccount());			
-		}
+		current_Job = new Job();
+		current_Job.setAccount(getSession().getAccount());
+		getSession().addContent(PropertyBean.JOB, current_Job);
 	}
 
 	/**
-	 * Wenn das anlegen der neuen Bewergung auf einen Job auf der View 
+	 * Wenn das anlegen der neuen Bewerbung auf einen Job auf der View 
 	 * bestaetigt wird, wird das Job-Objekt in die Session gegeben und 
 	 * steht nunmer hierueber fuer die folgeneden Operationen zur verfuegung. 
 	 */

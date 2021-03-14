@@ -9,18 +9,18 @@ public enum Uml {
 	u_UML("\u00FC"),
 	SZ("\u00DF");
 	
-	private String name;
+	private String uchar;
 
 	Uml (String name){
-		this.name = name;
+		this.uchar = name;
 	}
 	
-	public String getName() {
-		return name;
+	public String getUchar() {
+		return uchar;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUchar(String uchar) {
+		this.uchar = uchar;
 	}
 
 }

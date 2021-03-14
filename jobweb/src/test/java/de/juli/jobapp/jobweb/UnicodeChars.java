@@ -16,13 +16,13 @@ public class UnicodeChars {
 		System.out.println("\u00FC");
 		System.out.println("\u00DF");
 		
-		System.out.println(Uml.A_UML.getName());
-		System.out.println(Uml.a_UML.getName());
-		System.out.println(Uml.O_UML.getName());
-		System.out.println(Uml.o_UML.getName());
-		System.out.println(Uml.U_UML.getName());
-		System.out.println(Uml.u_UML.getName());
-		System.out.println(Uml.SZ.getName());
+		System.out.println(Uml.A_UML.getUchar());
+		System.out.println(Uml.a_UML.getUchar());
+		System.out.println(Uml.O_UML.getUchar());
+		System.out.println(Uml.o_UML.getUchar());
+		System.out.println(Uml.U_UML.getUchar());
+		System.out.println(Uml.u_UML.getUchar());
+		System.out.println(Uml.SZ.getUchar());
 		
 	}
 
