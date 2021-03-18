@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.model.Account;
+import de.juli.jobapp.jobmodel.model.SenderAddress;
 import de.juli.jobapp.jobmodel.service.JsonService;
 import javassist.NotFoundException;
 
@@ -43,6 +44,10 @@ public class AccountHelper {
 		account.setUser(props.propertyFind(String.format("%s.email.user", name)));
 		account.setUser(props.propertyFind(String.format("%s.roll", name)));
 		account.setStyleTheme(props.propertyFind(String.format("%s.theme", name)));
+		
+		SenderAddress adress = new SenderAddress("Hein", "Mück", "Sebalsdsbrück. 36", 28203, "Bremen", "01111 22334455", "hein.mück@gmx.de");
+		account.setAddress(adress);
+		
 		return account;
 	}
 	

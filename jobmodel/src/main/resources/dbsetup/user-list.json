@@ -13,7 +13,20 @@
 		"profillink": "not set",
 		"smtp": "mail.gmx.net",
 		"styleTheme": "dark",
-		"jobs": null
+		"jobs": null,
+		"address": {
+			"id": null,
+			"version": null,
+			"createDate": null,
+			"updateDate": null,
+			"firstName": "Hein",
+			"lastName": "Mück",
+			"street": "Sebalsdsbrück. 36",
+			"zip": 28203,
+			"city": "Bremen",
+			"phone": "01111 22334455",
+			"mail": "hein.mück@gmx.de"
+		}
 	},
 	{
 		"id": null,
@@ -29,6 +42,19 @@
 		"profillink": "not set",
 		"smtp": "mail.gmx.net",
 		"styleTheme": "dark",
-		"jobs": null
+		"jobs": null,
+		"address": {
+			"id": null,
+			"version": null,
+			"createDate": null,
+			"updateDate": null,
+			"firstName": "Hein",
+			"lastName": "Mück",
+			"street": "Sebalsdsbrück. 36",
+			"zip": 28203,
+			"city": "Bremen",
+			"phone": "01111 22334455",
+			"mail": "hein.mück@gmx.de"
+		}
 	}
 ]

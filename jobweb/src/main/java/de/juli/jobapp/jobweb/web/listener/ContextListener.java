@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 import de.juli.jobapp.jobmodel.controller.CriteriaController;
 import de.juli.jobapp.jobmodel.controller.EmController;
 import de.juli.jobapp.jobmodel.controller.ModelController;
+import de.juli.jobapp.jobmodel.exeptions.ShitHappendsExeption;
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.AppSetting;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.service.JsonService;
 import de.juli.jobapp.jobmodel.util.AppProperties;
-import javassist.NotFoundException;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -38,9 +38,17 @@ public class ContextListener implements ServletContextListener {
 		
 		LOG.debug("Einstellungen der Persistence-Unit:");
 		EmController.getEm().getProperties().entrySet().forEach(e -> LOG.debug("{} : {}", e.getKey(), e.getValue()));
+		AppProperties properties = AppProperties.getInstance(AppProperties.CONFIG_PROP);
+		
+		try {
+			if(!new Boolean(properties.propertyFind("db.data.job.setup"))) {
+				return;
+			}
+		} catch (ShitHappendsExeption e) {
+			LOG.error("{}", e.getMessage());
+		}
 
 		if (cc.getTableSize(Account.class) == 0) {
-			AppProperties properties = AppProperties.getInstance(AppProperties.CONFIG_PROP);
 			ModelController controller = new ModelController();
 			JsonService jsonService = new JsonService();
 			
@@ -68,9 +76,9 @@ public class ContextListener implements ServletContextListener {
 									controller.create(a);								
 								});
 							}
-						} catch (NotFoundException e1) {
+						} catch (ShitHappendsExeption e) {
 							LOG.error("{}", "Das Erstellen Jobs ist in die Hose gegangen!");
-							LOG.error("{}", e1);
+							LOG.error("{}", e);
 						}
 					});
 					LOG.debug("{}", "Ein paar Jobs wurden neu angelegt!");

@@ -1,0 +1,44 @@
+
+${cmp_name}
+${cnt_first_name} ${cnt_last_name}
+${cmp_zip} ${cmp_city}
+${cmp_street}
+
+																		Bremen 15.03.21
+
+
+${job_title}
+
+
+Sehr ${cnt_sex} ${cnt_title} ${cnt_last_name},
+
+Sie suchen einen Softwareentwickler unter Java. Als 'Sun Certified Java Programmer' 
+und 'Oracle Certified Professional, Java EE 5 Web Component Developer' mit mehrjähriger 
+Projekterfahrung in der objektorientierten Entwicklung von webbasierten Anwendungen, 
+würde ich mich Ihnen gerne vorstellen.
+
+Zur Zeit bin ich bei einem Bremer Unternehmen mit der Entwicklung einer webbasierten 
+Helpdeskanwendung unter Java EE8 betraut. Hierbei entwickle ich mit den Java-Framework 
+JPA in der Implementation von Eclipse Link und JAXB 2 für die Modelgenerierung gegen eine 
+Oracle Datenbank. Im Frontend basiert das Projekt auf JSF und dem AJAX-Framework 
+PrimeFaces, wo ich clientseitig ebenfalls Javascript, jQuery, HTM und CSS intensiv einsetzt. 
+Meine Aufgaben umfassten gleichsam das Deployment der Webapplikationen auf einen 
+Jboss Wild-Fly Applicationserver. In der täglichen Projektarbeit werde ich von Frameworks 
+wie Eclipse, Maven und Git bzw. SVN unterstützt und kann hier hingehend auf gute bis 
+sehr gute Kenntnisse verweisen. 
+	Neben umfassenden Java-Kenntinssen habe ich durch vorhergehenden Projektarbeiten auch
+Erfahrungen in ASP.Net und dem MS MVC, so wie dem EF Framework unter C# erworben und 
+gegen einen SQL Server programmiert. Dabei sind von mir Http -Anfragen über das OData 
+Protokoll für REST APIs verarbeitet worden. Grundkenntnisse mit dem Kendo-Framework 
+runden mein .NET-Profil ab.
+
+In meinem bisherigen Schaffen konnte ich sowohl eigenverantwortlich, als auch im Team
+überzeugen. Aus meinen Projektarbeiten bringe ich die Erfahrung mit, dass sich meine Stärken im
+konstruktiven und kreativen Austausch mit Kollegen am besten entwickeln. Aufgrund des 
+Projektabschusses würde ich gerne eine neue und spannende Herausforderung bei der ${cmp_name} zum 
+annehmen und ich kann Ihnen einen sofortigen Einstiegstermin anbieten.
+
+Ich freue mich sehr auf eine Einladung zu einem persönlichen Gespräch und verbleibe bis dahin mit
+freundlichem Gruß
+
+Ulrich Kloodt

@@ -1,9 +1,12 @@
 package de.juli.jobapp.jobmodel.model;
 
+import java.beans.Transient;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import de.juli.jobapp.jobmodel.enums.Sex;
 import de.juli.jobapp.jobmodel.enums.Title;
 
 @Entity
@@ -80,6 +83,27 @@ public class Contact extends Model {
 		this.title = title;
 	}
 
+	@Transient
+	public String getLetterAddress() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Sehr");
+		sb.append(" ");
+		if(title.getSex().equals(Sex.FEMALE)) {
+			sb.append("geehrte");
+		}
+		if(title.getSex().equals(Sex.MALE)) {
+			sb.append("geehrter");
+		}
+		sb.append(" ");
+		sb.append(title.getName());
+		sb.append(" ");
+		sb.append(lastName);
+		sb.append(",");
+		sb.append("\n");
+		sb.append("\n");
+		return sb.toString();
+	}
+	
 	@Override
 	public String toString() {
 		return "ID: "+super.getId()+"\nContact [title=" + title + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone

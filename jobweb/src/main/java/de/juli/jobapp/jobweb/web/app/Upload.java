@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.enums.Uml;
 import de.juli.jobapp.jobmodel.model.Account;
-import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
+import de.juli.jobapp.jobweb.exeptions.ShitHappendsExeption;
 import de.juli.jobapp.jobweb.service.DirService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
@@ -114,8 +114,8 @@ public class Upload extends WebBean {
 			Files.copy(input, target);
 		} else {
 			try {
-				throw new ShittHappensExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");				
-			} catch (ShittHappensExeption e) {
+				throw new ShitHappendsExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");				
+			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
 				FacesMessages.error(null, "Es wurde keine Datei ausgew"+Uml.a_UML.getUchar()+"hlt!");
 			} catch (Exception e) {

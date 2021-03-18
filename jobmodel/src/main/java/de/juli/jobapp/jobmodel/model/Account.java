@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -29,6 +30,8 @@ public class Account extends Model{
 	private String styleTheme;
 	@OneToMany(mappedBy="account", cascade=CascadeType.ALL)
 	private List<Job> jobs;
+	@OneToOne(cascade=CascadeType.ALL)
+	private SenderAddress address;
 
 	public String getName() {
 		return name;
@@ -86,6 +89,12 @@ public class Account extends Model{
 	}
 	public List<Job> getJobs() {
 		return jobs;
+	}
+	public SenderAddress getAddress() {
+		return address;
+	}
+	public void setAddress(SenderAddress address) {
+		this.address = address;
 	}
 	public void addJob(Job job) {
 		if(this.jobs == null) {

@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javassist.NotFoundException;
+import de.juli.jobapp.jobmodel.exeptions.ShitHappendsExeption;
 
 public class AppProperties {
 	private static final Logger LOG = LoggerFactory.getLogger(AppProperties.class);
@@ -35,13 +35,13 @@ public class AppProperties {
 		return null;
 	}
 
-	public String propertyFind(String prop) throws NotFoundException {
+	public String propertyFind(String prop) throws ShitHappendsExeption {
 		propertiesLoadXML();
 		String result = currentProps.getProperty(prop);
 		if (result == null) {
 			String msg = String.format("Es wurde kein passender Eintrag fuer %s gefunden!", prop);
 			LOG.error(msg);
-			throw new NotFoundException(msg);
+			throw new ShitHappendsExeption(msg);
 		}
 		return result;
 	}

@@ -23,7 +23,7 @@ public class Company extends Model{
 	private String zip;
 	private String city;
 	private String street;
-	private String addressee;
+	private String address;
 	private String web;
 	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
 	private List<Job> jobs;
@@ -68,12 +68,12 @@ public class Company extends Model{
 		this.street = street;
 	}
 
-	public String getAddressee() {
-		return addressee;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddressee(String addressee) {
-		this.addressee = addressee;
+	public void setAddress(String addressee) {
+		this.address = addressee;
 	}
 
 	public String getWeb() {

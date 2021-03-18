@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<f:event listener="#{apptext.preRender}" type="preRenderView" />
+		<b:jumbotron style-class="#{style.name}">
+			<b:messages globalOnly="true" id="msg" />
+
+			<b:row>
+				<b:column>
+					<div class="head">Angaben im Briefkopf</div>
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.name}" />
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.account.address.street}" />
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.city}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="Telefon: #{apptext.account.address.phone}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="E-Mail: #{apptext.account.address.mail}" />
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column>
+					<div class="head">Angaben zur Zieladresse</div>
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.model.company.name}" />
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.contact}" />
+				</b:column>
+			</b:row>
+
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.model.company.street}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				&nbsp;
+			</b:row>
+			<b:row>
+				<b:column medium-screen="6">
+					<h:outputText size="100" value="#{apptext.compCity}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column>
+					<div class="head">Eingabe eines Bewergungstextes</div>
+				</b:column>
+			</b:row>
+			<b:row>
+				&nbsp;
+			</b:row>
+			<b:row>
+				<b:column>
+					<h:outputText style="font-weight: bold;" value="#{apptext.model.title}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				&nbsp;
+			</b:row>
+			<b:row>
+				<b:column medium-screen="12" style="text-align:right">
+					<h:outputText value="#{apptext.date}" />
+				</b:column>
+			</b:row>
+			<b:row>
+				&nbsp;
+			</b:row>
+			<b:row>
+				<b:column medium-screen="12" style="text-align:right">
+					<h:outputText value="" />
+				</b:column>
+			</b:row>
+			<h:form id="frm">
+				<b:row>
+					<b:column medium-screen="12">
+						<b:inputTextarea value="#{apptext.txt}" style="width: 100%; height: 686px;" />
+					</b:column>
+				</b:row>
+				<b:row style-class="cmd">
+					<b:column medium-screen="2">
+						<b:commandButton value="Details" action="#{apptext.details}" look="success" />
+					</b:column>
+					<b:column offset="2" medium-screen="2" style="margin: 0;">
+						<b:commandButton value="Speichern" action="#{apptext.save}" look="primary" />
+					</b:column>
+				</b:row>
+			</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>
+
+</html>

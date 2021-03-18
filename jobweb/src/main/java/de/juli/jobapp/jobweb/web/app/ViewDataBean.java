@@ -18,7 +18,7 @@ import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobmodel.service.DocumentService;
-import de.juli.jobapp.jobweb.exeptions.ShittHappensExeption;
+import de.juli.jobapp.jobweb.exeptions.ShitHappendsExeption;
 import de.juli.jobapp.jobweb.service.SendService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
@@ -119,6 +119,7 @@ public class ViewDataBean extends WebBean {
 		try {
 			model.addState(new State(JobState.CREATED));
 			model = super.getController().persist(model);
+			session.getAccount().addJob(model);
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern.");
@@ -176,7 +177,7 @@ public class ViewDataBean extends WebBean {
 	}
 
 	/**
-	 * Schickt das Job-Objekt zum Verenden an den SendService und setzt des
+	 * Schickt das Job-Objekt zum Versenden an den SendService und setzt des
 	 * Objekt frisch in die Session
 	 */
 	public String send() {
@@ -186,8 +187,8 @@ public class ViewDataBean extends WebBean {
 			session.addContent(PropertyBean.CURRENT_JOB, this.model);
 		} else {
 			try {
-				throw new ShittHappensExeption("Das versenden der Bewerbung ist schief gelaufen!");
-			} catch (ShittHappensExeption e) {
+				throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
+			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
 				FacesMessages.error(null, "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");
 			} catch (Exception e1) {
@@ -195,6 +196,13 @@ public class ViewDataBean extends WebBean {
 			}
 		}
 		return PropertyBean.DETAILS;
+	}
+
+	/**
+	 * Leitet zum Erstellen eines Bewerbungstextes weiter
+	 */
+	public String applytxt() {
+		return PropertyBean.TXT;
 	}
 	
 	/**

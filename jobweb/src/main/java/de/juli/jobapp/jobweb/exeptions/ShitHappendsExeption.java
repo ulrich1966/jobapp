@@ -2,12 +2,12 @@ package de.juli.jobapp.jobweb.exeptions;
 
 import com.sun.star.uno.RuntimeException;
 
-public class ShittHappensExeption extends RuntimeException {
+public class ShitHappendsExeption extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	public ShittHappensExeption(){
+	public ShitHappendsExeption(){
 		super();
 	}
-	public ShittHappensExeption(String msg){
+	public ShitHappendsExeption(String msg){
 		super(msg);
 	}
 }

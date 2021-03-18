@@ -291,6 +291,9 @@
 						<b:column medium-screen="2">
 							<b:commandButton value="Bewerben" action="#{data.send}" disabled="#{!data.docCreated}" look="primary" />
 						</b:column>
+						<b:column medium-screen="2">
+							<b:commandButton value="Text estellen" action="#{data.applytxt}" disabled="#{data.docCreated}" look="info" />
+						</b:column>
 					</b:row>
 				</b:form>
 			</b:row>

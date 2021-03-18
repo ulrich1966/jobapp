@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.juli.jobapp.jobmodel.exeptions.ShitHappendsExeption;
 import de.juli.jobapp.jobmodel.model.Model;
 import de.juli.jobapp.jobmodel.util.AppProperties;
 import javassist.NotFoundException;
@@ -33,7 +34,7 @@ public class JsonService {
 		super();
 		try {
 			jsonDir = AppProperties.getInstance(AppProperties.CONFIG_PROP).propertyFind("json.data.setup.dir");
-		} catch (NotFoundException e) {
+		} catch (ShitHappendsExeption e) {
 			LOG.error(e.getMessage());
 		}
 	}

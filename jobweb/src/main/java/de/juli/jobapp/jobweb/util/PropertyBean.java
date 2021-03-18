@@ -20,6 +20,7 @@ public class PropertyBean {
 	public static final String LIST = "list_view.xhtml?faces-redirect=true";
 	public static final String HISTORY = "history.xhtml?faces-redirect=true";
 	public static final String SETTINGS = "app_setting.xhtml?faces-redirect=true";
+	public static final String TXT = "apply_text.xhtml?faces-redirect=true";
 	
 	// Session Keys
 	public static final String CURRENT_JOB = "currentJob"; 

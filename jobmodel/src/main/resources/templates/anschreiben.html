@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+<style type="text/css">
+p {
+	margin: 0;
+	padding: 0;
+}
+.sm {
+	font-size: 0.8em;
+}
+</style>
+</head>
+
+<body>
+	<div style="border-right: 1px solid black; width: auto;">
+		<p th:text="${map.sender_name}" style="font-size: 1.2em; margin-bottom: 2px;"/>
+		<p class="sm" th:text="${map.sender_street}"/>
+		<p class="sm" th:text="${map.sender_city}"/>
+		<p class="sm" th:text="${map.sender_phone}"/>
+		<p class="sm" th:text="${map.sender_email}"/>
+	</div>
+	<br />
+	<br />
+	<div>
+		<p th:text="${map.company_name}"/>
+		<p th:text="${map.company_contact}"/>
+		<p th:text="${map.company_street}"/>
+		<br />
+		<p th:text="${map.company_city}" />
+	</div>
+	<br />
+	<br />
+	<div style="width: 100%; text-align: right;">
+		<p th:text="${map.date}"/>
+	</div>
+	<br />
+	<br />
+	<p th:text="${map.title}" style="font-weight: bold;"/>
+	<br />
+	<br />
+	<p th:text="${map.letter_address + ','}"/>
+	<br />
+	<p th:text="${map.txt}"/>
+	<br />
+	<p th:text="${map.sender_name}"/>
+</body>
+</html>

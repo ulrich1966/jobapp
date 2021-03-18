@@ -3,4 +3,5 @@
 <properties>
 	<entry key="json.data.setup.dir">dbsetup</entry>
 	<entry key="json.data.users">model</entry>
+	<entry key="template.file">templates/anschreiben.html</entry>
 </properties>

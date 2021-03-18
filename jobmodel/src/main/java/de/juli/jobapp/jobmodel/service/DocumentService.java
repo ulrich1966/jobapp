@@ -22,8 +22,9 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
-import de.juli.docuworks.docuhandle.OpenOfficeFileService;
-import de.juli.docuworks.docuhandle.OpenOfficePdfService;
+import de.juli.docuworks.docuhandle.service.OpenOfficeFileService;
+import de.juli.docuworks.docuhandle.service.OpenOfficePdfService;
+import de.juli.docuworks.docuhandle.service.WebTemplatePdfService;
 import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.converter.DayTimeConverter;
 import de.juli.jobapp.jobmodel.enums.FileTyps;
@@ -213,13 +214,24 @@ public class DocumentService {
 		return model;
 	}
 	
+	/**
+	 * Eerzeugt eine PDF-Dokument ueber ein Thymleaf Template ueber
+	 * den WebTemplatePdfService  
+	 */
+	public Job createWebTemplatePdf(Map<String, String> map, Job model) {
+		WebTemplatePdfService service = new WebTemplatePdfService();
+		Path target = Paths.get(model.getLocalDocDir());
+		target = target.resolve("anschreiben.pdf");
+		target = service.generatePdf(map, target, root.resolve("templates/anschreiben.html"));
+		return addPdf(model, target.toFile().toString());
+	}
+
 	public Job createOpenOfficePdf(Job model) {
 		OpenOfficePdfService service = new OpenOfficePdfService(OpenOfficePdfService.CreationVia.OPEN_OFFICE);
 		ModelController contoller = new ModelController();
 		AppSetting setting = contoller.findFirst(AppSetting.class);
 		boolean success = false;
 		
-		Pdf pdf = new Pdf();
 		String source = model.getLetter().getTarget();
 		String target = String.format("%s\\%s.%s", model.getLocalDocDir(), "anschreiben", "pdf");
 		String cmd = String.format("%s\\%s", setting.getLibreOfficeHome(), setting.getCmd());
@@ -236,13 +248,15 @@ public class DocumentService {
 			String msg = String.format("Der Service zum Erstellen des PDF konnte nicht ausgefuert werden!\nQuelle: %s\nZiel: %s\n OfficePfad: %s", source, target, cmd);
 			throw new DocumentServiceExeption(msg);
 		}
-		
+		return addPdf(model, target);
+	}
+	
+	private Job addPdf (Job model, String target) {
+		Pdf pdf = new Pdf();
 		pdf.setTarget(target);
 		pdf.setExtension("pdf");
-		pdf.setName(String.format("%s.%s", model.getCompany().getName(), "pdf"));
-		
+		pdf.setName(String.format("%s.%s", model.getCompany().getName(), "pdf"));		
 		model.setPdf(pdf);
-		
 		return model;
 	}
 
@@ -266,7 +280,7 @@ public class DocumentService {
 		data.put("cmp_zip", model.getCompany().getZip());
 		data.put("cmp_city", model.getCompany().getCity());
 		data.put("cmp_street", model.getCompany().getStreet());
-		data.put("cmp_addressee", model.getCompany().getAddressee());
+		data.put("cmp_addressee", model.getCompany().getAddress());
 
 		data.put("cnt_sex", Title.appellation(model.getCompany().getContact().getTitle()));
 		data.put("cnt_title", model.getCompany().getContact().getTitle().getName());

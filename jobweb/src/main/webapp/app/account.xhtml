@@ -10,12 +10,70 @@
 			<h:form id="frm">
 				<b:row>
 					<b:column style-class="head-line" medium-screen="12">
-						<h:outputText value="Angaben zum Kontakt:" />
+						<h:outputText value="Angaben zum Benutzer:" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column>
+						<div class="head">Kontaktangaben (Briefkopf in Dukumenten)</div>
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column medium-screen="2">
-						<h:outputLabel styleClass="label" value="Name:" />
+						<h:outputLabel styleClass="label" value="Vorname:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.firstName}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Nachname:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.lastName}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="PLZ:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.zip}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Ort:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.city}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Telefon:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.phone}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Telefon:" />
+					 </b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.address.mail}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column>
+						<div class="head">Account Angaben</div>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Benutzer:" />
 					 </b:column>
 					<b:column medium-screen="6">
 						<b:inputText size="100" value="#{account.model.name}" />
@@ -30,7 +88,11 @@
 						<b:inputSecret size="100" value="#{account.model.pass}" />
 					</b:column>
 				</b:row>
-
+				<b:row>
+					<b:column>
+						<div class="head">Angaben zum E-Mailversandt</div>
+					</b:column>
+				</b:row>
 				<b:row>
 					<b:column medium-screen="2">
 						<h:outputLabel styleClass="label" value="Email-Port:" />

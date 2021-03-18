@@ -113,7 +113,7 @@ public class JsonServiceTestJobs {
 	
 	private Company createCompany(int i) {
 		Company model = new Company();
-		model.setCity("Stadt der Firma" + i);
+		model.setCity("Stadt der Firma " + i);
 		model.setName("Unternehen des Jobs " + i);
 		model.setStreet("Straße der Firma" + i);
 		model.setWeb("https://www.qwant.com");

@@ -9,7 +9,8 @@ public enum JobState {
 	DOC_CREATED("Dokumente erstellt"),
 	SEND("Bewerbung versandt"),
 	DOC_DELETED("Dokumente gel"+Uml.o_UML.getUchar()+"scht"),
-	UPDATED(Uml.A_UML.getUchar()+"nderungen gespeichert");
+	UPDATED(Uml.A_UML.getUchar()+"nderungen gespeichert"),
+	PDF_CREATED("Pdf mit Template erzeugt");
 
 	private String name;
 

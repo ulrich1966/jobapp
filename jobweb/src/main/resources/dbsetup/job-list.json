@@ -9,7 +9,7 @@
 		"note": "Der beste Job, den man kriegen kann0",
 		"webLink": "https://www.qwant.com",
 		"localDocDir": null,
-		"jobAdDate": 1615149983056,
+		"jobAdDate": 1616087529237,
 		"salary": 1,
 		"isListed": null,
 		"source": {
@@ -29,7 +29,7 @@
 			"zip": "1230",
 			"city": "Stadt der Firma0",
 			"street": "Straße der Firma0",
-			"addressee": null,
+			"address": null,
 			"web": "https://www.qwant.com",
 			"jobs": [
 			],
@@ -56,9 +56,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983059,
+				"timeStamp": 1616087529241,
 				"note": "Dieser Job ist neu angelegt",
-				"jobState": "CREATED"
+				"jobState": "READY_TO_PERSIST"
 			}
 		],
 		"historys": [
@@ -67,9 +67,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983060,
+				"timeStamp": 1616087529241,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_BUILD"
+				"appHistory": "NOT_SEND"
 			}
 		],
 		"account": null
@@ -84,7 +84,7 @@
 		"note": "Der beste Job, den man kriegen kann1",
 		"webLink": "https://www.qwant.com",
 		"localDocDir": null,
-		"jobAdDate": 1615149983060,
+		"jobAdDate": 1616087529241,
 		"salary": 1,
 		"isListed": null,
 		"source": {
@@ -104,7 +104,7 @@
 			"zip": "1231",
 			"city": "Stadt der Firma1",
 			"street": "Straße der Firma1",
-			"addressee": null,
+			"address": null,
 			"web": "https://www.qwant.com",
 			"jobs": [
 			],
@@ -131,9 +131,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983060,
+				"timeStamp": 1616087529241,
 				"note": "Dieser Job ist neu angelegt",
-				"jobState": "CREATED"
+				"jobState": "READY_TO_PERSIST"
 			}
 		],
 		"historys": [
@@ -142,9 +142,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983060,
+				"timeStamp": 1616087529241,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_BUILD"
+				"appHistory": "NOT_SEND"
 			}
 		],
 		"account": null
@@ -159,7 +159,7 @@
 		"note": "Der beste Job, den man kriegen kann2",
 		"webLink": "https://www.qwant.com",
 		"localDocDir": null,
-		"jobAdDate": 1615149983060,
+		"jobAdDate": 1616087529241,
 		"salary": 1,
 		"isListed": null,
 		"source": {
@@ -179,7 +179,7 @@
 			"zip": "1232",
 			"city": "Stadt der Firma2",
 			"street": "Straße der Firma2",
-			"addressee": null,
+			"address": null,
 			"web": "https://www.qwant.com",
 			"jobs": [
 			],
@@ -206,9 +206,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983060,
+				"timeStamp": 1616087529241,
 				"note": "Dieser Job ist neu angelegt",
-				"jobState": "CREATED"
+				"jobState": "READY_TO_PERSIST"
 			}
 		],
 		"historys": [
@@ -217,9 +217,9 @@
 				"version": null,
 				"createDate": null,
 				"updateDate": null,
-				"timeStamp": 1615149983060,
+				"timeStamp": 1616087529241,
 				"note": "Ein frisch erzeugter History-Eintrag",
-				"appHistory": "NOT_BUILD"
+				"appHistory": "NOT_SEND"
 			}
 		],
 		"account": null
