@@ -79,7 +79,7 @@ public class AccountBean extends WebBean implements CrudBean {
 	public String update() {
 		ModelController controller = super.getController();
 		controller.persist(model);
-		return PropertyBean.HOME;	
+		return PropertyBean.DETAILS;	
 	}
 
 	@Override
