@@ -36,7 +36,7 @@ public class LoginBean implements Serializable {
 	public void preRender(ComponentSystemEvent event){
 		this.username = "uli";
 		this.password = "uli";
-		login();
+		//login();
 	}
 
 	/**

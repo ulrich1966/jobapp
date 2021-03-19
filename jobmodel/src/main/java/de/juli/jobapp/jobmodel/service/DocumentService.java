@@ -42,7 +42,6 @@ public class DocumentService {
 	private static Path userHome;
 	private static Path userDir;
 	private static Path root;
-	private static Path docRoot;
 
 	public DocumentService() {
 		try {
@@ -51,17 +50,7 @@ public class DocumentService {
 			root = Paths.get(DocumentService.class.getResource("/").toURI());
 			userHome = Paths.get(System.getProperty("user.home"));
 			userDir = Paths.get(System.getProperty("user.dir"));
-			docRoot = userHome.resolve("job").resolve("docs");
-			if (!Files.exists(docRoot)) {
-				try {
-					Files.createDirectory(docRoot);
-				} catch (IOException e) {
-					LOG.error(e.getMessage());
-					String msg = String.format("Es konnte kein DocumentService erstellt werden\n mit dem Pfad %s stimmt was nicht", docRoot);
-					throw new DocumentServiceExeption(msg);
-				}
-			}
-			LOG.debug(String.format("root: %s\nuser.home: %s\nuser.dir: %s\njava.class.path: %s\ndocRoot: %s\nappRoot: %s", root, userHome, userDir, classes, docRoot, appRoot));
+			LOG.debug(String.format("root: %s\nuser.home: %s\nuser.dir: %s\njava.class.path: %s\nappRoot: %s", root, userHome, userDir, classes, appRoot));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
