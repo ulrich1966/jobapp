@@ -102,7 +102,7 @@ public class EditDataBean extends WebBean implements CrudBean {
 			e.printStackTrace();
 			FacesMessages.error(null, "Fehler beim speichern. Die Bewerbung konnte nicht gespeichert werden!");
 		}
-		return PropertyBean.EDIT;
+		return PropertyBean.DETAILS;
 	}
 	
 

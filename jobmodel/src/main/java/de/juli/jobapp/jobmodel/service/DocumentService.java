@@ -17,11 +17,6 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.artofsolving.jodconverter.DocumentConverter;
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
-
 import de.juli.docuworks.docuhandle.service.OpenOfficeFileService;
 import de.juli.docuworks.docuhandle.service.OpenOfficePdfService;
 import de.juli.docuworks.docuhandle.service.WebTemplatePdfService;
@@ -37,20 +32,15 @@ import de.juli.jobapp.jobmodel.model.Pdf;
 
 public class DocumentService {
 	private static final Logger LOG = LoggerFactory.getLogger(DocumentService.class);
-	private static String classes;
-	private static String appRoot;
-	private static Path userHome;
-	private static Path userDir;
-	private static Path root;
+	private static Path serverRoot;
 
+	/**
+	 * Setzt das Wurzelveeichniss (WEB-INF/classes) des aktuellen Servers 
+	 */
 	public DocumentService() {
 		try {
-			classes = System.getProperty("java.class.path");
-			appRoot = DocumentService.class.getResource("").toURI().toString();
-			root = Paths.get(DocumentService.class.getResource("/").toURI());
-			userHome = Paths.get(System.getProperty("user.home"));
-			userDir = Paths.get(System.getProperty("user.dir"));
-			LOG.debug(String.format("root: %s\nuser.home: %s\nuser.dir: %s\njava.class.path: %s\nappRoot: %s", root, userHome, userDir, classes, appRoot));
+			serverRoot = Paths.get(DocumentService.class.getResource("/").toURI());
+			LOG.debug("Serverroot: \n{}", serverRoot);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -68,6 +58,10 @@ public class DocumentService {
 		return model;
 	}
 
+	/**
+	 * Je nach dem welcher Dokumententyp vorligt bzw. erzeugt werden soll werden hier 
+	 * die entsprechenden Methoden zur Generiereung der Dokumente aufgerufen.  
+	 */
 	public Job createLetter(Job model) {
 		FileTyps key = FileTyps.fildByTypeName(model.getLetter().getExtension());
 		try {
@@ -95,6 +89,9 @@ public class DocumentService {
 		return model;
 	}
 	
+	/**
+	 * Die zu einer Bewerbung gehoerenden Dokumente / Ordner loeschen
+	 */
 	public Job delDocuments(Job model) throws IOException {
 		String localDocDir = model.getLocalDocDir();
 		try {
@@ -114,6 +111,10 @@ public class DocumentService {
 		return model;
 	}
 
+	/**
+	 * Erstellen des E-Mail Textes fuer die Bewerbung, wenn die Vorlage ein 
+	 * Text-Dokument ist. 
+	 */
 	public Job createEmail(Job model) throws IOException {
 		// Mail TXT generieren
 		String localDocDir = model.getLocalDocDir();
@@ -135,19 +136,14 @@ public class DocumentService {
 		return model;
 	}
 
+	/**
+	 * Der Bewergung den hinterlegten und ausgewaehlten Lebenslauf hinzufuegen 
+	 */
 	public Job createVita(Job model) {
 		model.getVita().setTarget(model.getVita().getTemplate());
 		return model;
 	}
 
-	private void createTxt(Job model) {
-		
-	}
-
-	private void createDoc(Job model) {
-		
-	}
-	
 	/**
 	 * Mit den Danten aus dem Job - Model wird ein ODT Dokumententemplate mit 
 	 * den Modeldaten gefuellt und ein neues ODT Dokument als Anschreiben erzeugt 
@@ -164,44 +160,6 @@ public class DocumentService {
 		model.getLetter().setTarget(target.toString());
 		return model;
 	}
-
-	@Deprecated
-	public Job createPdf(Job model) throws Exception {
-		ModelController contoller = new ModelController();
-		AppSetting setting = contoller.findFirst(AppSetting.class);
-		String companyName = model.getCompany().getName();
-		String source = model.getLetter().getTarget();
-		String target = String.format("%s\\%s.%s", model.getLocalDocDir(), "anschreiben", "pdf");
-
-		File inputFile = new File(source);
-		File outputFile = new File(target);
-
-		String cmd = String.format("%s\\%s", setting.getLibreOfficeHome(), setting.getCmd());
-
-		ProcessBuilder pb = new ProcessBuilder(cmd, "-headless", "-accept=\"socket,host=127.0.0.1,port=8100;urp;\"", "-nofirststartwizard");
-		Process process = pb.start();
-
-		OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
-		connection.connect();
-		DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
-		converter.convert(inputFile, outputFile);
-
-		if (connection.isConnected()) {
-			connection.disconnect();
-		}
-
-		process.destroy();
-		pb = null;
-
-		Pdf pdf = new Pdf();
-		pdf.setTarget(target);
-		pdf.setExtension("pdf");
-		pdf.setName(String.format("%s.%s", companyName, "pdf"));
-		
-		model.setPdf(pdf);
-
-		return model;
-	}
 	
 	/**
 	 * Eerzeugt eine PDF-Dokument ueber ein Thymleaf Template ueber
@@ -211,10 +169,15 @@ public class DocumentService {
 		WebTemplatePdfService service = new WebTemplatePdfService();
 		Path target = Paths.get(model.getLocalDocDir());
 		target = target.resolve("anschreiben.pdf");
-		target = service.generatePdf(map, target, root.resolve("templates/anschreiben.html"));
+		target = service.generatePdf(map, target, serverRoot.resolve("templates/anschreiben.html"));
 		return addPdf(model, target.toFile().toString());
 	}
 
+	/**
+	 * Ueber den OpenOfficePdfService das Anschreiben als PDF ueber das hinterlegte und ausgewaelte  
+	 * ODT-Template erzeugen. Die entsprechenden Pfade festlegen und zur Uebergabe dieser an das Model die
+	 * addPdf() Methode aufrufen.     
+	 */
 	public Job createOpenOfficePdf(Job model) {
 		OpenOfficePdfService service = new OpenOfficePdfService(OpenOfficePdfService.CreationVia.OPEN_OFFICE);
 		ModelController contoller = new ModelController();
@@ -240,6 +203,10 @@ public class DocumentService {
 		return addPdf(model, target);
 	}
 	
+	/**
+	 * Setzt im Model den Pfad zu dem generireten PDF-Dokument, damit er ueber das 
+	 * speichern im View-Controller fuer den aktuellen Job persiteirt werden kann.  
+	 */
 	private Job addPdf (Job model, String target) {
 		Pdf pdf = new Pdf();
 		pdf.setTarget(target);
@@ -249,6 +216,11 @@ public class DocumentService {
 		return model;
 	}
 
+	/**
+	 * Erzeugt den Unteroder, das als Ablage fuer die Bewerdbungsdateien geutzt werden soll,
+	 * der sich aus dem Benutzer und dem Firmennamen an den die Bewerbung gehen soll 
+	 * zusammensetzt.
+	 */
 	private void createDir(Path path) throws IOException {
 		if (Files.exists(path)) {
 			FileUtils.deleteDirectory(path.toFile());
@@ -256,6 +228,10 @@ public class DocumentService {
 		Files.createDirectories(path);
 	}
 
+	/**
+	 * Erzeugt eine Map mit den ganzen Daten fuer die Felder, die in der 
+	 * Bewerbung ersetzt werden sollen. 
+	 */
 	private Map<String, String> fillData(Job model) {
 		Map<String, String> data = new HashMap<>();
 		DayTimeConverter converter = new DayTimeConverter();
@@ -288,7 +264,24 @@ public class DocumentService {
 
 		return data;
 	}
+	
+	/**
+	 * Das Anschreiben der Bewerbgung als Text geneirieren 
+	 */
+	private void createTxt(Job model) {
+		
+	}
 
+	/**
+	 * Das Anschreiben der Bewerbgung als MS-Word Document generieren 
+	 */
+	private void createDoc(Job model) {
+		
+	}
+
+	/**
+	 * Das Anschreiben der Bewerbgung als MS-Word Docx generieren 
+	 */
 	@SuppressWarnings("unused")
 	private void createDocx(Document document) {}
 }
