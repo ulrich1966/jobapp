@@ -23,9 +23,10 @@ import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 
-public class MailSerrvice implements Runnable{
+public class MailSerrvice extends Thread{
 	private static final Logger LOG = LoggerFactory.getLogger(MailSerrvice.class);
 	private final Job currentJob;
+	private boolean success;
 	
 	public MailSerrvice(Account account, Map<String, Object> data, Job job) {
 		currentJob = job;
@@ -126,12 +127,17 @@ public class MailSerrvice implements Runnable{
 	@Override
 	public void run() {
 		LOG.info("Email sending STARTED");
+		success = false;
 		try {
-			sendAttatchmentMail();
-			//sendSimpleMail();
-		} catch (Exception e) {
+			success = sendAttatchmentMail();
+			LOG.info("Email sending successful: {}", success);
+		} catch (EmailException | IOException e) {
 			e.printStackTrace();
+			LOG.info("Email sending FAILED");
 		}
-		LOG.info("Email sending DONE");
+	}
+
+	public boolean isSuccess() {
+		return success;
 	}
 }

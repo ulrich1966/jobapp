@@ -62,25 +62,8 @@ public class ViewDataBean extends WebBean {
 					super.redirect(PropertyBean.APP_HOME);
 				}
 			}
-			switch (model.getStateLastEntry().getJobState()) {
-			case CREATED:
-				hasChanged = false;
-				break;
-			case UPDATED:
-				hasChanged = true;
-				break;
-			case READY_TO_PERSIST:
-				isNew = true;
-				break;
-			case DOC_CREATED:
-				docCreated = true;
-				break;
-			case DOC_DELETED:
-				docDeleted = true;
-				break;
-			default:
-				break;
-			}
+
+			settingStates(model.getStateLastEntry().getJobState());
 
 			if (model.getLocalDocDir() != null) {
 				dirExist = true;
@@ -95,7 +78,7 @@ public class ViewDataBean extends WebBean {
 		}
 
 		String msg = makeStateString();
-		addMsg(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg), "footer_msg");
+		super.addMsg(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg), "footer_msg");
 	}
 
 	/**
@@ -142,8 +125,8 @@ public class ViewDataBean extends WebBean {
 	public String deldocs() {
 		try {
 			service.delDocuments(model);
-			model.addState(new State(JobState.DOC_DELETED, null));
-			model.addHistory(new History(AppHistory.NOT_BUILD, "Die Dokumente wurden von Dir gel"+Uml.o_UML.getUchar()+"scht!"));
+			model.addState(new State(JobState.DOC_DELETED, "L" + Uml.o_UML.getUchar() + "schung durch Benutzer"));
+			model.addHistory(new History(AppHistory.NOT_BUILD, "Die Dokumente wurden von Dir gel" + Uml.o_UML.getUchar() + "scht!"));
 			model = super.getController().persist(model);
 		} catch (IOException e) {
 			LOG.error(e.getMessage());
@@ -166,7 +149,7 @@ public class ViewDataBean extends WebBean {
 			model = service.createEmail(model);
 			model = service.createVita(model);
 			model = service.createOpenOfficePdf(model);
-			model.addState(new State(JobState.DOC_CREATED, null));
+			model.addState(new State(JobState.DOC_CREATED, "Unterlagen zur Bewerbung wurden generiert"));
 			model.addHistory(new History(AppHistory.NOT_SEND, msg));
 			model = super.getController().persist(model);
 		} catch (Exception e) {
@@ -177,20 +160,34 @@ public class ViewDataBean extends WebBean {
 	}
 
 	/**
-	 * Schickt das Job-Objekt zum Versenden an den SendService und setzt des
-	 * Objekt frisch in die Session
+	 * Versenden der Unterlagen per E-MAil mit dem SendService. Ruf dort die
+	 * Methode send() auf die einen Thread startet und bei erfogreichem Versandt
+	 * success = true zurueckgibt. Generiert fuer die Ausgabe entsprechende
+	 * Erfolgs- oder Fehlermeldungen.
 	 */
 	public String send() {
 		SendService service = new SendService(model);
-		boolean success = service.send();
+		String msg = null;
+		boolean success = false;
+		try {
+			success = service.send();
+		} catch (InterruptedException e2) {
+			LOG.error("{}", e2.getMessage());
+			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Der E-Mail Versandt wurde unterbrochen!"));
+			success = false;
+		}
 		if (success) {
-			session.addContent(PropertyBean.CURRENT_JOB, this.model);
+			msg = String.format("Die Bewerbung an %s wurde verdandt", model.getCompany().getName());
+			model.addHistory(new History(AppHistory.SEND, msg));
+			model.addState(new State(JobState.SEND, msg));
+			model = super.getController().persist(model);
+			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
 		} else {
 			try {
 				throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
 			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
-				FacesMessages.error(null, "Fehler beim speichern. Eine gleichnamige Quelle existiert vermutlich bereits.");
+				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -204,10 +201,39 @@ public class ViewDataBean extends WebBean {
 	public String applytxt() {
 		return PropertyBean.TXT;
 	}
-	
+
 	/**
-	 * Bietet eine Uebersicht der aktuellen Satuse als String zur kontolle der 
-	 * Rednervorgaenge. Ist nur in der Entwicklungphase sinnvoll.  
+	 * Fummelt die Statuse aus dem Model um die Funktion (disabele Attribut) der Schaltflaechen zu setzen fuer eine 
+	 * sinnvolle Abfolge der Bewerbung  
+	 */
+	private void settingStates(JobState jobState) {
+		switch (jobState) {
+		case CREATED:
+			hasChanged = false;
+			break;
+		case UPDATED:
+			hasChanged = true;
+			break;
+		case READY_TO_PERSIST:
+			isNew = true;
+			break;
+		case DOC_CREATED:
+			docCreated = true;
+			break;
+		case SEND:
+			docCreated = true;
+			break;
+		case DOC_DELETED:
+			docDeleted = true;
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * Bietet eine Uebersicht der aktuellen Satuse als String zur kontolle der
+	 * Rednervorgaenge. Ist nur in der Entwicklungphase sinnvoll.
 	 */
 	private String makeStateString() {
 		StringBuilder sb = new StringBuilder();
@@ -226,6 +252,8 @@ public class ViewDataBean extends WebBean {
 		return sb.toString();
 	}
 
+	// ---------------------------Getter / Setter ----------------------------//
+	
 	public Job getModel() {
 		return model;
 	}

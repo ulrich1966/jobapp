@@ -17,7 +17,8 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.juli.docuworks.docuhandle.service.OpenOfficeFileService;
+import de.juli.docuworks.docuhandle.model.DocumentModel;
+import de.juli.docuworks.docuhandle.service.DocumentModelService;
 import de.juli.docuworks.docuhandle.service.OpenOfficePdfService;
 import de.juli.docuworks.docuhandle.service.WebTemplatePdfService;
 import de.juli.jobapp.jobmodel.controller.ModelController;
@@ -150,13 +151,16 @@ public class DocumentService {
 	 * und im Bewerbungsordner der Firma gespeichert.   
 	 */
 	private Job createOdt(Job model) throws Exception {
-		OpenOfficeFileService oof = new OpenOfficeFileService();
 		Map<String, String> data = fillData(model);
 		Path source = Paths.get(model.getLetter().getTemplate());
 		Path target = Paths.get(model.getLocalDocDir());
 		target = target.resolve(Paths.get("anschreiben" + ".odt"));
+		
 		LOG.debug("\n\t{}\n\tgoes to\n\t{}", source.toString(), target.toString());
-		oof.convert(source, target, data);
+		
+		DocumentModelService service = new DocumentModelService();
+		DocumentModel documentModel = new DocumentModel(source, target, data);
+		documentModel = service.convert(documentModel);		
 		model.getLetter().setTarget(target.toString());
 		return model;
 	}
