@@ -22,8 +22,8 @@
 			<!-- Firma -->
 
 			<b:row>
-				<b:column>
-					<div class="head">Firmendaten</div>
+				<b:column col-md="12">
+					<b:well style-class="head">Firmendaten</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
@@ -68,7 +68,7 @@
 
 			<b:row>
 				<b:column>
-					<div class="head">Kontakt</div>
+					<b:well style-class="head">Kontakt</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
@@ -76,8 +76,10 @@
 					<h:outputLabel styleClass="label" value="Name:" />
 				</b:column>
 				<b:column medium-screen="10">
-					<h:outputText value="#{data.model.company.contact.title.name}" />&nbsp;
-					<h:outputText value="#{data.model.company.contact.firstName}" />&nbsp;
+					<h:outputText value="#{data.model.company.contact.title.name}" />
+					&nbsp;
+					<h:outputText value="#{data.model.company.contact.firstName}" />
+					&nbsp;
 					<h:outputText value="#{data.model.company.contact.lastName}" />
 				</b:column>
 			</b:row>
@@ -108,7 +110,7 @@
 
 			<b:row>
 				<b:column style-class="center">
-					<div class="head">Bewerbung</div>
+					<b:well style-class="head">Bewerbung</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
@@ -132,7 +134,7 @@
 					<h:outputLabel styleClass="label" value="Angebotsdatum:" />
 				</b:column>
 				<b:column medium-screen="2">
-					<h:outputText value="#{data.model.jobAdDate}" converter="sqlDateConverter"/>
+					<h:outputText value="#{data.model.jobAdDate}" converter="sqlDateConverter" />
 				</b:column>
 				<b:column offset="1" medium-screen="7">
 					<h:outputLabel styleClass="label" value="Link:" />
@@ -153,7 +155,7 @@
 
 			<b:row>
 				<b:column style-class="center">
-					<div class="head">Verwaltung</div>
+					<b:well style-class="head">Verwaltung</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
@@ -172,7 +174,7 @@
 					<h:outputLabel styleClass="label" value="In Vorlege-Liste:" />
 				</b:column>
 				<b:column offset="1" medium-screen="2" style-class="green">
-					<h:outputText value="#{data.model.isListed}" converter="trueFalseConverter"/>
+					<h:outputText value="#{data.model.isListed}" converter="trueFalseConverter" />
 				</b:column>
 			</b:row>
 			<b:row>
@@ -193,12 +195,12 @@
 					<h:outputText value="#{data.model.localDocDir}" />
 				</b:column>
 			</b:row>
-			
+
 			<!--  Dokumentenerstellung -->
-			
+
 			<b:row>
 				<b:column style-class="center">
-					<div class="head">Vorlagen für die Dokumentenerstellung</div>
+					<b:well style-class="head">Vorlagen für die Dokumentenerstellung</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
@@ -227,14 +229,14 @@
 			</b:row>
 			<b:row>
 				<b:column style-class="center">
-					<div class="head">Pfade der erstellen Dokumente</div>
+					<b:well style-class="head">Pfade der erstellen Dokumente</b:well>
 				</b:column>
 			</b:row>
 			<b:row>
 				<b:column medium-screen="2">
 					<h:outputLabel styleClass="label" value="Anschreiben:" />
 				</b:column>
-				<b:column offset="1"	 medium-screen="9">
+				<b:column offset="1" medium-screen="9">
 					<h:outputText value="#{data.model.letter.target}" />
 				</b:column>
 			</b:row>
@@ -264,7 +266,7 @@
 			</b:row>
 
 			<!-- Commands -->
-			
+
 			<b:row style-class="cmd">
 				<b:form class="hidden-md hidden-sm hidden-xs">
 					<b:row style-class="cmd">

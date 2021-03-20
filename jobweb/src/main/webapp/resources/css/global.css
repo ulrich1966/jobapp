@@ -15,6 +15,13 @@ div .label {
 	letter-spacing: 0.13em;	
 }
 
+div .well {
+	min-height: 0;
+	background:  darkgray;
+	border: none;
+	padding: 0;
+}
+
 .jumbotron.dark td {
 	color: inherit;
 	font-size: 1em;
@@ -35,7 +42,6 @@ div .label {
 .jumbotron.dark tr a {
 	color: #337ab7;
 }
-
 
 /* Style by Override Boot Faces Class */
 
