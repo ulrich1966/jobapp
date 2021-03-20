@@ -271,35 +271,42 @@
 				<b:form class="hidden-md hidden-sm hidden-xs">
 					<b:row style-class="cmd">
 						<b:column medium-screen="2">
-							<b:commandButton value="Edit" action="#{data.edit}" look="success" />
+							<b:commandButton iconAwesome="fa-pencil" action="#{data.edit}" tooltip="Datensatz Bearbeiten" tooltip-delay-show="1000">
+								<f:facet name="tt">
+								</f:facet>
+							</b:commandButton>
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Speichern" action="#{data.save}" disabled="#{!data.isNew}" look="primary" />
+							<b:commandButton iconAwesome="fa-save" action="#{data.save}" disabled="#{!data.isNew}" tooltip="Datensatz speichern" tooltip-delay-show="1000"/>
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Datensatz löschen" action="#{data.delete}" look="danger" />
+							<b:commandButton iconAwesome="fa-eraser" action="#{data.delete}" tooltip="Datensatz Löeschen" tooltip-delay-show="1000" />
 						</b:column>
-						<b:column medium-screen="2">
-							<b:commandButton value="Verlauf ansehen" action="#{data.history}" look="default" />
+						<b:column medium-screen="2">		
+							<b:commandButton iconAwesome="fa-history" action="#{data.history}" tooltip="Verlauf ansehen" tooltip-delay-show="1000"/>
 						</b:column>
 					</b:row>
 					<b:row style-class="cmd">
 						<b:column medium-screen="2">
-							<b:commandButton value="Dokumente erstellen" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" look="info" />
+							<b:commandButton iconAwesome="fa-paperclip" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" tooltip="Dokumente erstellen" tooltip-delay-show="1000"/>
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Dokumente löschen" action="#{data.deldocs}" disabled="#{!data.dirExist}" look="warning" />
+							<b:commandButton iconAwesome="fa-trash" action="#{data.deldocs}" disabled="#{!data.dirExist}" tooltip="Dokumente löschen" tooltip-delay-show="1000"/>
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Bewerben" action="#{data.send}" disabled="#{!data.docCreated}" look="primary" />
+							<b:commandButton iconAwesome="fa-paper-plane" ajax="true" update="dlg-frm:id-dlg" oncomplete="$('.modal-dlg-pass').modal('show');" disabled="#{!data.docCreated}" tooltip="Bewerbung mit Unterlagen versenden" tooltip-delay-show="1000"/>
 						</b:column>
 						<b:column medium-screen="2">
-							<b:commandButton value="Text estellen" action="#{data.applytxt}" disabled="#{data.docCreated}" look="info" />
+							<b:commandButton iconAwesome="fa-file-pdf-o" disabled="#{data.docCreated}" tooltip="Text für die PDF Erstellung des Anschreiben eigeben" tooltip-delay-show="1000"/>
 						</b:column>
 					</b:row>
 				</b:form>
 			</b:row>
 		</b:jumbotron>
+		
+		<b:form id="dlg-frm">
+			<ui:include src="../frgm/email_pass_fgm.xhtml"></ui:include>
+		</b:form>
 	</ui:define>
 </ui:composition>
 

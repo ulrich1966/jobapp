@@ -166,7 +166,7 @@ public class ViewDataBean extends WebBean {
 	 * Erfolgs- oder Fehlermeldungen.
 	 */
 	public String send() {
-		SendService service = new SendService(model);
+		SendService service = new SendService(model, session.getMailUser(), session.getMailPass());
 		String msg = null;
 		boolean success = false;
 		try {

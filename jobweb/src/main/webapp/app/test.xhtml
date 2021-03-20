@@ -6,15 +6,46 @@
 	<h:outputStylesheet name="common-style.css" library="css" />
 	<h:outputStylesheet name="css/global.css" />
 	<title>Jobsuche</title>
+
 </h:head>
 <ui:composition template="/templates/layout.xhtml">
-
 	<ui:define name="content">
-		<f:event listener="#{test.test}" type="preRenderView" />
-		<h2>
-			Testseite für Versuche
-		</h2>
-		<b:messages globalOnly="true" id="msg" />
+		<b:form id="frm" prependId="false">
+			<b:modal id="id-dlg" class="modal-dlg-pass" title="Email Passwort" style-class="#{style.name} dialog">
+				<p style="font-weight: bold;">Für das Versenden der Bewerbung ist ein Passwort Deines E-Mail Accounts notwendig!</p>
+				<p>
+					E-Mail Konto: <span style="font-size: 1.2em; font-style: italic;">#{data.model.account.sender}</span>
+				</p>
+				<b:row style-class="cmd">
+					<b:column medium-screen="6">
+						<b:inputText class="imp-pass" id="id-imp-pass" size="100" value="#{data.session.mailPass}" type="password" tooltip="SMTP Passwort für Deinen E-Mail Accout">
+							<f:facet name="append">
+								<b:iconAwesome class="eye-cmd" value="fa-eye" ajax="true" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+				</b:row>
+				<f:facet name="footer">
+					<p>
+						Zu Deiner Sicherheit und aus Gründen des Datenschrutzes wird dies Passwort <span style="font-size: 1.2em; color: red">nicht</span> in der Datenbank gspeichert Es ist nur so lange gültig, wie Du hier eingelgt bis. Beim nächsten Login musst Du die Zugangsdaten also erneut eingeben!
+					</p>
+					<b:button icon-awesome="fa-close " dismiss="modal" onclick="return false;" tooltip="Nicht übernehmen und schließen" tooltip="Datensatz speichern" style-class="red" />
+					<b:button icon-awesome="fa-save" dismiss="modal" onclick="return false;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" style-class="red" />
+				</f:facet>
+
+				<script>
+					$(document).ready(function() {
+						switchPass();
+					});
+				</script>
+			</b:modal>
+			<b:jumbotron style-class="#{style.name}">
+				<f:event listener="#{test.test}" type="preRenderView" />
+				<h2>Testseite für Versuche</h2>
+				<b:messages globalOnly="true" id="msg" />
+				<b:commandButton look="primary" value="Ein Modalfenster öffenen" ajax="true" update="id-dlg" oncomplete="$('.modal-dlg-pass').modal('show');" />
+			</b:jumbotron>
+		</b:form>
 	</ui:define>
 </ui:composition>
 </html>

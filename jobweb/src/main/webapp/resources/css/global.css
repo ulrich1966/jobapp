@@ -2,6 +2,18 @@
 
 /* Style by Tag */
 
+
+.modal-content div{
+	background: #646363;
+	color: #fff;
+	font-size: 1em;
+}
+
+.modal-header {
+	letter-spacing: 0.45em;
+	text-align: center;
+}
+
 input, select {
 	font-size: 1em;
 	padding: 5px;
@@ -20,6 +32,11 @@ div .well {
 	background:  darkgray;
 	border: none;
 	padding: 0;
+}
+
+div .modal-footer {
+	word-wrap: normal;
+	text-align: left;
 }
 
 .jumbotron.dark td {
@@ -58,6 +75,10 @@ div .well {
 
 .green{
 	color: #5ebf5e;
+}
+
+.dark-green{
+	color: rgb(0, 64, 0);
 }
 
 .red{

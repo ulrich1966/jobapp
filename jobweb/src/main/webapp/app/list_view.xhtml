@@ -13,7 +13,11 @@
 					<h:outputText value="Liste der erstellten Bewergungen:" />
 				</b:column>
 			</b:row>
-			<b:container class="head">Moin <span class="red">#{list.count}</span> Jobs gefunden</b:container>
+			<b:row>
+				<b:column medium-screen="12">
+					<b:well class="head">Moin <span class="red">#{list.count}</span> Jobs gefunden</b:well>
+				</b:column>
+			</b:row>
 			<b:dataTable value="#{list.currentJobs.entrySet().toArray()}" var="model">
 				<f:facet name="header">
 					<tr>
@@ -32,19 +36,19 @@
 					<h:outputText value="#{model.value.state.timeStamp}" converter="dateConverter" />
 				</b:dataTableColumn>
 				<b:dataTableColumn>
-					<h:outputText styleClass="green" value="#{model.value.state.jobState.name}" />
+					<h:outputText styleClass="dark-green" value="#{model.value.state.jobState.name}" />
 				</b:dataTableColumn>
 				<b:dataTableColumn>
 					<h:form id="frm">
-						<b:commandLink value="Details" action="#{list.dataView}">
+						<b:commandLink action="#{list.dataView}" iconAwesome="fa-file-text-o" tooltip="Details ansehen" tooltip-delay-show="1000"> 
 							<f:param value="#{model.value.job.id}" name="id" />
 						</b:commandLink>
 						<br />
-						<b:commandLink value="Edit" action="#{list.dataEdit}">
+						<b:commandLink value="" action="#{list.dataEdit}" iconAwesome="fa-pencil" tooltip="Datensatz editieren" tooltip-delay-show="1000" >
 							<f:param value="#{model.value.job.id}" name="id" />
 						</b:commandLink>
 						<br />
-						<b:commandLink value="Verlauf" action="#{list.history}">
+						<b:commandLink value="" action="#{list.history}" iconAwesome="fa-history" tooltip="Velauf ansehen" tooltip-delay-show="1000">
 							<f:param value="#{model.value.job.id}" name="id" />
 						</b:commandLink>
 					</h:form>

@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -19,25 +18,28 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.controller.ModelController;
 import de.juli.jobapp.jobmodel.enums.AppHistory;
-import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.History;
 import de.juli.jobapp.jobmodel.model.Job;
 
 public class MailSerrvice extends Thread{
 	private static final Logger LOG = LoggerFactory.getLogger(MailSerrvice.class);
 	private final Job currentJob;
+	private final String mailUser;
+	private final String mailPass;
 	private boolean success;
 	
-	public MailSerrvice(Account account, Map<String, Object> data, Job job) {
+	public MailSerrvice(Job job, String mailUser, String mailPass) {
+		this.mailUser = mailUser;
+		this.mailPass = mailPass;
 		currentJob = job;
 	}
 
-	public String sendSimpleMail() throws EmailException {
+	public String sendSimpleMail(String mailUser, String mailPass) throws EmailException {
 		Email email = new SimpleEmail();
 		email.setHostName(currentJob.getAccount().getSmtp());
 		email.setSmtpPort(currentJob.getAccount().getPort());
 		email.setSSL(true);
-		email.setAuthenticator(new DefaultAuthenticator(currentJob.getAccount().getUser(), currentJob.getAccount().getSmtpPass()));
+		email.setAuthenticator(new DefaultAuthenticator(mailUser, mailPass));
 		email.setFrom(currentJob.getAccount().getSender());
 		email.setSubject("TestMail");
 		email.setMsg("Moin");
@@ -48,7 +50,7 @@ public class MailSerrvice extends Thread{
 		return null;
 	}
 
-	public boolean sendAttatchmentMail() throws EmailException, IOException {
+	public boolean sendAttatchmentMail(String mailUser, String mailPass) throws EmailException, IOException {
 		MultiPartEmail email = new MultiPartEmail();
 		EmailAttachment apply = new EmailAttachment();
 		EmailAttachment profil = new EmailAttachment();
@@ -93,7 +95,7 @@ public class MailSerrvice extends Thread{
 			email.setHostName(currentJob.getAccount().getSmtp());
 			email.setSmtpPort(currentJob.getAccount().getPort());
 			email.setSSL(true);
-			email.setAuthenticator(new DefaultAuthenticator(currentJob.getAccount().getUser(), currentJob.getAccount().getSmtpPass()));
+			email.setAuthenticator(new DefaultAuthenticator(mailUser, mailPass));
 			email.addTo(currentJob.getCompany().getContact().getEmail());
 			email.setFrom(currentJob.getAccount().getSender());
 			email.setSubject(currentJob.getTitle());
@@ -129,7 +131,7 @@ public class MailSerrvice extends Thread{
 		LOG.info("Email sending STARTED");
 		success = false;
 		try {
-			success = sendAttatchmentMail();
+			success = sendAttatchmentMail(this.mailUser, this.mailPass);
 			LOG.info("Email sending successful: {}", success);
 		} catch (EmailException | IOException e) {
 			e.printStackTrace();

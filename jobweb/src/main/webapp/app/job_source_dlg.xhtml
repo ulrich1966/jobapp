@@ -24,7 +24,7 @@
 					<b:commandButton value="Cancel" dismiss="modal" onclick="modal('hide');" class="btn btn-lg" />
 				</b:column>
 				<b:column medium-screen="4">
-					<h:commandButton value="Speichern" action="#{jobsource.save}" class="btn btn-lg btn-info" update="@form:id_source" />
+					<h:commandButton iconAwesome="fa-save" tooltip="Datensatz speichern" tooltip-delay-show="1000" action="#{jobsource.save}" class="btn btn-lg btn-info" update="@form:id_source" />
 				</b:column>
 			</b:row>
 		</table>

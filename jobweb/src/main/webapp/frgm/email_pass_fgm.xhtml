@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:composite="http://java.sun.com/jsf/composite" xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+ <ui:fragment>
+ 	<b:modal id="id-dlg" class="modal-dlg-pass" title="Email Passwort" style-class="#{style.name} dialog">
+				<p style="font-weight: bold;">Für das Versenden der Bewerbung ist ein Passwort Deines E-Mail Accounts notwendig!</p>
+				<p>
+					E-Mail Konto: <span style="font-size: 1.2em; font-style: italic;">#{data.model.account.sender}</span>
+				</p>
+				<b:row>
+					<b:column medium-screen="6">
+						<b:inputText size="100" type="text" value="#{data.session.mailUser}" placeholder="#{data.model.account.sender}" tooltip="Benutzername Deines E-Mail Accouts" tooltip-delay-show="1000" />
+					</b:column>
+				</b:row>
+				<b:row style-class="cmd">
+					<b:column medium-screen="6">
+						<b:inputText class="imp-pass" id="id-imp-pass" size="100" value="#{data.session.mailPass}" type="password" tooltip="SMTP Passwort für Deinen E-Mail Accout" tooltip-delay-show="1000">
+							<f:facet name="append">
+								<b:iconAwesome class="eye-cmd" value="fa-eye" ajax="true" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+				</b:row>
+				<f:facet name="footer">
+					<p>
+						Zu Deiner Sicherheit und aus Gründen des Datenschrutzes wird dies Passwort <span style="font-size: 1.2em; color: red">nicht</span> in der Datenbank gspeichert Es ist nur so lange gültig, wie Du hier eingelgt bis. Beim nächsten Login musst Du die Zugangsdaten also erneut eingeben!
+					</p>
+					<b:button icon-awesome="fa-close" dismiss="modal" onclick="return false;" tooltip="Nicht übernehmen und schließen" tooltip-delay-show="1000" style-class="red" />
+					<b:commandButton icon-awesome="fa-save" action="#{data.send}" dismiss="modal" onclick="return false;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" style-class="red" />
+				</f:facet>
+
+				<script>
+					$(document).ready(function() {
+						switchPass();
+					});
+				</script>
+			</b:modal>
+ </ui:fragment>
+
+</html>

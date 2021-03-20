@@ -95,19 +95,18 @@
 				</b:row>
 				<b:row>
 					<b:column medium-screen="2">
-						<h:outputLabel styleClass="label" value="Email-Port:" />
-					</b:column>
-					<b:column medium-screen="6">
-						<b:inputText size="100" value="#{account.model.port}" />
-					</b:column>
-				</b:row>
-
-				<b:row>
-					<b:column medium-screen="2">
 						<h:outputLabel styleClass="label" value="Cloud-link:" />
 					</b:column>
 					<b:column medium-screen="6">
 						<b:inputText size="100" value="#{account.model.profillink}" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputLabel styleClass="label" value="Email-Port:" />
+					</b:column>
+					<b:column medium-screen="6">
+						<b:inputText size="100" value="#{account.model.port}" />
 					</b:column>
 				</b:row>
 
@@ -145,18 +144,18 @@
 						<h:outputLabel styleClass="label" value="E-Mail Pass:" />
 					</b:column>
 					<b:column medium-screen="6">
-						<b:inputSecret size="100" value="#{account.model.smtpPass}" />
+						<b:inputText size="100" value="Wird individuel abgefrag" disabled="true" tooltip="Das Passwort für den SMPT Server wird nicht in der Datenbak bespeichert und muss individuell eingegeben werden" tooltip-delay-show="1000"/>
 					</b:column>
 				</b:row>
 				
 				<!-- Comands -->
 				
 				<b:row style-class="cmd">
-					<b:column offset="2" medium-screen="2">
-						<b:commandButton value="Speichern" action="#{account.update}" look="primary" />
+					<b:column offset="2" medium-screen="1">
+						<b:commandButton iconAwesome="fa-save" tooltip="Datensatz speichern" tooltip-delay-show="1000" action="#{account.update}"  />
 					</b:column>
-					<b:column medium-screen="2">
-						<b:commandButton value="Neu" action="#{account.create}" look="info" />
+					<b:column medium-screen="1">
+						<b:commandButton iconAwesome="fa-pencil-square-o " action="#{account.create}" tooltip="Neuen Datensatz anlegen" tooltip-delay-show="1000"/>
 					</b:column>
 				</b:row>
 			</h:form>

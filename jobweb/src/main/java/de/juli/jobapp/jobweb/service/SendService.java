@@ -23,7 +23,7 @@ public class SendService {
 	 * Costructor konfiguriert den MailService und setzt E-Mail- Empfaenger und
 	 * Sender
 	 */
-	public SendService(Job job) {
+	public SendService(Job job, String mailUser, String mailPass) {
 		Map<String, Object> data = new HashMap<>();
 		List<String> recipients = new ArrayList<>();
 		Account acc = job.getAccount();
@@ -31,7 +31,7 @@ public class SendService {
 		String resip = job.getCompany().getContact().getEmail();
 		recipients.add(resip);
 		recipients.add(acc.getSender());
-		service = new MailSerrvice(acc, data, job);
+		service = new MailSerrvice(job, mailUser, mailPass);
 	}
 
 	/**
