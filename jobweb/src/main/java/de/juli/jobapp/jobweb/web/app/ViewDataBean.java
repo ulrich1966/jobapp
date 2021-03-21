@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
@@ -36,6 +37,10 @@ public class ViewDataBean extends WebBean {
 	private Boolean isNew = false;
 	private Boolean dirExist = false;
 	private Boolean hasTaplates = false;
+	private Boolean readyToSend = false;
+	private String modal;
+	private String mailUser;
+	private String mailPass;
 	private Job model;
 
 	public ViewDataBean() {
@@ -79,6 +84,21 @@ public class ViewDataBean extends WebBean {
 
 		String msg = makeStateString();
 		super.addMsg(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg), "footer_msg");
+	}
+	
+
+	/**
+	 * Bevor die View geraendert wird soll geprueft werden, ob der Benutzer bereits Zugangsdaten fuer den SMPT E-Mail Versandt 
+	 * hinterlegt hat, um ggf. den Modal-Dialog zu rendern.
+	 */
+	public void preRender(ComponentSystemEvent event) {
+		super.preRender(event);
+		if(null == super.session.getContent(PropertyBean.MAIL_USER) || null == super.session.getContent(PropertyBean.MAIL_PASS)) {
+			modal = "show";
+		} else {
+			this.mailUser = super.session.getContentAsString(PropertyBean.MAIL_USER);
+			this.mailPass = super.session.getContentAsString(PropertyBean.MAIL_PASS);
+		}
 	}
 
 	/**
@@ -166,17 +186,30 @@ public class ViewDataBean extends WebBean {
 	 * Ist die Mail erfolgreich versendet wird der Status als Versendet gesetze und das aktuelle Job-Objekt persistiert. 
 	 * Generiert fuer die Ausgabe entsprechende Erfolgs- oder Fehlermeldungen und setzt bei einem Fehler SMPT Zugansdaten zurueck. 
 	 */
-	public String send() {
-
-		if(null == session.getMailUser() || null == session.getMailPass()) {
-			session.setMailUser(session.getAccount().getSender());
+	public String sendMail() {
+		if(null == this.mailUser) {
+			this.mailUser = super.session.getAccount().getSender();
 			return "";
 		}
 		
-		SendService service = new SendService(model, session.getMailUser(), session.getMailPass());
+		if(null != this.mailUser) {
+			super.session.addContent(PropertyBean.MAIL_USER, this.mailUser);						
+		} else {
+			LOG.error("Der E-Mail SMPT Benutzername fehlt nocht!");
+			return "";
+		}
+		
+		if(null != this.mailPass) {
+			super.session.addContent(PropertyBean.MAIL_PASS, this.mailPass);			
+		} else {
+			LOG.error("Das E-Mail SMPT Passwort fehlt nocht!");
+			return "";			
+		}
+		
 		String msg = null;
 		boolean success = false;
 		try {
+			SendService service = new SendService(model, super.session.getContentAsString(PropertyBean.MAIL_USER), super.session.getContentAsString(PropertyBean.MAIL_PASS));
 			success = service.send();
 			model.addHistory(new History(AppHistory.SEND));
 			super.getController().update(model);
@@ -197,8 +230,8 @@ public class ViewDataBean extends WebBean {
 			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
 				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
-				session.setMailUser(null);				
-				session.setMailPass(null);				
+				session.removContent(PropertyBean.MAIL_USER);				
+				session.removContent(PropertyBean.MAIL_PASS);				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -230,9 +263,10 @@ public class ViewDataBean extends WebBean {
 			break;
 		case DOC_CREATED:
 			docCreated = true;
+			readyToSend = true;
 			break;
 		case SEND:
-			docCreated = true;
+			readyToSend = false;
 			break;
 		case DOC_DELETED:
 			docDeleted = true;
@@ -291,5 +325,29 @@ public class ViewDataBean extends WebBean {
 
 	public Boolean getHasTaplates() {
 		return hasTaplates;
+	}
+
+	public String getModal() {
+		return modal;
+	}
+
+	public String getMailUser() {
+		return mailUser;
+	}
+
+	public void setMailUser(String mailUser) {
+		this.mailUser = mailUser;
+	}
+
+	public String getMailPass() {
+		return mailPass;
+	}
+
+	public void setMailPass(String mailPass) {
+		this.mailPass = mailPass;
+	}
+
+	public Boolean getReadyToSend() {
+		return readyToSend;
 	}
 }

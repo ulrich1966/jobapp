@@ -40,8 +40,6 @@ public class Session implements Serializable {
 	private Path root;
 	private String dbUser;
 	private String dataBase;
-	private String mailPass;
-	private String mailUser;
 	
 	public Session(){
 		init++;
@@ -69,7 +67,7 @@ public class Session implements Serializable {
 	 */
 	public void logOut() {
 		login = false;
-		sessionContent.remove(PropertyBean.ACCOUNT);
+		sessionContent.clear();
 	}
 	
 	/**
@@ -223,22 +221,4 @@ public class Session implements Serializable {
 	public void setMessageList(List<FacesMessage> msg) {
 		this.messageList = msg;
 	}
-
-	public String getMailPass() {
-		return mailPass;
-	}
-
-	public void setMailPass(String mailPass) {
-		this.mailPass = mailPass;
-	}
-
-	public String getMailUser() {
-		return mailUser;
-	}
-
-	public void setMailUser(String mailUser) {
-		this.mailUser = mailUser;
-	}
-	
-	
 }

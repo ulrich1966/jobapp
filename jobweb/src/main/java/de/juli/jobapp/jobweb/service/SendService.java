@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Job;
+import de.juli.jobapp.jobweb.exeptions.NoCredtialsExeption;
 
 /**
  * Streuert das Versenden der E-Mails
@@ -20,14 +21,23 @@ public class SendService {
 	 * Costructor konfiguriert den MailService und setzt E-Mail- Empfaenger und
 	 * Sender
 	 */
-	public SendService(Job job, String mailUser, String mailPass) {
-		List<String> recipients = new ArrayList<>();
-		Account acc = job.getAccount();
+	public SendService(Job model, String mailUser, String mailPass) throws NoCredtialsExeption {
+		
+		if(null == mailUser) {
+			throw new NoCredtialsExeption("Du hast keinen Benutzer fuer den SMPT E-Mail Versandt");
+		}
 
-		String resip = job.getCompany().getContact().getEmail();
+		if(null == mailPass) {
+			throw new NoCredtialsExeption("Du hast keinen Passwort fuer den SMPT E-Mail Versandt");
+		}
+		
+		List<String> recipients = new ArrayList<>();
+		Account acc = model.getAccount();
+
+		String resip = model.getCompany().getContact().getEmail();
 		recipients.add(resip);
 		recipients.add(acc.getSender());
-		service = new MailSerrvice(job, mailUser, mailPass);
+		service = new MailSerrvice(model, mailUser, mailPass);
 	}
 
 	/**

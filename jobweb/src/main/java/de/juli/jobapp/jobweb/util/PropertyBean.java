@@ -26,4 +26,6 @@ public class PropertyBean {
 	public static final String CURRENT_JOB = "currentJob"; 
 	public static final String LOGIN_NAME = "loginName";
 	public static final String ACCOUNT = "account"; 
+	public static final String MAIL_USER = "mailUser"; 
+	public static final String MAIL_PASS = "mailPass"; 
 }

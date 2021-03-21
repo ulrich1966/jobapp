@@ -10,12 +10,12 @@
 		</p>
 		<b:row>
 			<b:column medium-screen="6">
-				<b:inputText size="100" type="text" value="#{data.session.mailUser}" placeholder="#{data.model.account.sender}" tooltip="Benutzername Deines E-Mail Accouts" tooltip-delay-show="1000" />
+				<b:inputText size="100" type="text" value="#{data.mailUser}" placeholder="#{data.model.account.sender}" tooltip="Benutzername Deines E-Mail Accouts" tooltip-delay-show="1000" />
 			</b:column>
 		</b:row>
 		<b:row style-class="cmd">
 			<b:column medium-screen="6">
-				<b:inputText class="imp-pass" id="id-imp-pass" size="100" value="#{data.session.mailPass}" type="password" tooltip="SMTP Passwort für Deinen E-Mail Accout" tooltip-delay-show="1000">
+				<b:inputText class="imp-pass" id="id-imp-pass" size="100" value="#{data.mailPass}" type="password" tooltip="SMTP Passwort für Deinen E-Mail Accout" tooltip-delay-show="1000">
 					<f:facet name="append">
 						<b:iconAwesome class="eye-cmd" value="fa-eye" ajax="true" />
 					</f:facet>
@@ -27,7 +27,7 @@
 				Zu Deiner Sicherheit und aus Gründen des Datenschrutzes wird dies Passwort <span style="font-size: 1.2em; color: red">nicht</span> in der Datenbank gspeichert Es ist nur so lange gültig, wie Du hier eingelgt bis. Beim nächsten Login musst Du die Zugangsdaten also erneut eingeben!
 			</p>
 			<b:button icon-awesome="fa-close" dismiss="modal" onclick="return false;" tooltip="Nicht übernehmen und schließen" tooltip-delay-show="1000" />
-			<b:commandButton action="#{data.send}" icon-awesome="fa-save" dismiss="modal" onclick="return true;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" />
+			<b:commandButton action="#{data.sendMail}" icon-awesome="fa-save" dismiss="modal" onclick="return true;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" />
 		</f:facet>
 	
 		<script>
