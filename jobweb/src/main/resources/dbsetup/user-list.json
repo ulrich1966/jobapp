@@ -8,10 +8,10 @@
 		"pass": "DD55CEC2CE59ACA4E6647DCFBC90DC27",
 		"port": 587,
 		"user": "user",
-		"sender": "ulrich.kloodt@gmx.de",
+		"sender": "job4uli@web.de",
 		"smtpPass": "geheimes password",
 		"profillink": "not set",
-		"smtp": "mail.gmx.net",
+		"smtp": "smtp.web.de",
 		"styleTheme": "dark",
 		"jobs": null,
 		"address": {
@@ -25,7 +25,7 @@
 			"zip": 28203,
 			"city": "Bremen",
 			"phone": "01111 22334455",
-			"mail": "hein.mück@gmx.de"
+			"mail": "job4uli@web.de"
 		}
 	},
 	{
@@ -37,10 +37,10 @@
 		"pass": "DD55CEC2CE59ACA4E6647DCFBC90DC27",
 		"port": 587,
 		"user": "admin",
-		"sender": "post2uli@gmx.de",
+		"sender": "not set",
 		"smtpPass": "geheimes password",
 		"profillink": "not set",
-		"smtp": "mail.gmx.net",
+		"smtp": "not set",
 		"styleTheme": "dark",
 		"jobs": null,
 		"address": {
@@ -54,7 +54,7 @@
 			"zip": 28203,
 			"city": "Bremen",
 			"phone": "01111 22334455",
-			"mail": "hein.mück@gmx.de"
+			"mail": "job4uli@web.de"
 		}
 	}
 ]

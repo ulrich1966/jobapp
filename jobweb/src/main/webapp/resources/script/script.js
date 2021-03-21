@@ -2,7 +2,7 @@
  * 
  */
 function moin() {
-	alert('Moin!');
+	console.log("moin");
 }
 
 function switchPass() {

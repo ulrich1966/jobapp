@@ -46,12 +46,12 @@
 		<param-value>5</param-value>
 	</context-param>
 	<context-param>
-		<!-- XML Kommentare ind den Seiten sollen nicht geraendert werden -->
+		<!-- XML Kommentare in den Seiten sollen nicht geraendert werden -->
 		<param-name>javax.faces.FACELETS_SKIPCOMMENTS</param-name>
 		<param-value>true</param-value>
 	</context-param>
 	<context-param>
-		<!-- XML Kommentare ind den Seiten sollen nicht geraendert werden -->
+		<!-- Projektstatus -->
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>

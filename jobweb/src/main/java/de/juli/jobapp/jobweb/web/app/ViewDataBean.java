@@ -158,20 +158,29 @@ public class ViewDataBean extends WebBean {
 		}
 		return PropertyBean.DETAILS;
 	}
-
+	
 	/**
-	 * Versenden der Unterlagen per E-MAil mit dem SendService. Ruf dort die
-	 * Methode send() auf die einen Thread startet und bei erfogreichem Versandt
-	 * success = true zurueckgibt. Generiert fuer die Ausgabe entsprechende
-	 * Erfolgs- oder Fehlermeldungen.
+	 * Fuer den Versand der E-Mail sind valide Zugangsdaten fuer den SMPT Server notwendig, die zuvor Gesetzt werden muessen.
+	 * Ist dieses geschehen werden die Unterlagen per E-MAil mit dem SendService versandt ueber den Aufruf der Methode send().
+	 * Diese staretet  einen Thread und bei erfogreichem Versandt liefert sie success = true zurueck oder bei Misserfolg false. 
+	 * Ist die Mail erfolgreich versendet wird der Status als Versendet gesetze und das aktuelle Job-Objekt persistiert. 
+	 * Generiert fuer die Ausgabe entsprechende Erfolgs- oder Fehlermeldungen und setzt bei einem Fehler SMPT Zugansdaten zurueck. 
 	 */
 	public String send() {
+
+		if(null == session.getMailUser() || null == session.getMailPass()) {
+			session.setMailUser(session.getAccount().getSender());
+			return "";
+		}
+		
 		SendService service = new SendService(model, session.getMailUser(), session.getMailPass());
 		String msg = null;
 		boolean success = false;
 		try {
 			success = service.send();
-		} catch (InterruptedException e2) {
+			model.addHistory(new History(AppHistory.SEND));
+			super.getController().update(model);
+		} catch (Exception e2) {
 			LOG.error("{}", e2.getMessage());
 			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Der E-Mail Versandt wurde unterbrochen!"));
 			success = false;
@@ -188,6 +197,8 @@ public class ViewDataBean extends WebBean {
 			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
 				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
+				session.setMailUser(null);				
+				session.setMailPass(null);				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -198,7 +209,7 @@ public class ViewDataBean extends WebBean {
 	/**
 	 * Leitet zum Erstellen eines Bewerbungstextes weiter
 	 */
-	public String applytxt() {
+	public String applyTxt4Pdf() {
 		return PropertyBean.TXT;
 	}
 

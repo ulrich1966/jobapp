@@ -1,16 +1,13 @@
 package de.juli.jobapp.jobweb.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Job;
-import de.juli.jobapp.jobmodel.service.MailSerrvice;
 
 /**
  * Streuert das Versenden der E-Mails
@@ -24,7 +21,6 @@ public class SendService {
 	 * Sender
 	 */
 	public SendService(Job job, String mailUser, String mailPass) {
-		Map<String, Object> data = new HashMap<>();
 		List<String> recipients = new ArrayList<>();
 		Account acc = job.getAccount();
 
@@ -39,9 +35,9 @@ public class SendService {
 	 * Gibt die Statusmeldung true, wenn allles gut gegangen oder false,
 	 * wenn was scheif gelaufen ist zurueck.
 	 */
-	public boolean send() throws InterruptedException {
+	public boolean send() throws Exception {
 		service.start();
-		service.join();
+		service.join(10000);
 		if (!service.isAlive()) {
 			LOG.debug("Der E-Mail Versandt ist beendet!");
 		} 
