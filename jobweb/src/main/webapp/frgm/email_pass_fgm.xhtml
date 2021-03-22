@@ -27,7 +27,7 @@
 				Zu Deiner Sicherheit und aus Gründen des Datenschrutzes wird dies Passwort <span style="font-size: 1.2em; color: red">nicht</span> in der Datenbank gspeichert Es ist nur so lange gültig, wie Du hier eingelgt bis. Beim nächsten Login musst Du die Zugangsdaten also erneut eingeben!
 			</p>
 			<b:button icon-awesome="fa-close" dismiss="modal" onclick="return false;" tooltip="Nicht übernehmen und schließen" tooltip-delay-show="1000" />
-			<b:commandButton action="#{data.sendMail}" icon-awesome="fa-save" dismiss="modal" onclick="return true;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" />
+			<b:commandButton action="#{data.doModal}" icon-awesome="fa-save" dismiss="modal" onclick="return true;" tooltip="Passwort übernehmen und Bewerbung absenden" tooltip-delay-show="1000" />
 		</f:facet>
 	
 		<script>

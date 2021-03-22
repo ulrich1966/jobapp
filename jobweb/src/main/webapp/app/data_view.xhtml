@@ -283,10 +283,8 @@
 						<b:column medium-screen="1">
 							<b:commandButton iconAwesome="fa-history" action="#{data.history}" tooltip="Verlauf ansehen" tooltip-delay-show="1000" />
 						</b:column>
-					</b:row>
-					<b:row style-class="cmd">
-						<b:column offset="2" medium-screen="1">
-							<b:commandButton iconAwesome="fa-paperclip" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" tooltip="Dokumente erstellen" tooltip-delay-show="1000" />
+						<b:column medium-screen="1">
+							<b:commandButton iconAwesome="fa-paperclip" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" tooltip="Dokumente erstellen, die als Text bzw. Anhänge dienen sollen" tooltip-delay-show="1000" />
 						</b:column>
 						<b:column medium-screen="1">
 							<b:commandButton iconAwesome="fa-trash" action="#{data.deldocs}" disabled="#{!data.dirExist}" tooltip="Dokumente löschen" tooltip-delay-show="1000" />

@@ -38,6 +38,7 @@ public class ViewDataBean extends WebBean {
 	private Boolean dirExist = false;
 	private Boolean hasTaplates = false;
 	private Boolean readyToSend = false;
+	private Boolean hasMailCredentials = false;
 	private String modal;
 	private String mailUser;
 	private String mailPass;
@@ -89,16 +90,14 @@ public class ViewDataBean extends WebBean {
 
 	/**
 	 * Bevor die View geraendert wird soll geprueft werden, ob der Benutzer bereits Zugangsdaten fuer den SMPT E-Mail Versandt 
-	 * hinterlegt hat, um ggf. den Modal-Dialog zu rendern.
+	 * hinterlegt hat, um ggf. den Modal-Dialog zu rendern. Wenn es noch keine Zugangsdaten in der Session gibt, dann wird die 
+	 * Account E-Mail als Usermen als Vorschlag in den mailUser gesetzt, Modal wird auf 'show' gesetzt, damit der Modal-Dialog 
+	 * angezeigt wird. HasMail ist dann 'false' damit sendMail ohne Verdand returniert. Sind die Zugangsdaten gesezt, werden 
+	 * die entsprechenden Klassenvariablen gesetzt und hasMail ist 'true', damit in sendMail die Mail versandt wird. 
 	 */
 	public void preRender(ComponentSystemEvent event) {
 		super.preRender(event);
-		if(null == super.session.getContent(PropertyBean.MAIL_USER) || null == super.session.getContent(PropertyBean.MAIL_PASS)) {
-			modal = "show";
-		} else {
-			this.mailUser = super.session.getContentAsString(PropertyBean.MAIL_USER);
-			this.mailPass = super.session.getContentAsString(PropertyBean.MAIL_PASS);
-		}
+		this.hasMailCredentials = checkCredentials();
 	}
 
 	/**
@@ -178,64 +177,62 @@ public class ViewDataBean extends WebBean {
 		}
 		return PropertyBean.DETAILS;
 	}
+
+	/**
+	 * Uebernahme der Eingaben aus dem Modal-Dialog und weiterleitung zu sendMail, um die Mail abzusenden.
+	 * Sind die Credentials nicht gesetzt wird der Modal-Dialog ohne Aktionen geschlossen.   
+	 */
+	public String doModal() {
+		if(null != this.mailUser && null != this.mailPass) {
+			super.session.addContent(PropertyBean.MAIL_USER, this.mailUser);						
+			super.session.addContent(PropertyBean.MAIL_PASS, this.mailPass);
+			return sendMail();
+		}
+		return "";
+	}
 	
 	/**
 	 * Fuer den Versand der E-Mail sind valide Zugangsdaten fuer den SMPT Server notwendig, die zuvor Gesetzt werden muessen.
-	 * Ist dieses geschehen werden die Unterlagen per E-MAil mit dem SendService versandt ueber den Aufruf der Methode send().
-	 * Diese staretet  einen Thread und bei erfogreichem Versandt liefert sie success = true zurueck oder bei Misserfolg false. 
+	 * Ist dieses geschehen werden die Unterlagen per E-Mail mit dem SendService versandt ueber den Aufruf der Methode send().
+	 * Diese staretet einen Thread und bei erfogreichem Versandt liefert sie success = true zurueck oder bei Misserfolg false. 
 	 * Ist die Mail erfolgreich versendet wird der Status als Versendet gesetze und das aktuelle Job-Objekt persistiert. 
 	 * Generiert fuer die Ausgabe entsprechende Erfolgs- oder Fehlermeldungen und setzt bei einem Fehler SMPT Zugansdaten zurueck. 
 	 */
 	public String sendMail() {
-		if(null == this.mailUser) {
-			this.mailUser = super.session.getAccount().getSender();
+		if(!checkCredentials()) {
 			return "";
-		}
+		}		
 		
-		if(null != this.mailUser) {
-			super.session.addContent(PropertyBean.MAIL_USER, this.mailUser);						
-		} else {
-			LOG.error("Der E-Mail SMPT Benutzername fehlt nocht!");
-			return "";
-		}
-		
-		if(null != this.mailPass) {
-			super.session.addContent(PropertyBean.MAIL_PASS, this.mailPass);			
-		} else {
-			LOG.error("Das E-Mail SMPT Passwort fehlt nocht!");
-			return "";			
-		}
-		
-		String msg = null;
-		boolean success = false;
 		try {
-			SendService service = new SendService(model, super.session.getContentAsString(PropertyBean.MAIL_USER), super.session.getContentAsString(PropertyBean.MAIL_PASS));
+			String msg = null;
+			boolean success = false;
+			SendService service = new SendService(model, this.mailUser, this.mailPass);
 			success = service.send();
-			model.addHistory(new History(AppHistory.SEND));
-			super.getController().update(model);
+
+			if (success) {
+				msg = String.format("Die Bewerbung an %s wurde verdandt", model.getCompany().getName());
+				model.addHistory(new History(AppHistory.SEND, msg));
+				model.addState(new State(JobState.SEND, msg));
+				model = super.getController().persist(model);
+				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
+			} else {
+				try {
+					throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
+				} catch (ShitHappendsExeption e) {
+					LOG.error(e.getMessage());
+					session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
+					session.removContent(PropertyBean.MAIL_USER);				
+					session.removContent(PropertyBean.MAIL_PASS);				
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			
 		} catch (Exception e2) {
 			LOG.error("{}", e2.getMessage());
 			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Der E-Mail Versandt wurde unterbrochen!"));
-			success = false;
 		}
-		if (success) {
-			msg = String.format("Die Bewerbung an %s wurde verdandt", model.getCompany().getName());
-			model.addHistory(new History(AppHistory.SEND, msg));
-			model.addState(new State(JobState.SEND, msg));
-			model = super.getController().persist(model);
-			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
-		} else {
-			try {
-				throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
-			} catch (ShitHappendsExeption e) {
-				LOG.error(e.getMessage());
-				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
-				session.removContent(PropertyBean.MAIL_USER);				
-				session.removContent(PropertyBean.MAIL_PASS);				
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
+		
 		return PropertyBean.DETAILS;
 	}
 
@@ -244,6 +241,21 @@ public class ViewDataBean extends WebBean {
 	 */
 	public String applyTxt4Pdf() {
 		return PropertyBean.TXT;
+	}
+
+	private Boolean checkCredentials() {
+		boolean cred = false;
+		if(null == super.session.getContent(PropertyBean.MAIL_USER) || null == super.session.getContent(PropertyBean.MAIL_PASS)) {
+			modal = "show";
+			this.mailUser = super.session.getAccount().getSender();
+			cred = false;
+		} else {
+			this.mailUser = super.session.getContentAsString(PropertyBean.MAIL_USER);
+			this.mailPass = super.session.getContentAsString(PropertyBean.MAIL_PASS);
+			modal = null;
+			cred = true;
+		}
+		return cred;
 	}
 
 	/**
