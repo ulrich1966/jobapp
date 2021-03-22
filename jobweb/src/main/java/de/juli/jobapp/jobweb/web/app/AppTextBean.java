@@ -22,19 +22,19 @@ import de.juli.jobapp.jobmodel.model.Account;
 import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobmodel.service.DocumentService;
+import de.juli.jobapp.jobmodel.util.AppProperties;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
 import net.bootsfaces.utils.FacesMessages;
 
 /**
- *  
+ * Controller zur Erzeugung eines PDF-Anschreibens in der View via Formular. 
  */
 @Named("apptext")
 @RequestScoped
 public class AppTextBean extends WebBean {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(AppTextBean.class);
-	private Map<String, String> txtMap = new HashMap<>(); 
 	private Job model;
 	private Account account;
 	private String txt;
@@ -62,6 +62,63 @@ public class AppTextBean extends WebBean {
 		}
 	}
 	
+	/**
+	 * Pruefung ob es bereits eien Zielpfad im Job-Objekt gibt und ggf. diesen setzen. Den individuellen Anschreibentext als PDF generieren lassen
+	 * und Bewerbungstext fuer die aktuelle Bewerbung uebernehmen und persitieren.  
+	 */
+	public String save() {
+		if(null == model.getLocalDocDir() || !model.getLocalDocDir().isEmpty()) {
+			String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
+			model.setLocalDocDir(targetPath);			
+		}
+		try {
+			model = getDocumentService().createRootDir(model);
+		} catch (IOException e) {
+			LOG.error(e.getMessage());
+		}
+		model = getDocumentService().createWebTemplatePdf(mapifyValues(), model, AppProperties.getInstance(AppProperties.CONFIG_PROP).propertyFind("thymeleaf.template"));	
+		try {
+			model.addState(new State(JobState.PDF_CREATED));
+			model = super.getController().persist(model);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			FacesMessages.error(null, "Fehler beim speichern.");
+		}
+
+		return PropertyBean.DETAILS;
+	}
+
+	/**
+	 * Leitet auf die Detail-View weiter  
+	 */
+	public String details() {
+		return PropertyBean.DETAILS;
+	}
+
+	/**
+	 * Die fuer die PDF-Erzeugung notwendigen Daten aus dem View-Formular bzw. aus dem Job-Objekt in eine Map zur Ubergabe an
+	 * den DokumentenService ueberfueren. 
+	 */
+	private Map<String, String> mapifyValues() {
+		Map<String, String> data = new HashMap<>();
+		data.put("sender_name", getName());
+		data.put("sender_street", account.getAddress().getStreet());
+		data.put("sender_city", getCity());
+		data.put("sender_phone", account.getAddress().getPhone());
+		data.put("sender_email", account.getAddress().getMail());
+		data.put("company_name", model.getCompany().getName());
+		data.put("company_contact", getContact());
+		data.put("company_street", model.getCompany().getStreet());
+		data.put("company_city", getCompCity());
+		data.put("title", model.getTitle());
+		data.put("letter_address", model.getCompany().getContact().getLetterAddress());
+		data.put("date", getDate());
+		data.put("txt", txt);
+		return data;
+	}
+	
+	// ------- Getter / Setter ------------------------------------------
+	
 	public String getName() {
 		return String.format("%s %s", account.getAddress().getFirstName(), account.getAddress().getLastName());
 	}
@@ -84,52 +141,6 @@ public class AppTextBean extends WebBean {
 		return String.format("%s %s", account.getAddress().getCity(), formattedDate);
 	}
 	
-	/**
-	 * Die Rootababen fuer den Job setzen
-	 * Bewerbungstext fuer die aktuelle Bewerbung uebernehmen.  
-	 */
-	public String save() {
-		String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
-		model.setLocalDocDir(targetPath);
-		try {
-			model = getDocumentService().createRootDir(model);
-		} catch (IOException e) {
-			LOG.error(e.getMessage());
-		}
-		
-		txtMap.put("sender_name", getName());
-		txtMap.put("sender_street", account.getAddress().getStreet());
-		txtMap.put("sender_city", getCity());
-		txtMap.put("sender_phone", String.format("Telefon: %s", account.getAddress().getPhone()));
-		txtMap.put("sender_email", String.format("E-Mail: %s", account.getAddress().getMail()));
-		txtMap.put("company_name", model.getCompany().getName());
-		txtMap.put("company_contact", getContact());
-		txtMap.put("company_street", model.getCompany().getStreet());
-		txtMap.put("company_city", getCompCity());
-		txtMap.put("title", model.getTitle());
-		txtMap.put("letter_address", model.getCompany().getContact().getLetterAddress());
-		txtMap.put("date", getDate());
-		txtMap.put("txt", txt);
-		
-		model = getDocumentService().createWebTemplatePdf(txtMap, model);	
-		try {
-			model.addState(new State(JobState.PDF_CREATED));
-			model = super.getController().persist(model);
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-			FacesMessages.error(null, "Fehler beim speichern.");
-		}
-
-		return PropertyBean.DETAILS;
-	}
-
-	/**
-	 * Leitet auf die Detail-View weiter  
-	 */
-	public String details() {
-		return PropertyBean.DETAILS;
-	}
-
 	public String getTxt() {
 		return model.getCompany().getContact().getLetterAddress(); 
 	}

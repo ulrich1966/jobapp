@@ -20,6 +20,7 @@ import de.juli.jobapp.jobmodel.model.Job;
 import de.juli.jobapp.jobmodel.model.State;
 import de.juli.jobapp.jobmodel.service.DocumentService;
 import de.juli.jobapp.jobweb.exeptions.ShitHappendsExeption;
+import de.juli.jobapp.jobweb.service.MailerService;
 import de.juli.jobapp.jobweb.service.SendService;
 import de.juli.jobapp.jobweb.util.AppDirectories;
 import de.juli.jobapp.jobweb.util.PropertyBean;
@@ -42,7 +43,7 @@ public class ViewDataBean extends WebBean {
 	private String mailUser;
 	private String mailPass;
 	private Job model;
-
+	
 	public ViewDataBean() {
 	}
 
@@ -85,20 +86,16 @@ public class ViewDataBean extends WebBean {
 		String msg = makeStateString();
 		super.addMsg(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg), "footer_msg");
 	}
-	
 
 	/**
-	 * Bevor die View geraendert wird soll geprueft werden, ob der Benutzer bereits Zugangsdaten fuer den SMPT E-Mail Versandt 
-	 * hinterlegt hat, um ggf. den Modal-Dialog zu rendern.
+	 * Bevor die View geraendert wird soll in checkCredentials geprueft werden,
+	 * ob der Benutzer bereits Zugangsdaten fuer den SMPT E-Mail Versandt
+	 * hinterlegt hat, um ggf. den Modal-Dialog zu rendern. Demensprechend wird
+	 * modal = 'show' oder null gesetzt.
 	 */
 	public void preRender(ComponentSystemEvent event) {
 		super.preRender(event);
-		if(null == super.session.getContent(PropertyBean.MAIL_USER) || null == super.session.getContent(PropertyBean.MAIL_PASS)) {
-			modal = "show";
-		} else {
-			this.mailUser = super.session.getContentAsString(PropertyBean.MAIL_USER);
-			this.mailPass = super.session.getContentAsString(PropertyBean.MAIL_PASS);
-		}
+		checkCredentials();
 	}
 
 	/**
@@ -161,10 +158,9 @@ public class ViewDataBean extends WebBean {
 	 */
 	public String createDocs() {
 		try {
-			String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
-			String msg = String.format("Die unterlagen wurden erstellt und liegen auf dem Server: %s", targetPath);
-			model.setLocalDocDir(targetPath);
-			model = service.createRootDir(model);
+			String msg = confLocalDocDir();
+			msg = String.format("Die unterlagen wurden erstellt und liegen auf dem Server: %s", msg);
+			//model = service.createRootDir(model);
 			model = service.createLetter(model);
 			model = service.createEmail(model);
 			model = service.createVita(model);
@@ -178,64 +174,90 @@ public class ViewDataBean extends WebBean {
 		}
 		return PropertyBean.DETAILS;
 	}
-	
+
 	/**
-	 * Fuer den Versand der E-Mail sind valide Zugangsdaten fuer den SMPT Server notwendig, die zuvor Gesetzt werden muessen.
-	 * Ist dieses geschehen werden die Unterlagen per E-MAil mit dem SendService versandt ueber den Aufruf der Methode send().
-	 * Diese staretet  einen Thread und bei erfogreichem Versandt liefert sie success = true zurueck oder bei Misserfolg false. 
-	 * Ist die Mail erfolgreich versendet wird der Status als Versendet gesetze und das aktuelle Job-Objekt persistiert. 
-	 * Generiert fuer die Ausgabe entsprechende Erfolgs- oder Fehlermeldungen und setzt bei einem Fehler SMPT Zugansdaten zurueck. 
+	 * Uebernahme der Eingaben aus dem Modal-Dialog und weiterleitung zu
+	 * sendMail, um die Mail abzusenden. Sind die Credentials nicht gesetzt wird
+	 * der Modal-Dialog ohne Aktionen geschlossen.
 	 */
-	public String sendMail() {
-		if(null == this.mailUser) {
-			this.mailUser = super.session.getAccount().getSender();
-			return "";
+	public String doModal() {
+		if (null != this.mailUser && null != this.mailPass) {
+			super.session.addContent(PropertyBean.MAIL_USER, this.mailUser);
+			super.session.addContent(PropertyBean.MAIL_PASS, this.mailPass);
+			return sendMail();
 		}
-		
-		if(null != this.mailUser) {
-			super.session.addContent(PropertyBean.MAIL_USER, this.mailUser);						
-		} else {
-			LOG.error("Der E-Mail SMPT Benutzername fehlt nocht!");
-			return "";
-		}
-		
-		if(null != this.mailPass) {
-			super.session.addContent(PropertyBean.MAIL_PASS, this.mailPass);			
-		} else {
-			LOG.error("Das E-Mail SMPT Passwort fehlt nocht!");
-			return "";			
-		}
-		
-		String msg = null;
+		return "";
+	}
+
+	/**
+	 * Erzeugt E-Mail-Text ueber den DocumentService und persistiert das
+	 * veraenderte Job-Objekt Ueber den MailerService solle eine E-Mail erzeugt
+	 * werden, die dann mit dem default E-Mailprogrmm des Systems verdandt
+	 * werden soll.
+	 */
+	public String doMailer() {
+		MailerService mailer = new MailerService();
 		boolean success = false;
 		try {
-			SendService service = new SendService(model, super.session.getContentAsString(PropertyBean.MAIL_USER), super.session.getContentAsString(PropertyBean.MAIL_PASS));
+			model = service.createRootDir(model);
+			model = service.createEmail(model);
+			getController().persist(model);
+			success = mailer.createDefaultMailerMail(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (!success) {
+			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim erzeugen der E-Mail!"));
+		}
+		return "";
+	}
+
+	/**
+	 * Fuer den Versand der E-Mail sind valide Zugangsdaten fuer den SMPT Server
+	 * notwendig, die zuvor Gesetzt werden muessen. Ist dieses geschehen werden
+	 * die Unterlagen per E-Mail mit dem SendService versandt ueber den Aufruf
+	 * der Methode send(). Diese staretet einen Thread und bei erfogreichem
+	 * Versandt liefert sie success = true zurueck oder bei Misserfolg false.
+	 * Ist die Mail erfolgreich versendet wird der Status als Versendet gesetze
+	 * und das aktuelle Job-Objekt persistiert. Generiert fuer die Ausgabe
+	 * entsprechende Erfolgs- oder Fehlermeldungen und setzt bei einem Fehler
+	 * SMPT Zugansdaten zurueck.
+	 */
+	public String sendMail() {
+		if (!checkCredentials()) {
+			return "";
+		}
+
+		try {
+			String msg = null;
+			boolean success = false;
+			SendService service = new SendService(model, this.mailUser, this.mailPass);
 			success = service.send();
-			model.addHistory(new History(AppHistory.SEND));
-			super.getController().update(model);
+
+			if (success) {
+				msg = String.format("Die Bewerbung an %s wurde verdandt", model.getCompany().getName());
+				model.addHistory(new History(AppHistory.SEND, msg));
+				model.addState(new State(JobState.SEND, msg));
+				model = super.getController().persist(model);
+				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
+			} else {
+				try {
+					throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
+				} catch (ShitHappendsExeption e) {
+					LOG.error(e.getMessage());
+					session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
+					session.removContent(PropertyBean.MAIL_USER);
+					session.removContent(PropertyBean.MAIL_PASS);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+
 		} catch (Exception e2) {
 			LOG.error("{}", e2.getMessage());
 			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Der E-Mail Versandt wurde unterbrochen!"));
-			success = false;
 		}
-		if (success) {
-			msg = String.format("Die Bewerbung an %s wurde verdandt", model.getCompany().getName());
-			model.addHistory(new History(AppHistory.SEND, msg));
-			model.addState(new State(JobState.SEND, msg));
-			model = super.getController().persist(model);
-			session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
-		} else {
-			try {
-				throw new ShitHappendsExeption("Das versenden der Bewerbung ist schief gelaufen!");
-			} catch (ShitHappendsExeption e) {
-				LOG.error(e.getMessage());
-				session.addMesssage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Fehler beim versenden der E-Mail ggf. stimmen die Zugansdaten nicht!"));
-				session.removContent(PropertyBean.MAIL_USER);				
-				session.removContent(PropertyBean.MAIL_PASS);				
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
+
 		return PropertyBean.DETAILS;
 	}
 
@@ -246,9 +268,42 @@ public class ViewDataBean extends WebBean {
 		return PropertyBean.TXT;
 	}
 
+	private String confLocalDocDir() {
+		if (null == model.getLocalDocDir() || model.getLocalDocDir().isEmpty()) {
+			String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
+			model.setLocalDocDir(targetPath);
+			model = super.getController().persist(model);
+			return targetPath;
+		}
+		return "";
+	}
+
 	/**
-	 * Fummelt die Statuse aus dem Model um die Funktion (disabele Attribut) der Schaltflaechen zu setzen fuer eine 
-	 * sinnvolle Abfolge der Bewerbung  
+	 * Wenn es noch keine Zugangsdaten in der Session gibt, dann wird die
+	 * Account E-Mail als Usermen als Vorschlag in den mailUser gesetzt, Modal
+	 * wird auf 'show' gesetzt, damit der Modal-Dialog angezeigt wird. HasMail
+	 * ist dann 'false' damit sendMail ohne Verdand returniert. Sind die
+	 * Zugangsdaten gesezt, werden die entsprechenden Klassenvariablen gesetzt
+	 * und hasMail ist 'true', damit in sendMail die Mail versandt wird.
+	 */
+	private Boolean checkCredentials() {
+		boolean cred = false;
+		if (null == super.session.getContent(PropertyBean.MAIL_USER) || null == super.session.getContent(PropertyBean.MAIL_PASS)) {
+			modal = "show";
+			this.mailUser = super.session.getAccount().getSender();
+			cred = false;
+		} else {
+			this.mailUser = super.session.getContentAsString(PropertyBean.MAIL_USER);
+			this.mailPass = super.session.getContentAsString(PropertyBean.MAIL_PASS);
+			modal = null;
+			cred = true;
+		}
+		return cred;
+	}
+
+	/**
+	 * Fummelt die Statuse aus dem Model um die Funktion (disabele Attribut) der
+	 * Schaltflaechen zu setzen fuer eine sinnvolle Abfolge der Bewerbung
 	 */
 	private void settingStates(JobState jobState) {
 		switch (jobState) {
@@ -298,7 +353,7 @@ public class ViewDataBean extends WebBean {
 	}
 
 	// ---------------------------Getter / Setter ----------------------------//
-	
+
 	public Job getModel() {
 		return model;
 	}

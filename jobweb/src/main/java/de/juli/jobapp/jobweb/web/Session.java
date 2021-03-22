@@ -165,7 +165,7 @@ public class Session implements Serializable {
 	}
 
 	/**
-	 *	Root-Verzeicnis als PAth zurueckgeben
+	 *	Root-Verzeicnis als Path zurueckgeben
 	 */
 	public Path getRoot() {
 		return root;

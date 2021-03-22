@@ -9,4 +9,5 @@
 	<entry key="json.data.jobs">job-list</entry>
 	<entry key="db.data.job.setup">true</entry>
 	<entry key="main.account.name">uli</entry>
+	<entry key="thymeleaf.template">templates/anschreiben.xhtml</entry>
 </properties>

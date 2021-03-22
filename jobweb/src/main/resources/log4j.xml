@@ -7,12 +7,9 @@
 		</layout>		
 	</appender>
 
-	<!-- Log everything (a lot of information, but very useful for troubleshooting) -->
-	<Logger name="org.hibernate.*" level="error" />
-	
-	<Logger name="net.bootsfaces.*" level="error" />
-	<Logger name="org.jboss.weld.*" level="error" />
-	<Logger name="com.sun.faces.*" level="error" />
+	<Logger name="de.juli.jobapp" level="DEBUG">
+		<appender-ref ref="console" />
+	</Logger>
 
 	<root>
 		<level value="DEBUG" />

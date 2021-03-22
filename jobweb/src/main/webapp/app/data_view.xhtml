@@ -10,7 +10,7 @@
 			<b:messages global-only="true" id="msg" />
 			<b:row>
 				<b:column style-class="head-line" medium-screen="12">
-					<h:outputText value="Detaills zu der Bewerbung:" />
+					<h:outputText value="Details zu der Bewerbung:" />
 				</b:column>
 			</b:row>
 			<b:row>
@@ -283,10 +283,8 @@
 						<b:column medium-screen="1">
 							<b:commandButton iconAwesome="fa-history" action="#{data.history}" tooltip="Verlauf ansehen" tooltip-delay-show="1000" />
 						</b:column>
-					</b:row>
-					<b:row style-class="cmd">
-						<b:column offset="2" medium-screen="1">
-							<b:commandButton iconAwesome="fa-paperclip" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" tooltip="Dokumente erstellen" tooltip-delay-show="1000" />
+						<b:column medium-screen="1">
+							<b:commandButton iconAwesome="fa-paperclip" action="#{data.createDocs}" disabled="${!data.hasTaplates or data.docCreated}" tooltip="Dokumente erstellen, die als Text bzw. Anhänge dienen sollen" tooltip-delay-show="1000" />
 						</b:column>
 						<b:column medium-screen="1">
 							<b:commandButton iconAwesome="fa-trash" action="#{data.deldocs}" disabled="#{!data.dirExist}" tooltip="Dokumente löschen" tooltip-delay-show="1000" />
@@ -296,6 +294,9 @@
 						</b:column>
 						<b:column medium-screen="1">
 							<b:commandButton iconAwesome="fa-file-pdf-o" action="#{data.applyTxt4Pdf}" disabled="#{data.docCreated}" tooltip="Text für die PDF Erstellung des Anschreiben eigeben" tooltip-delay-show="1000" />
+						</b:column>
+						<b:column medium-screen="1">
+							<b:commandButton iconAwesome="fa-envelope-o " action="#{data.doMailer}" tooltip="E-Mail Programm öffnen" tooltip-delay-show="1000" />
 						</b:column>
 					</b:row>
 				</b:form>

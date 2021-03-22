@@ -8,7 +8,11 @@
 		<f:event listener="#{apptext.preRender}" type="preRenderView" />
 		<b:jumbotron style-class="#{style.name}">
 			<b:messages globalOnly="true" id="msg" />
-
+			<b:row>
+				<b:column style-class="head-line" medium-screen="12">
+					<h:outputText value="PDF Erstellung" />
+				</b:column>
+			</b:row>
 			<b:row>
 				<b:column>
 					<b:well style-class="head">Angaben im Briefkopf</b:well>
@@ -106,15 +110,15 @@
 			<h:form id="frm">
 				<b:row>
 					<b:column medium-screen="12">
-						<b:inputTextarea value="#{apptext.txt}" style="width: 100%; height: 686px;" />
+						<b:inputTextarea lang="DE" value="#{apptext.txt}" style="width: 100%; height: 686px;" tooltip="Den Bewerbungstext eingeben. Aus diesem wird beim Speichern eine PDF-Dokument erstellt." tooltip-delay-show="1000"/>
 					</b:column>
 				</b:row>
 				<b:row style-class="cmd">
-					<b:column medium-screen="2">
+					<b:column medium-screen="1">
 						<b:commandButton iconAwesome="fa-file-text-o" tooltip="Details ansehen" tooltip-delay-show="1000" action="#{apptext.details}"  />
 					</b:column>
-					<b:column offset="2" medium-screen="2" style="margin: 0;">
-						<b:commandButton iconAwesome="fa-save" tooltip="Datensatz speichern" tooltip-delay-show="1000" action="#{apptext.save}"  />
+					<b:column medium-screen="1" style="margin: 0;">
+						<b:commandButton iconAwesome="fa-save" tooltip="PDF Dolument erstellen" tooltip-delay-show="1000" action="#{apptext.save}"  />
 					</b:column>
 				</b:row>
 			</h:form>

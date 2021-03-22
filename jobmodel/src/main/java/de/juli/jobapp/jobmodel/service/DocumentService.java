@@ -34,7 +34,27 @@ import de.juli.jobapp.jobmodel.model.Pdf;
 public class DocumentService {
 	private static final Logger LOG = LoggerFactory.getLogger(DocumentService.class);
 	private static Path serverRoot;
-
+	
+	/*
+	user
+	   |_vita
+	       |_[lebneslauf_vorlage].pdf
+	   |_letter
+	       |_[anschreiben_vorlage].odt		
+	   |_email
+	   |   |_[email_vorlage].odt
+	   |   |_[email_vorlage].txt
+	   |_applies
+	       |_[firmen_name 1]
+	       |		|_anschreiben.odt
+	       |		|_anschreiben.pdf
+	       |		|mail.txt
+	       |_[firmen_name 2]
+		   |		|_anschreiben.odt
+	      u.s.w		|_anschreiben.pdf
+	       			|_mail.txt
+	*/
+	
 	/**
 	 * Setzt das Wurzelveeichniss (WEB-INF/classes) des aktuellen Servers 
 	 */
@@ -48,8 +68,8 @@ public class DocumentService {
 	}
 
 	/**
-	 * Aus dem lokalen Serververzeichnis indem die Vorlagen hinterlegt werden den Pfad fuer die 
-	 * Firma der Bewerbung erzeugt, um dort dann die generierten die Dokumente hintelegen zu können. 
+	 * Aus dem lokalen Serververzeichnis indem die Vorlagen hinterlegt werden der Pfad fuer die 
+	 * Firma der Bewerbung erzeugt, um dort dann die generierten Dokumente hintelegen zu können. 
 	 */
 	public Job createRootDir(Job model) throws IOException {
 		Path root = Paths.get(model.getLocalDocDir().trim()).resolve(model.getCompany().getName().trim());
@@ -167,13 +187,17 @@ public class DocumentService {
 	
 	/**
 	 * Eerzeugt eine PDF-Dokument ueber ein Thymleaf Template ueber
-	 * den WebTemplatePdfService  
+	 * den WebTemplatePdfService. Zunaechst werden die Norwendigen Felder in eine HashMap uebertragen und 
+	 * die der WebTemplatePdfService generatePdf() Methode uebergeben werden kann. Der Zielpfad fuer die 
+	 * generierte Datei wird bestimmt und die Erzeugung des PDF an WebTemplatePdfService unter Angabe 
+	 * der zu verwendenen Template-Datei delegiert. Dem Job-Objekt wird das PDF als Anschreiben hinzugefuegt.      
+	 * @param templatePath 
 	 */
-	public Job createWebTemplatePdf(Map<String, String> map, Job model) {
+	public Job createWebTemplatePdf(Map<String, String> map, Job model, String templateLoc) {
 		WebTemplatePdfService service = new WebTemplatePdfService();
 		Path target = Paths.get(model.getLocalDocDir());
 		target = target.resolve("anschreiben.pdf");
-		target = service.generatePdf(map, target, serverRoot.resolve("templates/anschreiben.html"));
+		target = service.generatePdf(map, target,  templateLoc);
 		return addPdf(model, target.toFile().toString());
 	}
 
@@ -226,10 +250,10 @@ public class DocumentService {
 	 * zusammensetzt.
 	 */
 	private void createDir(Path path) throws IOException {
-		if (Files.exists(path)) {
-			FileUtils.deleteDirectory(path.toFile());
+		if (!Files.exists(path)) {
+			//FileUtils.deleteDirectory(path.toFile());
+			Files.createDirectories(path);
 		}
-		Files.createDirectories(path);
 	}
 
 	/**
@@ -265,6 +289,8 @@ public class DocumentService {
 		data.put("src_source", model.getSource().getName());
 
 		data.put("cloud_link", model.getAccount().getProfillink());
+		data.put("user_first_name", model.getAccount().getAddress().getFirstName());
+		data.put("user_last_name", model.getAccount().getAddress().getLastName());
 
 		return data;
 	}

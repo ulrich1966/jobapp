@@ -37,14 +37,14 @@ public class Upload extends WebBean {
 	private Part letterFile;
 	private Part emailFile;
 	private Account account;
-	//private AccountController controller;	
+	// private AccountController controller;
 
 	public Upload() {
 	}
-	
+
 	/**
-	 * Nauch Aufruf der View wird der Server nach Vorhandensein der Uploaddatein untersucht
-	 * und der Pfad  
+	 * Nauch Aufruf der View wird der Server nach Vorhandensein der Uploaddatein
+	 * untersucht und der Pfad
 	 */
 	@PostConstruct
 	public void init() {
@@ -53,13 +53,17 @@ public class Upload extends WebBean {
 		user = Paths.get(account.getName());
 		try {
 			Path vitaPath = AppDirectories.getVitaPath(root, user);
-			selections.setVitas(dirService.vitaDir(vitaPath));
-			
+			if (null != vitaPath) {
+				selections.setVitas(dirService.vitaDir(vitaPath));
+			}
 			Path letterPath = AppDirectories.getLetterPath(root, user);
-			selections.setLetters(dirService.letterDir(letterPath));
-			
+			if (null != letterPath) {
+				selections.setLetters(dirService.letterDir(letterPath));
+			}
 			Path emailPath = AppDirectories.getEmailPath(root, user);
-			selections.setEmails(dirService.emailDir(emailPath));
+			if (null != emailPath) {
+				selections.setEmails(dirService.emailDir(emailPath));
+			}
 		} catch (IOException e) {
 			FacesMessages.error("Auflisten der Dateien fehlgeschlagen");
 		}
@@ -108,23 +112,23 @@ public class Upload extends WebBean {
 		if (file != null) {
 			InputStream input = file.getInputStream();
 			target = new File(path.toString(), file.getSubmittedFileName()).toPath();
-			if(target.toFile().exists()) {
+			if (target.toFile().exists()) {
 				Files.delete(target);
 			}
 			Files.copy(input, target);
 		} else {
 			try {
-				throw new ShitHappendsExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");				
+				throw new ShitHappendsExeption(this.getClass().getName() + "save(Path path) -> file is NULL!");
 			} catch (ShitHappendsExeption e) {
 				LOG.error(e.getMessage());
-				FacesMessages.error(null, "Es wurde keine Datei ausgew"+Uml.a_UML.getUchar()+"hlt!");
+				FacesMessages.error(null, "Es wurde keine Datei ausgew" + Uml.a_UML.getUchar() + "hlt!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return target; 
+		return target;
 	}
-	
+
 	public Account getAccount() {
 		return account;
 	}
@@ -164,6 +168,5 @@ public class Upload extends WebBean {
 	public Path getRoot() {
 		return root;
 	}
-	
-	
+
 }
