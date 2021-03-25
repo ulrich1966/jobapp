@@ -43,7 +43,7 @@ public class ViewDataBean extends WebBean {
 	private String mailUser;
 	private String mailPass;
 	private Job model;
-	
+
 	public ViewDataBean() {
 	}
 
@@ -199,7 +199,7 @@ public class ViewDataBean extends WebBean {
 		MailerService mailer = new MailerService();
 		boolean success = false;
 		try {
-			model = service.createRootDir(model);
+			confLocalDocDir();
 			model = service.createEmail(model);
 			getController().persist(model);
 			success = mailer.createDefaultMailerMail(model);
@@ -268,10 +268,15 @@ public class ViewDataBean extends WebBean {
 		return PropertyBean.TXT;
 	}
 
-	private String confLocalDocDir() {
+	/**
+	 * Setzt den Pfad fuer den Speicherort fuer die Bewerbungsunterlagen der aktuellen Bewerbung and die aktuelle 
+	 * Firma. Dabei sollte folgensde herauskommen: [user]/applies/[firmen-name]  
+	 */
+	private String confLocalDocDir() throws IOException {
 		if (null == model.getLocalDocDir() || model.getLocalDocDir().isEmpty()) {
 			String targetPath = AppDirectories.getTargetPathAsString(getSession().getRoot(), getSession().getAccount().getName());
 			model.setLocalDocDir(targetPath);
+			model = service.createRootDir(model);
 			model = super.getController().persist(model);
 			return targetPath;
 		}
